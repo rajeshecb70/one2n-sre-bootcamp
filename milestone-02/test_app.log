@@ -1,0 +1,20 @@
+2024-09-17 15:10:37,235 - app - INFO - Added student: {'age': 21, 'id': 1, 'name': 'John Doe'}
+2024-09-17 15:10:37,243 - app - INFO - Retrieved all students
+2024-09-17 15:10:37,249 - app - INFO - Retrieved student 3: {'age': 25, 'id': 3, 'name': 'Jim Doe'}
+2024-09-17 15:10:37,257 - app - INFO - Updated student 4: {'age': 31, 'id': 4, 'name': 'Jack Updated'}
+2024-09-17 15:10:37,265 - app - INFO - Deleted student 5
+2024-09-17 15:34:03,620 - app - INFO - Added student: {'age': 21, 'id': 1, 'name': 'John Doe'}
+2024-09-17 15:34:03,628 - app - INFO - Retrieved all students
+2024-09-17 15:34:03,634 - app - INFO - Retrieved student 3: {'age': 25, 'id': 3, 'name': 'Jim Doe'}
+2024-09-17 15:34:03,640 - app - INFO - Updated student 4: {'age': 31, 'id': 4, 'name': 'Jack Updated'}
+2024-09-17 15:34:03,648 - app - INFO - Deleted student 5
+2024-09-18 11:14:39,900 - app - INFO - Added student: {'age': 21, 'id': 5, 'name': 'John Doe'}
+2024-09-18 11:14:39,912 - app - INFO - Retrieved all students
+2024-09-18 11:14:39,920 - app - INFO - Retrieved student 7: {'age': 25, 'id': 7, 'name': 'Jim Doe'}
+2024-09-18 11:14:39,930 - app - INFO - Updated student 8: {'age': 31, 'id': 8, 'name': 'Jack Updated'}
+2024-09-18 11:14:39,940 - app - INFO - Deleted student 9
+2024-09-18 11:17:09,894 - app - INFO - Added student: {'age': 21, 'id': 1, 'name': 'John Doe'}
+2024-09-18 11:17:09,905 - app - INFO - Retrieved all students
+2024-09-18 11:17:09,916 - app - INFO - Retrieved student 3: {'age': 25, 'id': 3, 'name': 'Jim Doe'}
+2024-09-18 11:17:09,935 - app - INFO - Updated student 4: {'age': 31, 'id': 4, 'name': 'Jack Updated'}
+2024-09-18 11:17:09,956 - app - INFO - Deleted student 5
