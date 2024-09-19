@@ -1,42 +1,44 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 from .models import Student
 from .schemas import StudentSchema
 from . import db
 
 bp = Blueprint('students', __name__, url_prefix='/api/v1/students')
 
-#@student_bp.route('', methods=['POST'])
+
+# @student_bp.route('', methods=['POST'])
 @bp.route('', methods=['POST'])
 def add_student():
     data = request.json
-    new_student = Student(name=data['name'], age=data['age'])
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
     db.session.add(new_student)
     db.session.commit()
     return StudentSchema().jsonify(new_student), 201
 
-#@student_bp.route('', methods=['GET'])
+
 @bp.route('', methods=['GET'])
 def get_all_students():
     students = Student.query.all()
     return StudentSchema(many=True).jsonify(students)
 
-#@student_bp.route('/<int:id>', methods=['GET'])
+
 @bp.route('/<int:id>', methods=['GET'])
 def get_student(id):
     student = Student.query.get_or_404(id)
     return StudentSchema().jsonify(student)
 
-#@student_bp.route('/<int:id>', methods=['PUT'])
+
 @bp.route('/<int:id>', methods=['PUT'])
 def update_student(id):
     student = Student.query.get_or_404(id)
     data = request.json
     student.name = data['name']
     student.age = data['age']
+    student.phone_number = data['phone_number']
     db.session.commit()
     return StudentSchema().jsonify(student)
 
-#@student_bp.route('/<int:id>', methods=['DELETE'])
+
 @bp.route('/<int:id>', methods=['DELETE'])
 def delete_student(id):
     student = Student.query.get_or_404(id)
@@ -44,6 +46,6 @@ def delete_student(id):
     db.session.commit()
     return '', 204
 
+
 def init_app(app):
     app.register_blueprint(bp)
-

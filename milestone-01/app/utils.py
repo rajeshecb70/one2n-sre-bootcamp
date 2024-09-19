@@ -1,5 +1,5 @@
-import logging
 from logging.config import dictConfig
+
 
 def setup_logging():
     logging_config = {
@@ -7,7 +7,10 @@ def setup_logging():
         'disable_existing_loggers': False,
         'formatters': {
             'default': {
-                'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+                'format': (
+                         '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+                          )
+
             }
         },
         'handlers': {
@@ -22,4 +25,3 @@ def setup_logging():
         }
     }
     dictConfig(logging_config)
-

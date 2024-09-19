@@ -1,17 +1,16 @@
-run:
+SHELL := /bin/bash
+
+run: install
 	FLASK_APP=app FLASK_ENV=development flask run --port 5001
-#	@echo "Running Flask app"
-#	@export $(cat .env | xargs) && FLASK_APP=app FLASK_ENV=development flask run --port 5001
-
-
-#migrate:
-#	FLASK_APP=app flask db migrate -m "Initial migration."
-#	FLASK_APP=app flask db upgrade
 
 test:
-	#pytest
 	PYTHONPATH=./ pytest
 
-#lint:
-#	flake8
+lint:
+	flake8
 
+activate:
+	source venv/bin/activate
+
+install:activate
+	pip install -r requirements.txt

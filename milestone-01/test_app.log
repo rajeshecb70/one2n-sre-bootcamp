@@ -18,3 +18,148 @@
 2024-09-18 11:17:09,916 - app - INFO - Retrieved student 3: {'age': 25, 'id': 3, 'name': 'Jim Doe'}
 2024-09-18 11:17:09,935 - app - INFO - Updated student 4: {'age': 31, 'id': 4, 'name': 'Jack Updated'}
 2024-09-18 11:17:09,956 - app - INFO - Deleted student 5
+2024-09-19 14:55:08,110 - app - INFO - Added student: {'age': 21, 'id': 9, 'name': 'John Doe'}
+2024-09-19 14:55:08,117 - app - INFO - Retrieved all students
+2024-09-19 14:55:08,123 - app - INFO - Retrieved student 11: {'age': 25, 'id': 11, 'name': 'Jim Doe'}
+2024-09-19 14:55:08,132 - app - INFO - Updated student 12: {'age': 31, 'id': 12, 'name': 'Jack Updated'}
+2024-09-19 14:55:08,141 - app - INFO - Deleted student 13
+2024-09-19 15:42:25,508 - app - INFO - Added student: {'age': 21, 'id': 14, 'name': 'John Doe'}
+2024-09-19 15:42:25,516 - app - INFO - Retrieved all students
+2024-09-19 15:42:25,526 - app - INFO - Retrieved student 16: {'age': 25, 'id': 16, 'name': 'Jim Doe'}
+2024-09-19 15:42:25,534 - app - INFO - Updated student 17: {'age': 31, 'id': 17, 'name': 'Jack Updated'}
+2024-09-19 15:42:25,543 - app - INFO - Deleted student 18
+2024-09-19 15:56:33,729 - app - INFO - Added student: {'age': 21, 'id': 19, 'name': 'John Doe'}
+2024-09-19 15:56:33,737 - app - INFO - Retrieved all students
+2024-09-19 15:56:33,744 - app - INFO - Retrieved student 21: {'age': 25, 'id': 21, 'name': 'Jim Doe'}
+2024-09-19 15:56:33,753 - app - INFO - Updated student 22: {'age': 31, 'id': 22, 'name': 'Jack Updated'}
+2024-09-19 15:56:33,763 - app - INFO - Deleted student 23
+2024-09-19 18:08:54,771 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 13, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-19 18:08:54,776 - app - INFO - Retrieved all students
+2024-09-19 18:08:54,777 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 13, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-19 18:08:54,783 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 13, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-19 18:08:54,788 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 13, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-19 18:15:10,090 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 13, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-19 18:15:10,094 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 13, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-19 18:19:53,177 - app - INFO - Deleted student 33
+2024-09-19 19:00:08,340 - app - INFO - Deleted student 36
+2024-09-19 19:00:37,680 - app - INFO - Deleted student 39
+2024-09-19 19:20:33,351 - app - INFO - Deleted student 42
+2024-09-19 19:24:47,724 - app - INFO - Added student with phone number: 1234567890
+2024-09-19 19:24:47,792 - app - INFO - Deleted student 46
+2024-09-19 19:25:16,698 - app - INFO - Added student with phone number: 1234567890
+2024-09-19 19:25:16,702 - app - INFO - Added student with phone number: 5551234
+2024-09-19 19:25:16,748 - app - INFO - Deleted student 50
+2024-09-19 19:25:29,644 - app - INFO - Added student with phone number: 1234567890
+2024-09-19 19:25:29,647 - app - INFO - Added student with phone number: 5551234
+2024-09-19 19:25:29,659 - app - INFO - Updated student 53: {'age': 31, 'id': 53, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-19 19:25:29,667 - app - INFO - Deleted student 54
+2024-09-19 19:40:50,019 - app - INFO - Added student with phone number: 1234567890
+2024-09-19 19:40:50,023 - app - INFO - Added student with phone number: 5551234
+2024-09-19 19:40:50,036 - app - INFO - Updated student 57: {'age': 31, 'id': 57, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-19 19:40:50,045 - app - INFO - Deleted student 58
+2024-09-19 19:42:11,743 - app - INFO - Added student with phone number: 1234567890
+2024-09-19 19:42:11,748 - app - INFO - Added student with phone number: 5551234
+2024-09-19 19:42:11,759 - app - INFO - Updated student 3: {'age': 31, 'id': 3, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-19 19:42:11,767 - app - INFO - Deleted student 4
