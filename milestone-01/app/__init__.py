@@ -1,11 +1,13 @@
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
-# import logging
+import logging
 from .utils import setup_logging
 from dotenv import load_dotenv
 from flask_migrate import Migrate
+
+
 
 
 # Load environment variables from .env file (optional)
@@ -41,5 +43,20 @@ def create_app():
     @app.route('/healthcheck', methods=['GET'])
     def healthcheck():
         return 'Hi, The Web REST API Service is up and running!', 200
+
+    # Log each request
+    @app.before_request
+    def log_request_info():
+        logging.info(f'Received {request.method} request for {request.url}')
+        logging.info(f'Request headers: {request.headers}')
+        if request.method in ['POST', 'PUT', 'PATCH']:
+            logging.info(f'Request body: {request.get_data(as_text=True)}')
+
+    @app.after_request
+    def log_response_info(response):
+        logging.info(f'Response status: {response.status}')
+        logging.info(f'Response headers: {response.headers}')
+        return response
+    # Log code end 
 
     return app
