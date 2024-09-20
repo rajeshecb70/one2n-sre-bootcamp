@@ -163,3 +163,49 @@ KeyError: 'phone_number'
 2024-09-19 19:42:11,748 - app - INFO - Added student with phone number: 5551234
 2024-09-19 19:42:11,759 - app - INFO - Updated student 3: {'age': 31, 'id': 3, 'name': 'Jack Updated', 'phone_number': 5559999}
 2024-09-19 19:42:11,767 - app - INFO - Deleted student 4
+2024-09-20 14:31:08,622 - app - INFO - Added student with phone number: 1234567890
+2024-09-20 14:31:08,627 - app - INFO - Added student with phone number: 5551234
+2024-09-20 14:31:08,639 - app - INFO - Updated student 7: {'age': 31, 'id': 7, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-20 14:31:08,648 - app - INFO - Deleted student 8
+2024-09-20 14:36:04,328 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-20 14:36:04,346 - app - INFO - Added student with phone number: 1234567890
+2024-09-20 14:36:04,351 - app - INFO - Added student with phone number: 5551234
+2024-09-20 14:36:04,361 - app - INFO - Updated student 11: {'age': 31, 'id': 11, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-20 14:36:04,371 - app - INFO - Deleted student 12
+2024-09-20 14:42:33,001 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-20 14:42:33,022 - app - INFO - Added student with phone number: 1234567890
+2024-09-20 14:42:33,063 - app - INFO - Updated student 15: {'age': 31, 'id': 15, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-20 14:42:33,074 - app - INFO - Deleted student 16
+2024-09-20 14:43:15,843 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-20 14:43:15,868 - app - INFO - Added student with phone number: 1234567890
+2024-09-20 14:43:15,908 - app - INFO - Updated student 19: {'age': 31, 'id': 19, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-20 14:43:15,917 - app - INFO - Deleted student 20
+2024-09-20 14:44:08,654 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-20 14:44:08,667 - app - INFO - Added student with phone number: 1234567890
+2024-09-20 14:44:08,707 - app - INFO - Updated student 23: {'age': 31, 'id': 23, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-20 14:44:08,718 - app - INFO - Deleted student 24
+2024-09-20 14:45:08,658 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-20 14:45:08,673 - app - INFO - Added student with phone number: 1234567890
+2024-09-20 14:45:08,680 - app - INFO - Retrieved student: {'age': 21, 'id': 26, 'name': 'Rajesh', 'phone_number': 1234567890}
+2024-09-20 14:45:08,690 - app - INFO - Updated student 27: {'age': 31, 'id': 27, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-20 14:45:08,702 - app - INFO - Deleted student 28
+2024-09-20 14:48:24,388 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-20 14:48:24,399 - app - INFO - Added student with phone number: 1234567890
+2024-09-20 14:48:24,423 - app - INFO - Retrieved student: {'age': 21, 'id': 30, 'name': 'Rajesh', 'phone_number': 1234567890}
+2024-09-20 14:48:24,434 - app - INFO - Updated student 31: {'age': 31, 'id': 31, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-20 14:48:24,444 - app - INFO - Deleted student 32
+2024-09-20 14:49:37,718 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-20 14:49:37,728 - app - INFO - Added student with phone number: 1234567890
+2024-09-20 14:49:37,735 - app - INFO - Retrieved student: {'age': 21, 'id': 34, 'name': 'Rajesh', 'phone_number': 1234567890}
+2024-09-20 14:49:37,747 - app - INFO - Updated student 35: {'age': 31, 'id': 35, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-20 14:49:37,759 - app - INFO - Deleted student 36
+2024-09-20 14:49:49,034 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-20 14:49:49,043 - app - INFO - Added student with phone number: 1234567890
+2024-09-20 14:49:49,050 - app - INFO - Retrieved student: {'age': 21, 'id': 38, 'name': 'Rajesh', 'phone_number': 1234567890}
+2024-09-20 14:49:49,060 - app - INFO - Updated student 39: {'age': 31, 'id': 39, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-20 14:49:49,072 - app - INFO - Deleted student 40
+2024-09-20 15:10:56,956 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-20 15:10:56,965 - app - INFO - Added student with phone number: 1234567890
+2024-09-20 15:10:56,972 - app - INFO - Retrieved student: {'age': 21, 'id': 50, 'name': 'Rajesh', 'phone_number': 1234567890}
+2024-09-20 15:10:56,983 - app - INFO - Updated student 51: {'age': 31, 'id': 51, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-20 15:10:56,995 - app - INFO - Deleted student 52
