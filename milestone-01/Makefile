@@ -15,14 +15,22 @@ install: $(VENV_DIR)/bin/activate
 
 # Target to run the Flask application
 run: install
+	@echo 'Checking the Health of API : http://127.0.0.1:5000/healthcheck'@echo 'Starting the Flask application...'
 	$(PYTHON) -m flask run
-	@echo 'Checking the Health of API : http://127.0.0.1:5000/healthcheck'
+	@echo 'App is running. Access it using the following endpoints:'
+	@echo '-------------------------------------------------------'
+	@echo 'Health Check: http://127.0.0.1:5000/healthcheck'
+	@echo 'Students API: http://127.0.0.1:5000/api/v1/students'
+	@echo '-------------------------------------------------------'
+	@sleep 2 # Wait for a moment before trying to perform health check
 
-# Target for running everything (virtual env setup, dependencies installation, and running Flask)
+# Perform a health check on the running Flask app
+healthcheck:
+	@curl -s http://127.0.0.1:5000/healthcheck || echo 'Health check failed or service is not running'
+
+# Target to run everything (virtual env setup, dependencies installation, and running Flask)
 all: install run
-	@echo 'Run below URL on browser to check the application'
-	@echo 'http://127.0.0.1:5000/api/v1/students'
-	
+	@echo 'Run the above URL(s) on the browser to interact with the application.'
 
 # Target to clean up the virtual environment
 clean:
