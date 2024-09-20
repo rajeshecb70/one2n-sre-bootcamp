@@ -14,16 +14,11 @@ install: $(VENV_DIR)/bin/activate
 	$(PIP) install -r requirements.txt
 
 # Target to run the Flask application
-#
 run: install
-	@echo 'Checking the Health of API : http://127.0.0.1:5000/healthcheck'@echo 'Starting the Flask application...'
+	@echo 'Checking the Health of API : http://127.0.0.1:5000/healthcheck'
+	@echo 'Starting the Flask application...'
 	$(PYTHON) -m flask run
-	@echo 'App is running. Access it using the following endpoints:'
-	@echo '-------------------------------------------------------'
-	@echo 'Health Check: http://127.0.0.1:5000/healthcheck'
-	@echo 'Students API: http://127.0.0.1:5000/api/v1/students'
-	@echo '-------------------------------------------------------'
-	@sleep 2 # Wait for a moment before trying to perform health check
+	
 
 # Perform a health check on the running Flask app
 healthcheck:
