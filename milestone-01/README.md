@@ -13,6 +13,7 @@
     - Python 3.12.3
     - Flask 3.0.3
     - MySQL 8.0
+    - pytest 8.3.3
 
 ## 4. Setup
    
@@ -72,8 +73,8 @@ make test
 
          Using proper HTTP verbs for different operations.✅
 
-         API should emit meaningful logs with appropriate log levels.
+         API should emit meaningful logs with appropriate log levels.✅
 
          API should have a /healthcheck endpoint.✅
 
-         Unit tests for different endpoints.
+         Unit tests for different endpoints.✅
