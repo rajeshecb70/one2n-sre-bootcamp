@@ -23,6 +23,19 @@ def test_client():
             db.create_all()
         yield testing_client
 
+def test_healthcheck(test_client):
+    # Make a GET request to the /healthcheck endpoint
+    response = test_client.get('/healthcheck')
+
+    # Assert that the status code is 200 (OK)
+    assert response.status_code == 200
+
+    # Assert that the response data is the expected healthcheck message
+    assert response.data.decode() == 'Hi, The Web REST API Service is up and running!'
+
+    # Optionally, log the result
+    logger.info("Healthcheck endpoint test passed with message: %s", response.data.decode())
+
 
 def test_add_student(test_client):
     # Test with phone_number as integer
@@ -37,18 +50,30 @@ def test_add_student(test_client):
     assert response_json['phone_number'] == 1234567890
     logger.info(f"Added student with phone number: {response_json['phone_number']}")
 
-    # Test with phone_number as string
+def test_get_student(test_client):
+    # First, add a student to ensure we have a record to retrieve
     response = test_client.post(
         '/api/v1/students',
-        json={'name': 'Alice', 'age': 30, 'phone_number': '5551234'}
+        json={'name': 'Rajesh', 'age': 21, 'phone_number': '1234567890'}
     )
     assert response.status_code == 201
-    response_json = response.get_json()
-    assert response_json['name'] == 'Alice'
-    assert response_json['age'] == 30
-    assert response_json['phone_number'] == 5551234
-    logger.info(f"Added student with phone number: {response_json['phone_number']}")
+    added_student = response.get_json()
+    student_id = added_student['id']  # Assuming the student record includes an 'id'
 
+    # Now, make a GET request to retrieve the student by ID
+    response = test_client.get(f'/api/v1/students/{student_id}')
+    
+    # Assert that the status code is 200 (OK)
+    assert response.status_code == 200
+    
+    # Assert that the response contains the correct student data
+    response_json = response.get_json()
+    assert response_json['name'] == 'Rajesh'
+    assert response_json['age'] == 21
+    assert response_json['phone_number'] == 1234567890
+    
+    # Log the result
+    logger.info(f"Retrieved student: {response_json}")
 
 def test_update_student(test_client):
     response = test_client.post(

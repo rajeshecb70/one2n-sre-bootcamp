@@ -34,6 +34,6 @@ clean:
 
 # Test the application 
 test:
-	pytest
+	PYTHONPATH=. pytest
 	
 
