@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
@@ -6,9 +6,6 @@ import logging
 from .utils import setup_logging
 from dotenv import load_dotenv
 from flask_migrate import Migrate
-
-
-
 
 # Load environment variables from .env file (optional)
 load_dotenv()
