@@ -11,27 +11,24 @@
 
 ## 3. Requirements
     - Python 3.12.3
+    - Flask 3.0.3
     - MySQL 8.0
 
 ## 4. Setup
-  ```
-  git clone git@github.com:rajeshecb70/one2n-sre-bootcamp.git
-  cd one2n-sre-bootcamp/milestone-01
-  ```
-
-  ```
-  # Create a virtual environment, activate & run it:
-  make all
-  ```
-  ```
-  # Set up environment variables. Create a `.env` file and add:
-  DATABASE_URL=mysql+pymysql://user:paassword@localhost/studentdb
-  ```
-
-```
-# Run the application:
-make run
-```
+   
+   ```
+   # Clone the repository
+   git clone git@github.com:rajeshecb70/one2n-sre-bootcamp.git
+   cd one2n-sre-bootcamp/milestone-01
+   ```
+   ```
+   # Set up environment variables. Create a `.env` file and add:
+   DATABASE_URL=mysql+pymysql://user:paassword@localhost/studentdb
+   ```
+   ```
+   # Create a virtual environment, activate & run the application:
+   make all
+   ```
 ```
 # Run migrations to set up the database:
 make migrate
@@ -40,8 +37,7 @@ make migrate
 # To run tests:
 make test
 ```
-
-## API Endpoints
+## 5. API Endpoints
 
 - **POST /api/v1/students** - Add a new student.
 - **GET /api/v1/students** - Get all students.
@@ -54,33 +50,30 @@ make test
 ## 6. Postman Collection
 
 ## 7.Expectations
+   -  The following expectations should be met to complete this milestone.
+         Create a public repository on GitHub. ✅
+      
+   -  The repository should contain the following
+         README.md file explaining the purpose of the repo, along with local setup instructions. ✅
+         
+         Explicitly maintaining dependencies in a file ex (pom.xml, build.gradle, go.mod, requirements.txt, etc).✅
 
-The following expectations should be met to complete this milestone.
+         Makefile to build and run the REST API locally. ✅
 
-    Create a public repository on GitHub. ✅
+         bility to run DB schema migrations to create the student table. ✅
 
-    The repository should contain the following
+         Config (such as database URL) should not be hard-coded in the code and should be passed through environment variables. ✅
 
-        README.md file explaining the purpose of the repo, along with local setup instructions. ✅
+         Postman collection for the APIs. ✅
 
-        Explicitly maintaining dependencies in a file ex (pom.xml, build.gradle, go.mod, requirements.txt, etc).✅
+   -  API expectations
 
-        Makefile to build and run the REST API locally. ✅
+         Support API versioning (e.g., api/v1/students).✅
 
-        Ability to run DB schema migrations to create the student table. ✅
+         Using proper HTTP verbs for different operations.✅
 
-        Config (such as database URL) should not be hard-coded in the code and should be passed through environment variables. ✅
+         API should emit meaningful logs with appropriate log levels.
 
-        Postman collection for the APIs. ✅
+         API should have a /healthcheck endpoint.✅
 
-    API expectations
-
-        Support API versioning (e.g., api/v1/students).✅
-
-        Using proper HTTP verbs for different operations.✅
-
-        API should emit meaningful logs with appropriate log levels.
-
-        API should have a /healthcheck endpoint.✅
-
-        Unit tests for different endpoints.
+         Unit tests for different endpoints.
