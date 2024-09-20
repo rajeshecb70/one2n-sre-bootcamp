@@ -31,3 +31,9 @@ all: install run
 # Target to clean up the virtual environment
 clean:
 	rm -rf $(VENV_DIR)
+
+# Test the application 
+test:
+	pytest
+	
+

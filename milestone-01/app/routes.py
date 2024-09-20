@@ -6,7 +6,6 @@ from . import db
 bp = Blueprint('students', __name__, url_prefix='/api/v1/students')
 
 
-# @student_bp.route('', methods=['POST'])
 @bp.route('', methods=['POST'])
 def add_student():
     data = request.json

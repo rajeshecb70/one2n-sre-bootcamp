@@ -60,7 +60,7 @@ make test
 
          Makefile to build and run the REST API locally. ✅
 
-         bility to run DB schema migrations to create the student table. ✅
+         Ability to run DB schema migrations to create the student table. ✅
 
          Config (such as database URL) should not be hard-coded in the code and should be passed through environment variables. ✅
 
