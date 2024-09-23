@@ -56,6 +56,7 @@ make run
   - API should be run using the docker image.✅
 
   - Dockerfile should have different stages to build and run the API.✅
+    - Its reduce the docker image size.
 
   - We should be able to inject environment variables while running the docker container at runtime.✅
 
