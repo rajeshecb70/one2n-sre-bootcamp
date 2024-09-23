@@ -209,3 +209,8 @@ KeyError: 'phone_number'
 2024-09-20 15:10:56,972 - app - INFO - Retrieved student: {'age': 21, 'id': 50, 'name': 'Rajesh', 'phone_number': 1234567890}
 2024-09-20 15:10:56,983 - app - INFO - Updated student 51: {'age': 31, 'id': 51, 'name': 'Jack Updated', 'phone_number': 5559999}
 2024-09-20 15:10:56,995 - app - INFO - Deleted student 52
+2024-09-23 13:56:49,392 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-23 13:56:49,405 - app - INFO - Added student with phone number: 1234567890
+2024-09-23 13:56:49,417 - app - INFO - Retrieved student: {'age': 21, 'id': 59, 'name': 'Rajesh', 'phone_number': 1234567890}
+2024-09-23 13:56:49,432 - app - INFO - Updated student 60: {'age': 31, 'id': 60, 'name': 'Jack Updated', 'phone_number': 5559999}
+2024-09-23 13:56:49,447 - app - INFO - Deleted student 61

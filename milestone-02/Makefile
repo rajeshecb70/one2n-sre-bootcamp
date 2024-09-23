@@ -1,38 +1,38 @@
-# Define the virtual environment directory
-VENV_DIR = venv
+# Makefile
 
-# Define the Python interpreter and pip within the virtual environment
-PYTHON = $(VENV_DIR)/bin/python
-PIP = $(VENV_DIR)/bin/pip
+# Variables
+IMAGE_NAME = my-flask-api
+CONTAINER_NAME = my-flask-api-container
+DOCKERFILE_PATH = Dockerfile
+TAG = 1
 
-# Target to create the virtual environment if it doesn't exist
-$(VENV_DIR)/bin/activate:
-	python3 -m venv $(VENV_DIR)
+# Default target when running "make"
+.PHONY: all
+all: build
 
-# Target to install dependencies
-install: $(VENV_DIR)/bin/activate
-	$(PIP) install -r requirements.txt
+# Build the Docker image
+.PHONY: build
+build:
+	docker build -t $(IMAGE_NAME):$(TAG) -f $(DOCKERFILE_PATH) .
 
-# Target to run the Flask application
-run: install
-	docker run --network="host" api1:0
-	
+# Run the Docker container
+.PHONY: run
+run:
+#	# docker run -p 5000:5000 --network host -e DB_HOST=172.17.0.1 -e DB_USER=rajesh -e DB_PASSWORD=One2n_One2n $(IMAGE_NAME):$(TAG)
+	docker run -d --network host $(IMAGE_NAME):$(TAG)
 
-# Perform a health check on the running Flask app
-healthcheck:
-	@curl -s http://127.0.0.1:5000/healthcheck || echo 'Health check failed or service is not running'
+# List Docker images
+.PHONY: images
+images:
+	docker images
 
-# Target to run everything (virtual env setup, dependencies installation, and running Flask)
-all: install run
-	@echo 'Run the above URL(s) on the browser to interact with the application.'
+# Stop and remove the Docker container
+.PHONY: stop
+stop:
+	docker stop $(CONTAINER_NAME) || true
+	docker rm $(CONTAINER_NAME) || true
 
-# Target to clean up the virtual environment
+# Clean up images
+.PHONY: clean
 clean:
-	rm -rf $(VENV_DIR)
-
-# Test the application 
-test:
-	PYTHONPATH=. pytest
-
-	
-
+	docker rmi $(IMAGE_NAME):$(TAG)
