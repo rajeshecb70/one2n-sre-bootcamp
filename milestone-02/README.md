@@ -51,7 +51,7 @@ make run
 - The following expectations should be met to complete this milestone.
   - API should be run using the docker image.✅
 
-  - Dockerfile should have different stages to build and run the API.
+  - Dockerfile should have different stages to build and run the API.✅
 
   - We should be able to inject environment variables while running the docker container at runtime.✅
 
