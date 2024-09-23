@@ -1,9 +1,9 @@
 ## 1. Project Title
-  Create a simple REST API Webserver:  Student API
+  Containerise REST API
 
 ## 2. Project Description
 
-  - The project involves creating a basic CRUD API with Python and Flask. 
+  - The project involves creating a basic CRUD API with Python and Flask & runs on Docker container
   - The API allows following operations on a student database:
     - Manage student records.
     - Add, retrieving, update, and delete students.
@@ -14,29 +14,27 @@
     - Flask 3.0.3
     - MySQL 8.0
     - pytest 8.3.3
+    - Docker 24.0.7
 
 ## 4. Setup
    
    ```
    # Clone the repository
    git clone git@github.com:rajeshecb70/one2n-sre-bootcamp.git
-   cd one2n-sre-bootcamp/milestone-01
+   cd one2n-sre-bootcamp/milestone-02
    ```
    ```
    # Set up environment variables. Create a `.env` file and add:
    DATABASE_URL=mysql+pymysql://user:paassword@localhost/studentdb
    ```
    ```
-   # Create a virtual environment, activate & run the application:
-   make all
+   # Create a virtual environment, activate & build the application:
+   make build
    ```
 ```
-# Run migrations to set up the database:
-make migrate
+# Run the application:
+make run
 ``` 
-```
-# To run tests:
-make test
 ```
 ## 5. API Endpoints
 
@@ -47,34 +45,21 @@ make test
 - **DELETE /api/v1/students/<id>** - Delete a student by ID.
 - **GET /healthcheck** - Health check endpoint.
   
-
 ## 6. Postman Collection
 
 ## 7.Expectations
-   -  The following expectations should be met to complete this milestone.
-         Create a public repository on GitHub. ✅
-      
-   -  The repository should contain the following
-         README.md file explaining the purpose of the repo, along with local setup instructions. ✅
-         
-         Explicitly maintaining dependencies in a file ex (pom.xml, build.gradle, go.mod, requirements.txt, etc).✅
+- The following expectations should be met to complete this milestone.
+  - API should be run using the docker image.✅
 
-         Makefile to build and run the REST API locally. ✅
+  - Dockerfile should have different stages to build and run the API.
 
-         Ability to run DB schema migrations to create the student table. ✅
+  - We should be able to inject environment variables while running the docker container at runtime.✅
 
-         Config (such as database URL) should not be hard-coded in the code and should be passed through environment variables. ✅
+  - README.md should be updated with proper instructions to build the image and run the docker container.✅
 
-         Postman collection for the APIs. ✅
+  - Similarly appropriate make targets should be added in the Makefile.✅
 
-   -  API expectations
+  - The docker image should be properly tagged using semver tagging, use of latest tag is heavily discouraged.✅
 
-         Support API versioning (e.g., api/v1/students).✅
-
-         Using proper HTTP verbs for different operations.✅
-
-         API should emit meaningful logs with appropriate log levels.✅
-
-         API should have a /healthcheck endpoint.✅
-
-         Unit tests for different endpoints.✅
+  - Appropriate measures should be taken to reduce docker image size. We want our images to have a small size footprint.
+   
