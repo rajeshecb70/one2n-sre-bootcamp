@@ -24,8 +24,12 @@
    cd one2n-sre-bootcamp/milestone-02
    ```
    ```
-   # Set up environment variables. Create a `.env` file and add:
-   DATABASE_URL=mysql+pymysql://user:paassword@localhost/studentdb
+   # Set up environment variables. Database mysql msut be install the below details required:
+   DATABASE_HOST = <local Server IP>
+   DATABASE_PORT = 3306
+   DATABASE_USERNAME = <Your Database User>
+   DATABASE_PASSWORD = <Your Database password>
+   
    ```
    ```
    # Create a virtual environment, activate & build the application:
