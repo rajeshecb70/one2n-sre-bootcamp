@@ -1,10 +1,10 @@
+# Stage 1: Build Stage
 FROM python:3.11-slim AS build-stage
-
 
 # Set working directory
 WORKDIR /app
 
-# Install required system dependencies (Alpine does not use apt, but slim does)
+# Install required system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
@@ -15,16 +15,26 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 
 # Install pip and create a virtual environment
-RUN python -m venv venv
+#RUN python -m venv venv
 
-# Activate the Virtual Environment and install dependencies
-RUN ./venv/bin/pip install --upgrade pip && ./venv/bin/pip install -r requirements.txt
+# Activate the virtual environment and install dependencies
+# RUN ./venv/bin/pip install --upgrade pip && ./venv/bin/pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Copy the rest of the application code into the container
-COPY . .
+# COPY . .
+
+# Stage 2: Production Stage (Final)
+FROM python:3.11-slim AS production-stage
+
+# Set working directory
+WORKDIR /app
+
+# Copy the virtual environment and app code from the build stage
+COPY --from=build-stage /app /app
 
 # Expose the port the Flask app will run on
 EXPOSE 5000
 
 # Default command to activate the virtual environment and start the Flask app
-CMD ["/bin/bash", "-c", ". venv/bin/activate && flask run", "0.0.0.0:5000"]
+CMD ["/bin/bash", "-c", ". venv/bin/activate && flask run --host=0.0.0.0 --port=5000"]
