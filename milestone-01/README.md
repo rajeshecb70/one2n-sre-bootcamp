@@ -19,7 +19,7 @@
    
    ```
    # Clone the repository
-   git clone git@github.com:rajeshecb70/one2n-sre-bootcamp.git
+   git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
    cd one2n-sre-bootcamp/milestone-01
    ```
    ```
@@ -34,6 +34,10 @@
 # Run migrations to set up the database:
 make migrate
 ``` 
+```
+# Upgrade migrations to set up the database:
+make upgrade
+
 ```
 # To run tests:
 make test
