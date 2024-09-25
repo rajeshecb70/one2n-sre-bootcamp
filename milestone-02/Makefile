@@ -4,7 +4,7 @@
 IMAGE_NAME = my-flask-api
 CONTAINER_NAME = my-flask-api-container
 DOCKERFILE_PATH = Dockerfile
-TAG = 1
+TAG = $(RANDOM)
 
 # Default target when running "make"
 .PHONY: all
