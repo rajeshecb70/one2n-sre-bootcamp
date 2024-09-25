@@ -1,40 +1,37 @@
 # Stage 1: Build Stage
-FROM python:3.11-slim AS build-stage
+FROM python:3.9.20-alpine3.20 AS build-stage
 
 # Set working directory
-WORKDIR /app
+WORKDIR /flask-app
 
 # Install required system dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpq-dev \
-    --no-install-recommends \
+RUN apk update && \
+    apk add libpq-dev \  
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the requirements.txt file to the container
 COPY requirements.txt .
 
-# Install pip and create a virtual environment
-#RUN python -m venv venv
-
 # Activate the virtual environment and install dependencies
-# RUN ./venv/bin/pip install --upgrade pip && ./venv/bin/pip install -r requirements.txt
-RUN pip install -r requirements.txt
+RUN pip3 install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
-# COPY . .
+COPY . ./
 
-# Stage 2: Production Stage (Final)
-FROM python:3.11-slim AS production-stage
+# Stage 2: Poduction Stage (Final)
+FROM python:3.9.20-alpine3.20 AS production-stage
 
 # Set working directory
-WORKDIR /app
+WORKDIR /flask-app
+
+# Depanedency 
+COPY --from=build-stage /usr/local/lib/python3.9 /usr/local/lib/python3.9
 
 # Copy the virtual environment and app code from the build stage
-COPY --from=build-stage /app /app
+COPY --from=build-stage /flask-app /flask-app
 
 # Expose the port the Flask app will run on
 EXPOSE 5000
 
 # Default command to activate the virtual environment and start the Flask app
-CMD ["/bin/bash", "-c", ". venv/bin/activate && flask run --host=0.0.0.0 --port=5000"]
+CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=5000" ]
