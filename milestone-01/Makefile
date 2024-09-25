@@ -23,8 +23,6 @@ install: $(VENV_DIR)/bin/activate
 # Check if MySQL is installed and user is created, then create the databases if they don't exist
 check_mysql:
 	@command -v mysql >/dev/null 2>&1 || { echo >&2 "MySQL is not installed. Aborting."; exit 1; }
-	@mysql -u $(DB_USER) -p$(DB_PASSWORD) -e "CREATE DATABASE IF NOT EXISTS $(DB_NAME);"
-	@mysql -u $(DB_USER) -p$(DB_PASSWORD) -e "CREATE DATABASE IF NOT EXISTS $(TEST_DB_NAME);"
 
 # Reset Alembic version table in MySQL (if it exists)
 reset_alembic:
@@ -74,7 +72,6 @@ clean:
 
 # Full cleanup, including Alembic migrations (use with caution)
 clean-full: clean
-	rm -rf migrations
 	rm -rvf .mypy_cache
 
 # PHONY target tells make that these are not files
