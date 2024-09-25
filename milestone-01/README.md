@@ -24,7 +24,7 @@
    ```
    ```
    # Set up environment variables. Create a `.env` file and add:
-   DATABASE_URL=mysql+pymysql://user:paassword@localhost/studentdb
+   DATABASE_URL=mysql+pymysql://user:paassword@localhost/studentdb1
    ```
    ```
    # Create a virtual environment, activate & run the application:

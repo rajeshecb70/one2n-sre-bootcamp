@@ -19,7 +19,7 @@ def create_app():
     app = Flask(__name__)
     # Load configuration from environment variables
     # Fallback to a default DB if env var is not set
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:newpassword@localhost/studentdb1'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Set up logging

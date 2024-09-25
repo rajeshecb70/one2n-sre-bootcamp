@@ -3,17 +3,6 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
-# Variables
-# VENV_DIR = venv
-# PYTHON = $(VENV_DIR)/bin/python
-# PIP = $(VENV_DIR)/bin/pip
-# DB_USER = root
-# DB_PASSWORD = newpassword
-# DB_HOST = localhost
-# DB_PORT = 3306
-# DB_NAME = studentdb1
-# TEST_DB_NAME = test_db
-
 # Check if the virtual environment exists, if not, create it
 $(VENV_DIR)/bin/activate: requirements.txt
 	@test -d $(VENV_DIR) || python3 -m venv $(VENV_DIR)
