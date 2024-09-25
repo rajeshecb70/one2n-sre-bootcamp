@@ -70,10 +70,12 @@ clean:
 	rm -rf $(VENV_DIR)
 	find . -name '*.pyc' -delete
 	find . -name '__pycache__' -delete
+	
 
 # Full cleanup, including Alembic migrations (use with caution)
 clean-full: clean
 	rm -rf migrations
+	rm -rvf .mypy_cache
 
 # PHONY target tells make that these are not files
 #.PHONY: install check_mysql reset_alembic alembic_init migrate upgrade start resume create_test_db test all clean clean_full
