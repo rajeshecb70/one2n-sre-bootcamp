@@ -135,7 +135,7 @@
 
     - Dockerfile should have different stages to build and run the API.✅
 
-    - We should be able to inject environment variables while running the docker container at runtime.✅
+    - We should be able to inject environment variables while running the docker container at runtime.
 
     - README.md should be updated with proper instructions to build the image and run the docker container.✅
 
