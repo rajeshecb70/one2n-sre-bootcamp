@@ -4,7 +4,6 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
-
 # Variables
 IMAGE_NAME = my-flask-api
 CONTAINER_NAME = my-flask-api-container
@@ -20,8 +19,8 @@ build:
 
 # Run the Docker container
 run:
-	docker run -d --network host --name $(CONTAINER_NAME) $(IMAGE_NAME):$(TAG)
-#   docker run -itd --network host  --name $(CONTAINER_NAME) -e MYSQL_USER=$(DB_USER) -e MYSQL_PASSWORD=$(DB_PASSWORD) -e MYSQL_DATABASE=$(DB_NAME) $(IMAGE_NAME):$(TAG)
+#	docker run -d --network host --name $(CONTAINER_NAME) $(IMAGE_NAME):$(TAG)
+    docker run -d -it --network host  --name $(CONTAINER_NAME) -e MYSQL_USER=$(DB_USER) -e MYSQL_PASSWORD=$(DB_PASSWORD) -e MYSQL_DATABASE=$(DB_NAME) $(IMAGE_NAME):$(TAG)
 
 # Stop and remove the Docker container
 stop:
