@@ -55,7 +55,6 @@
   # Clean Up Temp file and pyc files
   make full_clean:
   ```
-
   ```
   # Check MySQL Installation
   make check_mysql
@@ -73,25 +72,29 @@
   make migrate
   ```
   ```
-  # Run migrations to set up the database:
-  make migrate
-  ``` 
-  ```
   # Upgrade migrations to set up the database:
   make upgrade
 
-    - The schema after upgradation.
-
-  mysql> desc student;
+    - The original Schema 
+    mysql> desc student;
   +--------------+--------------+------+-----+---------+----------------+
   | Field        | Type         | Null | Key | Default | Extra          |
   +--------------+--------------+------+-----+---------+----------------+
   | id           | int          | NO   | PRI | NULL    | auto_increment |
   | name         | varchar(100) | NO   |     | NULL    |                |
   | age          | int          | NO   |     | NULL    |                |
-  | phone_number | int          | NO   |     | NULL    |                |
+   +--------------+--------------+------+-----+---------+----------------+
+
+    - The schema after upgradation.
+
+    mysql> desc student;
+  +--------------+--------------+------+-----+---------+----------------+
+  | Field        | Type         | Null | Key | Default | Extra          |
+  +--------------+--------------+------+-----+---------+----------------+
+  | id           | int          | NO   | PRI | NULL    | auto_increment |
+  | name         | varchar(100) | NO   |     | NULL    |                |
+  | age          | int          | NO   |     | NULL    |                |
   | gender       | varchar(100) | NO   |     | NULL    |                |
-  | address      | varchar(100) | YES  |     | NULL    |                |
   +--------------+--------------+------+-----+---------+----------------+
 
   ```
@@ -107,16 +110,11 @@
   | id           | int          | NO   | PRI | NULL    | auto_increment |
   | name         | varchar(100) | NO   |     | NULL    |                |
   | age          | int          | NO   |     | NULL    |                |
-  | phone_number | int          | NO   |     | NULL    |                |
-  | gender       | varchar(100) | NO   |     | NULL    |                |
-  +--------------+--------------+------+-----+---------+----------------+
-  5 rows in set (0.00 sec)
+   +--------------+--------------+------+-----+---------+----------------+
   ```
 
-  ```
-  # To run tests:
-  make test
-  ```
+ 
+ ```
 ## 5. API Endpoints
 
 - **POST /api/v1/students** - Add a new student.
@@ -135,7 +133,7 @@
 
     - Dockerfile should have different stages to build and run the API.✅
 
-    - We should be able to inject environment variables while running the docker container at runtime.
+    - We should be able to inject environment variables while running the docker container at runtime.✅
 
     - README.md should be updated with proper instructions to build the image and run the docker container.✅
 
