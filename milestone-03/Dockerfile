@@ -30,12 +30,12 @@ COPY --from=build-stage /usr/local/lib/python3.9 /usr/local/lib/python3.9
 # Copy the virtual environment and app code from the build stage
 COPY --from=build-stage /flask-app /flask-app
 
-RUN chmod +x /flask-app/run.sh
+# RUN chmod +x /flask-app/run.sh
 
 # Set environment variables
-ENV FLASK_APP=app/__init__.py
-ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=5000
+#ENV FLASK_APP=app/__init__.py
+#ENV FLASK_RUN_HOST=0.0.0.0
+#ENV FLASK_RUN_PORT=5000
 
 # Expose the port the Flask app will run on
 EXPOSE 5000

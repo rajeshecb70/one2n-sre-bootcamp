@@ -38,110 +38,23 @@
   ```
       
   ```
-  # run the app container and db container 
-  make build
-  ```
-  ```
-  # Run the Docker Container
-  make run
-  ```
-  ```
-  # Stop and Remove the Docker Container
-  make stop
-  ```
-  ```
-  # Clean Up Docker Images
-  make clean
-  ```
-  ```
-  # Clean Up Temp file and pyc files
-  make full_clean:
-  ```
-  ```
-  # Check MySQL Installation
-  make check_mysql
-  ```
-  ```
-  # Reset Alembic Version Table
-  make reset_alembic
-  ```
-  ```
-  # Initialize Alembic for migration 
-  make alembic_init
-  ```
-  ```
-  # Generate Migrations
-  make migrate
-  ```
-  ```
-  # Upgrade migrations to set up the database:
-  make upgrade
+  # Target to start the DB container
+start-db:
+	docker-compose up -d db
 
-    - The original Schema 
-    mysql> desc student;
-  +--------------+--------------+------+-----+---------+----------------+
-  | Field        | Type         | Null | Key | Default | Extra          |
-  +--------------+--------------+------+-----+---------+----------------+
-  | id           | int          | NO   | PRI | NULL    | auto_increment |
-  | name         | varchar(100) | NO   |     | NULL    |                |
-  | age          | int          | NO   |     | NULL    |                |
-   +--------------+--------------+------+-----+---------+----------------+
+# Target to run DB migrations.
+run-migrations:
+	docker-compose run flask-api flask db upgrade
 
-    - The schema after upgradation.
+# Target to build REST API docker image
+build-api:
+	docker-compose build flask-api
 
-    mysql> desc student;
-  +--------------+--------------+------+-----+---------+----------------+
-  | Field        | Type         | Null | Key | Default | Extra          |
-  +--------------+--------------+------+-----+---------+----------------+
-  | id           | int          | NO   | PRI | NULL    | auto_increment |
-  | name         | varchar(100) | NO   |     | NULL    |                |
-  | age          | int          | NO   |     | NULL    |                |
-  | gender       | varchar(100) | NO   |     | NULL    |                |
-  +--------------+--------------+------+-----+---------+----------------+
+# Target to run REST API docker container
+start-api: start-db run-migrations
+	docker-compose up -d flask-api
 
+# Target to stop all services
+stop:
+	docker-compose down
   ```
-
-  ```
-  # Upgrade migrations to set up the database:
-  make downgrade
-    - The Schema after downgrade (same as main original schema)
-  mysql> desc student;
-  +--------------+--------------+------+-----+---------+----------------+
-  | Field        | Type         | Null | Key | Default | Extra          |
-  +--------------+--------------+------+-----+---------+----------------+
-  | id           | int          | NO   | PRI | NULL    | auto_increment |
-  | name         | varchar(100) | NO   |     | NULL    |                |
-  | age          | int          | NO   |     | NULL    |                |
-   +--------------+--------------+------+-----+---------+----------------+
-  ```
-
- 
- ```
-## 5. API Endpoints
-
-- **POST /api/v1/students** - Add a new student.
-- **GET /api/v1/students** - Get all students.
-- **GET /api/v1/students/<id>** - Get a student by ID.
-- **PUT /api/v1/students/<id>** - Update a student by ID.
-- **DELETE /api/v1/students/<id>** - Delete a student by ID.
-- **GET /healthcheck** - Health check endpoint.
-  
-
-
-## 6. Expectations
-  - The following expectations should be met to complete this milestone.
-
-    - API should be run using the docker image.✅
-
-    - Dockerfile should have different stages to build and run the API.✅
-
-    - We should be able to inject environment variables while running the docker container at runtime.✅
-
-    - README.md should be updated with proper instructions to build the image and run the docker container.✅
-
-    - Similarly appropriate make targets should be added in the Makefile.✅
-
-    - The docker image should be properly tagged using semver tagging, use of latest tag is heavily discouraged.✅
-
-    - Appropriate measures should be taken to reduce docker image size. We want our images to have a small size footprint.✅
-      - Docker Image Size : 133MB
