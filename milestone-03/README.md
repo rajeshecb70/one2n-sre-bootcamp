@@ -8,6 +8,7 @@
 ## 3. Prerequisites
   - Docker and Docker Compose installed.
   - MySQL running in a container.
+  - .env for valid database string. 
 
 
 ## 4. Setup & configuration
@@ -17,11 +18,6 @@
   cd one2n-sre-bootcamp/milestone-03
   ```
         
-  ```
-  # Target to initailize the migration 
-  make init_migration
-  ```
-
   ```
   # Target to generate the migration.
   make generate_migration
