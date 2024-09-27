@@ -46,7 +46,7 @@
   # Target to stop flask API container
   make stop-flask
   ```
-    ```
+  ```
   # Target to stop flask Database container
   make stop-db
   ```
