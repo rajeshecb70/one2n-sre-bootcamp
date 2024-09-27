@@ -10,7 +10,7 @@
   - MySQL running in a container.
 
 
-## 4. Setup & configuration
+## 4. Setup & configuration of milestone-03
   ```
   # Clone the repository
   git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
