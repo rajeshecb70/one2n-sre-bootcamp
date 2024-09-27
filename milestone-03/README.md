@@ -1,8 +1,10 @@
 ## 1. Project Title
-  Containerise REST API
+  Setup one-click local development setup
 
 ## 2. Project Description
-  The objective of this project is to develop a Dockerfile for a REST API that adheres to best practices for containerization. The resulting Docker image will facilitate easy deployment, ensure environment configurability, and maintain a small size footprint. This project emphasizes using multi-stage builds, appropriate tagging conventions, and clear documentation for building and running the API.
+  We want to simplify the process of setting up API on the local machine for development. The idea is to enable other team members to run the API and its dependent services with the least amount of steps involved in getting this up and running.
+
+  We won’t be assuming that other team members have the required tools already installed on their local. So we will be going one step further and providing them with simple bash functions to install the required tools.
 
 
 ## 3. Requirements
@@ -32,11 +34,11 @@
   ```
   # Clone the repository
   git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
-  cd one2n-sre-bootcamp/milestone-02
+  cd one2n-sre-bootcamp/milestone-03
   ```
       
   ```
-  # Build the Docker Image
+  # run the app container and db container 
   make build
   ```
   ```
