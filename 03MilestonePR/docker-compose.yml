@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  flask-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: flask-api:3.1.0
+    restart: always
+    environment:
+      DATABASE_URL: mysql+pymysql://root:mypassword@db:3306/studentdb1
+      RUN_MIGRATION: true
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: studentdb1
+    ports:
+      - '3306:3306'
+    volumes:
+      - db-database:/var/lib/mysql
+
+volumes:
+  db-database:
