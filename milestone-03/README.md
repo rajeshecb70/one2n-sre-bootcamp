@@ -2,59 +2,79 @@
   Setup one-click local development setup
 
 ## 2. Project Description
-  We want to simplify the process of setting up API on the local machine for development. The idea is to enable other team members to run the API and its dependent services with the least amount of steps involved in getting this up and running.
-
-  We won’t be assuming that other team members have the required tools already installed on their local. So we will be going one step further and providing them with simple bash functions to install the required tools.
+  This project runs a Flask API using Docker, leveraging multi-stage builds to minimize the image size. The API interacts with a MySQL database and supports migrations.
 
 
-## 3. Requirements
-    - Python 3.12.3
-    - Flask 3.0.3
-    - MySQL 8.0
-    - pytest 8.3.3
-    - Docker 24.0.7
+## 3. Prerequisites
+  - Docker and Docker Compose installed.
+  - MySQL running in a container.
+
 
 ## 4. Setup & configuration
-   ```
-  # Configuration
-
-    Before running the commands, ensure that you have the following environment variables set:
-
-  - `IMAGE_NAME`: The name of the Docker image.
-  - `TAG`: The version tag for the Docker image (following semantic versioning).
-  - `DOCKERFILE_PATH`: The path to the Dockerfile (default is `Dockerfile`).
-  - `CONTAINER_NAME`: The name of the Docker container.
-  - `DB_USER`: MySQL username for database access.
-  - `DB_PASSWORD`: MySQL password for the specified user.
-  - `DB_NAME`: The name of the main database.
-  - `TEST_DB_NAME`: The name of the test database.
-  - `PYTHON`: The Python interpreter (default is `python`).
-  ```
-   
   ```
   # Clone the repository
   git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
   cd one2n-sre-bootcamp/milestone-03
   ```
-      
+        
+  ```
+  # Target to initailize the migration 
+  make init_migration
+  ```
+
+  ```
+  # Target to generate the migration.
+  make generate_migration
+  ```
+
   ```
   # Target to start the DB container
-start-db:
-	docker-compose up -d db
-
-# Target to run DB migrations.
-run-migrations:
-	docker-compose run flask-api flask db upgrade
-
-# Target to build REST API docker image
-build-api:
-	docker-compose build flask-api
-
-# Target to run REST API docker container
-start-api: start-db run-migrations
-	docker-compose up -d flask-api
-
-# Target to stop all services
-stop:
-	docker-compose down
+  make run-db
   ```
+
+  ```
+  # Target to build REST API docker image
+  make build-flask
+  ```
+
+  ```
+  # Target to start the database container
+  make run-flask
+  ```
+
+  ```
+  # Target to stop flask API container
+  make stop-flask
+  ```
+    ```
+  # Target to stop flask Database container
+  make stop-db
+  ```
+
+  ```
+  # Target to stop all services
+  make stop
+  ```
+
+  ```
+  # Target to clean the temporary files.
+  make full_clean
+  ```
+
+### 5. Expectations
+  - The following expectations should be met to complete this milestone.
+    - API and its dependent services should be run using docker-compose.✅
+    - Makefile should have the following targets.
+      - To start DB container.✅
+      - To run DB DML migrations.✅
+      - To build REST API docker image.✅
+      - To run REST API docker container.✅
+
+    - README.md file should be updated with instructions
+      - To add pre-requisites for any existing tools that must already be installed (e.g., docker, make, etc)✅
+      - To run different make targets and the order of execution.✅
+
+    - When we run the make target to start the REST API docker container.
+      - It should first start the DB and run DB DML migrations.✅
+      - (Good to have) You can even include checks to see if the DB is already running and DB migrations are already applied.
+      - Later it should invoke the docker compose command to start the API docker container.

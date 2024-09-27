@@ -1,16 +1,13 @@
-version: '3'
+version: '3.8'
 
 services:
   flask-api:
     build:
       context: .
       dockerfile: Dockerfile
+    image: flask-api:3.1.0
     restart: always
     environment:
-      DATABASE_HOST: db
-      DATABASE_USER: root
-      DATABASE_PASSWORD: mypassword
-      DATABASE_NAME: studentdb1
       DATABASE_URL: mysql+pymysql://root:mypassword@db:3306/studentdb1
       RUN_MIGRATION: true
     ports:

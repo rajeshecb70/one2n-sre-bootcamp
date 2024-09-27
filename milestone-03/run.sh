@@ -3,7 +3,7 @@
 # Check if the RUN_MIGRATION environment variable is set to "true"
 if [ "$RUN_MIGRATION" = "true" ]; then
     echo "Running database migrations..."
-    flask --app app/__init__.py db upgrade
+    python3 -m flask --app app/__init__.py db upgrade
 fi
 
 echo "Starting the Flask server..."

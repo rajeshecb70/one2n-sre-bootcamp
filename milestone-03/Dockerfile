@@ -12,9 +12,9 @@ RUN apk update && \
 # Copy the rest of the application code into the container
 ADD app /flask-app/app
 ADD migrations /flask-app/migrations
-COPY .env /flask-app/
-COPY requirements.txt /flask-app/
-COPY run.sh /flask-app/
+COPY .env requirements.txt run.sh /flask-app/
+RUN chmod +x /flask-app/run.sh
+
 # Activate the virtual environment and install dependencies
 RUN pip3 install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
@@ -30,17 +30,17 @@ COPY --from=build-stage /usr/local/lib/python3.9 /usr/local/lib/python3.9
 # Copy the virtual environment and app code from the build stage
 COPY --from=build-stage /flask-app /flask-app
 
-# RUN chmod +x /flask-app/run.sh
+
 
 # Set environment variables
-#ENV FLASK_APP=app/__init__.py
-#ENV FLASK_RUN_HOST=0.0.0.0
-#ENV FLASK_RUN_PORT=5000
+ENV FLASK_APP=app/__init__.py
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=5000
 
 # Expose the port the Flask app will run on
 EXPOSE 5000
 
 # Default command to activate the virtual environment and start the Flask app
 #CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=5000" ]
-# Run the entrypoint.sh script
+# Run the run.sh script
 ENTRYPOINT ["/flask-app/run.sh"]
