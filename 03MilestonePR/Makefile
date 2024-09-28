@@ -8,10 +8,11 @@ endif
 IMAGE_NAME = flask-api
 DOCKERFILE_PATH = Dockerfile
 TAG = 3.1.0
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/main
+# Target to initailize the migration 
+init_migration:
+	flask db init 
+
 # Target to generate the migration. (The message must comply with the app's requirements)
 generate_migration:
 	flask db migrate -m "(The message must comply with the app's requirements)"
@@ -21,7 +22,7 @@ run-db:
 	docker-compose up -d db
 
 # Target to start the application container and run migration
-all: build-flask run-flask
+all: build run
 
 # Target to build flask image with tag
 build-flask:
