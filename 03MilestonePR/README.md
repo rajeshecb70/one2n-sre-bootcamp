@@ -8,7 +8,7 @@
 ## 3. Prerequisites
   - Docker and Docker Compose installed.
   - MySQL running in a container.
-  - .env file for database details. (DATABASE_URL=mysql+pymysql://root:<DBpassword>@localhost/databasename)
+
 
 ## 4. Setup & configuration of milestone-03
   ```
@@ -16,7 +16,12 @@
   git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
   cd one2n-sre-bootcamp/milestone-03
   ```
-       
+        
+  ```
+  # Target to initailize the migration 
+  make init_migration
+  ```
+
   ```
   # Target to generate the migration.
   make generate_migration
