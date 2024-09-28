@@ -699,3 +699,941 @@ sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1048, "Column 'gend
 [SQL: INSERT INTO student (name, age, phone_number, gender) VALUES (%(name)s, %(age)s, %(phone_number)s, %(gender)s)]
 [parameters: {'name': 'Jill Doe', 'age': 27, 'phone_number': '1234567890', 'gender': None}]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-09-28 20:51:47,434 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-28 20:51:47,440 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'phone_number' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 14, in add_student
+    db.session.commit()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1054, "Unknown column 'phone_number' in 'field list'")
+[SQL: INSERT INTO student (name, age, phone_number, gender, address) VALUES (%(name)s, %(age)s, %(phone_number)s, %(gender)s, %(address)s)]
+[parameters: {'name': 'Rajesh', 'age': 21, 'phone_number': '1234567890', 'gender': None, 'address': None}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-09-28 20:51:47,509 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'phone_number' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 14, in add_student
+    db.session.commit()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1054, "Unknown column 'phone_number' in 'field list'")
+[SQL: INSERT INTO student (name, age, phone_number, gender, address) VALUES (%(name)s, %(age)s, %(phone_number)s, %(gender)s, %(address)s)]
+[parameters: {'name': 'Rajesh', 'age': 21, 'phone_number': '1234567890', 'gender': None, 'address': None}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-09-28 20:51:47,517 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'phone_number' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 14, in add_student
+    db.session.commit()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1054, "Unknown column 'phone_number' in 'field list'")
+[SQL: INSERT INTO student (name, age, phone_number, gender, address) VALUES (%(name)s, %(age)s, %(phone_number)s, %(gender)s, %(address)s)]
+[parameters: {'name': 'Jack Doe', 'age': 30, 'phone_number': '1234567890', 'gender': None, 'address': None}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-09-28 20:51:47,527 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'phone_number' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 14, in add_student
+    db.session.commit()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 775, in _read_query_result
+    result.read()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/pymysql/err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1054, "Unknown column 'phone_number' in 'field list'")
+[SQL: INSERT INTO student (name, age, phone_number, gender, address) VALUES (%(name)s, %(age)s, %(phone_number)s, %(gender)s, %(address)s)]
+[parameters: {'name': 'Jill Doe', 'age': 27, 'phone_number': '1234567890', 'gender': None, 'address': None}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-09-28 21:01:36,754 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-28 21:01:36,756 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:01:36,795 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:01:36,800 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:01:36,805 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:03:53,113 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-28 21:03:53,115 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:03:53,155 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:03:53,160 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:03:53,165 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:06:16,322 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-28 21:06:16,324 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:06:16,363 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:06:16,368 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:06:16,373 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:12:11,478 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-28 21:12:11,480 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:12:11,522 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:12:11,527 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:12:11,532 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:12:27,221 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-28 21:12:27,223 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:12:27,263 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:12:27,268 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:12:27,273 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:15:24,949 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-28 21:15:24,951 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:15:24,991 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:15:24,996 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:15:25,001 - app - ERROR - Exception on /api/v1/students [POST]
+Traceback (most recent call last):
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/onen2n/projects/one2n-sre-bootcamp/milestone-01/app/routes.py", line 12, in add_student
+    new_student = Student(name=data['name'], age=data['age'], phone_number=data['phone_number'])
+                                                                           ~~~~^^^^^^^^^^^^^^^^
+KeyError: 'phone_number'
+2024-09-28 21:17:49,788 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-28 21:17:49,804 - app - INFO - Added student: {'age': 21, 'gender': 'male', 'id': 8, 'name': 'Rajesh'}
+2024-09-28 21:17:49,815 - app - INFO - Retrieved student: {'age': 21, 'gender': 'male', 'id': 9, 'name': 'Rajesh'}
+2024-09-28 21:17:49,829 - app - INFO - Updated student 10: {'age': 31, 'gender': 'male', 'id': 10, 'name': 'Jack Updated'}
+2024-09-28 21:17:49,843 - app - INFO - Deleted student 11
+2024-09-28 21:27:58,124 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-28 21:27:58,135 - app - INFO - Added student: {'age': 21, 'gender': 'male', 'id': 12, 'name': 'Rajesh'}
+2024-09-28 21:27:58,146 - app - INFO - Retrieved student: {'age': 21, 'gender': 'male', 'id': 13, 'name': 'Rajesh'}
+2024-09-28 21:27:58,159 - app - INFO - Updated student 14: {'age': 31, 'gender': 'male', 'id': 14, 'name': 'Jack Updated'}
+2024-09-28 21:27:58,171 - app - INFO - Deleted student 15
+2024-09-28 21:39:30,014 - app - INFO - Healthcheck endpoint test passed with message: Hi, The Web REST API Service is up and running!
+2024-09-28 21:39:30,045 - app - INFO - Added student: {'age': 21, 'gender': 'male', 'id': 16, 'name': 'Rajesh'}
+2024-09-28 21:39:30,063 - app - INFO - Retrieved student: {'age': 21, 'gender': 'male', 'id': 17, 'name': 'Rajesh'}
+2024-09-28 21:39:30,092 - app - INFO - Updated student 18: {'age': 31, 'gender': 'male', 'id': 18, 'name': 'Jack Updated'}
+2024-09-28 21:39:30,120 - app - INFO - Deleted student 19

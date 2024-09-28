@@ -13,20 +13,13 @@ $(VENV_DIR)/bin/activate: requirements.txt
 install: $(VENV_DIR)/bin/activate
 	$(PIP) install -r requirements.txt
 
-# Check if MySQL is installed and user is created, then create the databases if they don't exist
-check_mysql:
-	@command -v mysql >/dev/null 2>&1 || { echo >&2 "MySQL is not installed. Aborting."; exit 1; }
-
-# Reset Alembic version table in MySQL (if it exists)
-reset_alembic:
-	@mysql -u $(DB_USER) -p$(DB_PASSWORD) -e "DROP TABLE IF EXISTS $(DB_NAME).alembic_version;"
 
 # Initialize Alembic (if not already initialized)
 alembic_init:
 	@test -f migrations/env.py || flask db init
 
 # Generate a new migration based on the models.py schema
-migrate: alembic_init
+migrate:
 	flask db migrate
 
 # Apply the database migrations (run 'upgrade')
@@ -54,7 +47,7 @@ test: create_test_db install
 	FLASK_ENV=test $(PYTHON) -m pytest
 
 # The 'all' target that runs everything in order
-all: install check_mysql reset_alembic migrate upgrade start
+all: install migrate upgrade start
 
 # Cleanup: remove virtual environment and other generated files (but not migrations)
 clean:
@@ -65,7 +58,4 @@ clean:
 
 # Full cleanup, including Alembic migrations (use with caution)
 clean-full: clean
-	rm -rvf .mypy_cache
-
-# PHONY target tells make that these are not files
-#.PHONY: install check_mysql reset_alembic alembic_init migrate upgrade start resume create_test_db test all clean clean_full
+	rm -rvf .mypy_cache .pytest_cache/
