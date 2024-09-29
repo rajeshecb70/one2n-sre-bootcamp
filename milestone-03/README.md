@@ -1,5 +1,5 @@
 ## 1. Project Title
-  Setup one-click local development setup
+  Milestone-03: Setup one-click local development setup
 
 ## 2. Project Description
   This project runs a Flask API using Docker, leveraging multi-stage builds to minimize the image size. The API interacts with a MySQL database and supports migrations.
@@ -8,11 +8,8 @@
 ## 3. Prerequisites
   - Docker and Docker Compose installed.
   - MySQL running in a container.
-<<<<<<< HEAD
-
-=======
   - .env file for database details. (DATABASE_URL=mysql+pymysql://root:<DBpassword>@localhost/databasename)
->>>>>>> origin/main
+
 
 ## 4. Setup & configuration of milestone-03
   ```
@@ -20,10 +17,6 @@
   git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
   cd one2n-sre-bootcamp/milestone-03
   ```
-<<<<<<< HEAD 
-=======
-       
->>>>>>> origin/main
   ```
   # Target to generate the migration.
   make generate_migration
