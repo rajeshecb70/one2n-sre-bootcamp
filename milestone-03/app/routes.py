@@ -9,7 +9,7 @@ bp = Blueprint('students', __name__, url_prefix='/api/v1/students')
 @bp.route('', methods=['POST'])
 def add_student():
     data = request.json
-    new_student = Student(name=data['name'], age=data['age'], gender=data['gender'], address=data['address'])
+    new_student = Student(name=data['name'], age=data['age'], gender=data['gender'])
     db.session.add(new_student)
     db.session.commit()
     return StudentSchema().jsonify(new_student), 201
@@ -34,7 +34,6 @@ def update_student(id):
     student.name = data['name']
     student.age = data['age']
     student.gender = data['gender']
-    student.address = data['address']
     db.session.commit()
     return StudentSchema().jsonify(student)
 
