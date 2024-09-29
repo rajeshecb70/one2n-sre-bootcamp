@@ -17,9 +17,13 @@
   git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
   cd one2n-sre-bootcamp/milestone-03
   ```
+    ```
+  # Target to intiate the migration.
+  make init-migration
+  ```
   ```
   # Target to generate the migration.
-  make generate_migration
+  make generate-migration
   ```
 
   ```

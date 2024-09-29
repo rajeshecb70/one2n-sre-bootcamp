@@ -9,16 +9,20 @@ IMAGE_NAME = flask-api
 DOCKERFILE_PATH = Dockerfile
 TAG = 3.1.0
 
+#Target to initiate the migration.
+init-migration:
+	flask db init
+
 # Target to generate the migration. (The message must comply with the app's requirements)
-generate_migration:
-	flask db migrate -m "(The message must comply with the app's requirements)"
+generate-migration:
+	flask db migrate -m "(create Tables in db)"
 
 # Target to start the DB container
 run-db:
 	docker-compose up -d db
 
 # Target to start the application container and run migration
-all: build-flask run-flask
+all: run-db build-flask run-flask
 
 # Target to build flask image with tag
 build-flask:
@@ -51,5 +55,9 @@ full-clean:
 	rm -rvf .mypy_cache
 	find . -name '*.pyc' -delete
 	find . -name '__pycache__' -delete
+	rm -rvf tests/.pytest_cache
+	rm -rvf logs/api.logs
+	rm -rvf test_app.log
+	
 
 	
