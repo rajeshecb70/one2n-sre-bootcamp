@@ -9,7 +9,7 @@
   - Docker and Docker Compose installed.
   - MySQL running in a container.
   - .env file for database details. (DATABASE_URL=mysql+pymysql://root:<DBpassword>@localhost/databasename)
-  - Github actions 
+  - Github actions required.
 
 
 ## 4. Setup & configuration of milestone-03

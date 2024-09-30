@@ -16,6 +16,6 @@ jobs:
 
       - name: Run shell script
         run: |
-          echo "Executing script on self-hosted runner"
-          touch /tmp/ashu
+          sudo echo "Executing script on self-hosted runner"
+          sudo touch /tmp/student
         shell: bash
