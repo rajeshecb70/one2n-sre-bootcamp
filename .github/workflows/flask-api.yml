@@ -5,12 +5,12 @@ on:
   push:
     branches:
       - milestone-04/pipeline
-#    paths:
-#      - 'app/**' # Trigger only when changes are made to the 'app/' directory
-#      - 'migrations/**'
-#      - '.env'
-#      - 'requirements.txt'
-#      - 'run.sh'
+    paths:
+      - 'app/**' # Trigger only when changes are made to the 'app/' directory
+      - 'migrations/**'
+      - '.env'
+      - 'requirements.txt'
+      - 'run.sh'
 
 jobs:
   build:
