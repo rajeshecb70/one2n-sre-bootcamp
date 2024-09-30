@@ -1,0 +1,25 @@
+name: Self-hosted CI for Milestone-04
+
+# Trigger the workflow when code is pushed to the milestone-04/pipeline branch
+on:
+  push:
+    branches:
+      - milestone-04/pipeline
+
+jobs:
+  print-india:
+    # Define the job to run on a self-hosted runner
+    runs-on: self-hosted
+    
+    steps:
+      # Step 1: Check out the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Print "India" to the console
+      - name: Print India
+        run: echo "India"
+
+      # Step 3: Log "Test India" in the workflow
+      - name: Test India
+        run: echo "Test India"
