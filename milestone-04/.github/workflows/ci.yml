@@ -1,21 +1,22 @@
-name: Self-Hosted Runner Pipeline
+name: Self-hosted CI for Milestone-04
 
+# Trigger the workflow when code is pushed to the milestone-04/pipeline branch
 on:
   push:
     branches:
-      - milestone-04/pipeline  # Trigger on branch 'as'
+      - milestone-04/pipeline
 
+# Define the jobs in the workflow
 jobs:
-  run-on-self-hosted-runner:
-    name: Run on self hosted 
-    runs-on: [self-hosted, onen2n-ThinkPad-E15-Gen-2]  # Specify the runner name
-
+  print-india:
+    # Run this job on a self-hosted runner
+    runs-on: self-hosted
+    
     steps:
+      # Step 1: Check out the code from the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run shell script
-        run: |
-          sudo echo "Executing script on self-hosted runner"
-          sudo touch /tmp/student
-        shell: bash
+      # Step 2: Print "India" to the console
+      - name: Print India
+        run: echo "India"
