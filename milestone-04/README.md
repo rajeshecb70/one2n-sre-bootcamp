@@ -57,19 +57,19 @@
   ```
 
 ### 5. Expectations
-  - The following expectations should be met to complete this milestone.
-    - API and its dependent services should be run using docker-compose.✅
-    - Makefile should have the following targets.
-      - To start DB container.✅
-      - To run DB DML migrations.✅
-      - To build REST API docker image.✅
-      - To run REST API docker container.✅
+The following expectations should be met to complete this milestone.
 
-    - README.md file should be updated with instructions
-      - To add pre-requisites for any existing tools that must already be installed (e.g., docker, make, etc)✅
-      - To run different make targets and the order of execution.✅
+    CI pipeline should consist of the following stages
+        Build API
+        Run tests
+        Perform code linting
+        Docker login
+        Docker build and push
 
-    - When we run the make target to start the REST API docker container.
-      - It should first start the DB and run DB DML migrations.✅
-      - (Good to have) You can even include checks to see if the DB is already running and DB migrations are already applied.
-      - Later it should invoke the docker compose command to start the API docker container.
+    To achieve the stages of building, testing, and performing code linting, you need to use appropriate make targets.
+
+    CI pipeline should be run using a self-hosted GitHub runner running on your local machine.
+
+    CI pipeline should only be triggered when changes are made in the code directory and not in other directories or filepaths.
+
+    CI workflow should allow the developer to manually trigger the pipeline when required.
