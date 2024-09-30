@@ -1,5 +1,5 @@
 ## 1. Project Title
-  Milestone-04 : Setup a CI pipeline
+  Milestone-04 : Setup a CI pipeline with github actions
 
 ## 2. Project Description
   This project runs a Flask API using Docker, leveraging multi-stage builds to minimize the image size. The API interacts with a MySQL database and supports migrations using github Actions.
