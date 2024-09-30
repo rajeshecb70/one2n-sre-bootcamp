@@ -10,7 +10,7 @@ on:
 jobs:
   print-india:
     # Run this job on a self-hosted runner
-    runs-on: self-hosted
+    runs-on: onen2n-ThinkPad-E15-Gen-2
     
     steps:
       # Step 1: Check out the code from the repository
