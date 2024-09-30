@@ -1,6 +1,6 @@
 name: CI Pipeline for Flask API
 
-# Trigger this workflow when pushing to the 'milestone-04/pipeline' branch
+# Trigger this workflow when pushing to the 'milestone-04/pipeline'
 on:
   push:
     branches:
