@@ -1,6 +1,6 @@
 name: Self-hosted CI for Milestone-04
 
-# Trigger the workflow when code is pushed to the milestone-04/pipeline branch
+# Trigger the workflow when code is pushed to the milestone-04/pipeline branch like 
 on:
   push:
     branches:
