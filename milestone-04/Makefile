@@ -19,7 +19,7 @@ install-dependencies: $(VENV_DIR)/bin/activate
 	$(PIP) install -r requirements.txt
 
 # Start the Flask application
-start-flask: install
+start-flask: install-dependencies
 	$(PYTHON) -m flask run
 
 # Resume the Flask application without additional setup (restart server)
@@ -27,7 +27,7 @@ resume-flask:
 	$(PYTHON) -m flask run
 
 # Run tests using pytest, ensuring the test database exists
-test-flask: install
+test-flask: install-dependencies
 	$(PYTHON) -m pytest
 
 # Linting target
@@ -42,7 +42,7 @@ docker-build:
 	docker build -t $(DOCKER_IMAGE):$(TAG) .
 
 #  Run Flask-api using the docker compose
-run-flask: build
+run-flask: docker-build
 	docker-compose up -d  flask-api 
 
 # Tagging
