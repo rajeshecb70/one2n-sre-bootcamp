@@ -1,8 +1,18 @@
+"""
+This module sets up logging for the application, including a rotating
+file handler that manages log files.
+"""
+
+import os
 import logging
 from logging.handlers import RotatingFileHandler
-import os
+
 
 def setup_logging():
+    """
+    Set up logging configuration for the application, creating a rotating 
+    log file handler and logging to stderr.
+    """
     # Create a logs directory if it doesn't exist
     if not os.path.exists('logs'):
         os.makedirs('logs')

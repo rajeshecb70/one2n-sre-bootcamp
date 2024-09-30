@@ -16,30 +16,31 @@
   ```
   # Clone the repository
   git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
-  cd one2n-sre-bootcamp/milestone-03
+  cd one2n-sre-bootcamp/milestone-04
   ```
-  # Target to generate the migration.
-  make generate_migration
   ```
-
-  ```
-  # Target to start the DB container
-  make run-db
+  # Target for Build API image
+  make docker-build
   ```
 
   ```
-  # Target to build REST API docker image
-  make build-flask
+  # Target to Run tests
+  make test-flask
   ```
 
   ```
-  # Target to start the database container
-  make run-flask
+  # Target to Perform code linting
+  make lint-flask
   ```
 
   ```
-  # Target to stop flask API container
-  make stop-flask
+  # Target to Docker login
+  make docker-login
+  ```
+
+  ```
+  # Target to Docker build and push
+  make all
   ```
   ```
   # Target to stop flask Database container
@@ -47,13 +48,13 @@
   ```
 
   ```
-  # Target to stop all services
-  make stop
+  # Target to clean some files.
+  make clean
   ```
 
   ```
-  # Target to clean the temporary files.
-  make full_clean
+  # Target to clean-full the temporary files.
+  make clean-full
   ```
 
 ### 5. Expectations

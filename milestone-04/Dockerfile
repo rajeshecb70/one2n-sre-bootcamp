@@ -30,8 +30,6 @@ COPY --from=build-stage /usr/local/lib/python3.9 /usr/local/lib/python3.9
 # Copy the virtual environment and app code from the build stage
 COPY --from=build-stage /flask-app /flask-app
 
-
-
 # Set environment variables
 ENV FLASK_APP=app/__init__.py
 ENV FLASK_RUN_HOST=0.0.0.0

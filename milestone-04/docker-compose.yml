@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     #working_dir: /flask-api
-    command: pytest tests/
+    #command: pytest tests/
     restart: always
     environment:
       DATABASE_URL: $(DATABASE_URL)

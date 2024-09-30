@@ -1,11 +1,14 @@
+# pylint: disable=logging-fstring-interpolation
 import os
 import logging
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from .utils import setup_logging
-from dotenv import load_dotenv
 from flask_migrate import Migrate
+from dotenv import load_dotenv
+from .utils import setup_logging
+
+
 
 # Load environment variables from .env file (optional)
 load_dotenv()
@@ -54,6 +57,6 @@ def create_app():
         logging.info(f'Response status: {response.status}')
         logging.info(f'Response headers: {response.headers}')
         return response
-    # Log code end 
+    # Log code end
 
     return app
