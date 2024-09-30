@@ -30,7 +30,10 @@
   # Target to start the DB container
   make run-db
   ```
-
+  ```
+  # Target to run application and db with migration.
+  make all
+  ```
   ```
   # Target to build REST API docker image
   make build-flask
