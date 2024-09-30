@@ -1,39 +1,21 @@
-name: CI Pipeline for Milestone-04
+name: Self-Hosted Runner Pipeline
 
-# Triggers the workflow on a push to the milestone-04/pipeline branch
 on:
   push:
     branches:
-      - milestone-04/pipeline
-  pull_request:
-    branches:
-      - milestone-04/pipeline
+      - milestone-04/pipeline  # Trigger on branch 'as'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  run-on-self-hosted-runner:
+    name: Run on self hosted 
+    runs-on: [self-hosted, onen2n-ThinkPad-E15-Gen-2]  # Specify the runner name
 
     steps:
-      # Step 1: Check out the repository's code
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up the appropriate language/runtime (e.g., Python, Node.js)
-      # If your milestone-04 is Python, for example:
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
-
-      # Step 3: Install dependencies (replace with your actual dependency manager)
-      - name: Install Dependencies
+      - name: Run shell script
         run: |
-          pip install -r milestone-04/requirements.txt
-
-      # Step 4: Run tests
-      - name: Run Tests
-        run: |
-          cd milestone-04
-          pytest
-
-  # Optional: Add another job for deployment or other tasks if needed
+          echo "Executing script on self-hosted runner"
+          touch /tmp/ashu
+        shell: bash
