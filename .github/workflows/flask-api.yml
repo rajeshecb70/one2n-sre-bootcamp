@@ -1,0 +1,63 @@
+name: CI Pipeline for Flask API
+
+# Trigger this workflow when pushing to the 'milestone-04/pipeline' branch
+on:
+  push:
+    branches:
+      - milestone-04/pipeline
+#    paths:
+#      - 'app/**' # Trigger only when changes are made to the 'app/' directory
+#      - 'migrations/**'
+#      - '.env'
+#      - 'requirements.txt'
+#      - 'run.sh'
+
+jobs:
+  build:
+    # Run this job on a self-hosted runner
+    runs-on: self-hosted
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python 3.9 environment
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      # Step 3: Install dependencies using Makefile
+      - name: Install dependencies
+        run: make install-dependencies
+
+      # Step 4: Build the Docker image
+      - name: Build Docker Image
+        run: make docker-build
+        env:
+          DOCKER_IMAGE: flask-api
+          TAG: latest
+
+      # Step 5: Run tests
+      - name: Run Tests
+        run: make test-flask
+
+      # Step 6: Perform linting
+      - name: Lint Code
+        run: make lint-flask
+
+      # Step 7: Docker login (using credentials stored in GitHub Secrets)
+      - name: Docker Login
+        run: make docker-login
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Step 8: Push Docker image to DockerHub
+      - name: Push Docker Image
+        run: make docker-push
+        env:
+          DOCKER_IMAGE: flask-api
+          TAG: latest
+          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
