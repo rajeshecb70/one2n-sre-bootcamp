@@ -5,10 +5,5 @@ class Student(db.Model):
     name = db.Column(db.String(100), nullable=False)
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String(100), nullable=False)
-   # address = db.Column(db.String(100), nullable=True) # New field Added
 
-    
-    def __init__(self, name, age, gender):
-        self.name = name
-        self.age = age
-        self.gender = gender
+    # Constructor is no longer needed, SQLAlchemy supports **kwargs for initialization.
