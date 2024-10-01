@@ -1,7 +1,3 @@
-#VENV_DIR := venv
-#PYTHON := $(VENV_DIR)/bin/python
-#PIP := $(VENV_DIR)/bin/pip
-# Testing
 # Search for .env File
 ifneq (,$(wildcard ./.env))
     include .env
@@ -17,22 +13,22 @@ $(VENV_DIR)/bin/activate: requirements.txt
 		$(PIP) install -r requirements.txt \
 	)
 
+#  Run database using the docker compose
+run-db:
+	docker-compose up -d db
+
 # Install dependencies inside the virtual environment
 install-dependencies: $(VENV_DIR)/bin/activate
 	@echo "Installing dependencies..."
 	$(PIP) install -r requirements.txt
 
-#  Run Flask-api using the docker compose
-run-db:
-	docker-compose up -d db
+#Target to initiate the migration.
+init-migration:
+	flask db init
 
-# Start the Flask application
-start-flask: install-dependencies
-	$(PYTHON) -m flask run
-
-# Resume the Flask application without additional setup (restart server)
-resume-flask:
-	$(PYTHON) -m flask run
+# Target to generate the migration. (The message must comply with the app's requirements)
+generate-migration:
+	flask db migrate -m "(Automatic generate the migration)"
 
 # Run tests using pytest, ensuring the test database exists
 test-flask:
@@ -47,11 +43,11 @@ lint-flask: $(VENV_DIR)/bin/activate
 # Docker build the application
 docker-build:
 	@echo "Building Docker image"
-	docker build -t $(DOCKER_IMAGE):$(TAG) .
+	docker build -t $(DOCKER_IMAGE):$(TAG) . 
 
 #  Run Flask-api using the docker compose
-run-flask: docker-build
-	docker-compose up -d  flask-api 
+run-flask:
+	docker-compose --env-file api.env -f docker-compose.yml up -d
 
 # Tagging
 docker-tag:
@@ -64,24 +60,24 @@ docker-login:
 
 
 # Docker push the built image
-docker-push: docker-build docker-tag
+docker-push: docker-tag
 	@echo "Pushing Docker image to DockerHub"
 	docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
 	@echo "Pushing Docker image to Docker Hub..."
 	docker push $(DOCKER_USER)/$(DOCKER_IMAGE):$(TAG)
 
 # Run the complete pipeline (build, tag, and push)
-all: docker-push
+all:run-db install-dependencies init-migration generate-migration test-flask run-flask docker-push
 
 # Target to stop container 
 stop:
 	docker-compose down
+
 # Cleanup: remove virtual environment and other generated files (but not migrations)
 clean:
 	rm -rf $(VENV_DIR)
 	find . -name '*.pyc' -delete
 	find . -name '__pycache__' -delete
-	
 
 # Full cleanup, including Alembic migrations (use with caution)
 clean-full: clean

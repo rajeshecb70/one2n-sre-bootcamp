@@ -37,7 +37,7 @@ def create_app():
         from . import routes
         routes.init_app(app)
         # Create all tables (if they don't exist yet)
-        db.create_all()
+        # db.create_all()
 
     # Healthcheck endpoint
     @app.route('/healthcheck', methods=['GET'])

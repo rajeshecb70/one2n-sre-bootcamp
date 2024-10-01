@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from .models import Student
-from .schemas import StudentSchema
+#from .schemas import StudentSchema
 from . import db
 
 bp = Blueprint('students', __name__, url_prefix='/api/v1/students')

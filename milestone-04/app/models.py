@@ -4,7 +4,7 @@ class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    gender = db.Column(db.String(100), nullable=False) # New field Added
+    gender = db.Column(db.String(100), nullable=False)
    # address = db.Column(db.String(100), nullable=True) # New field Added
 
     
@@ -12,4 +12,3 @@ class Student(db.Model):
         self.name = name
         self.age = age
         self.gender = gender
-
