@@ -30,33 +30,45 @@ jobs:
 
       # Step 3: Install dependencies using Makefile
       - name: Install dependencies
-        run: make install-dependencies
+        run: |
+          cd milestone-4
+          make install-dependencies
 
       # Step 4: Run tests
       - name: Run Tests
-        run: make test-flask      
+        run: |
+          cd milestone-4
+          make test-flask      
       
       # Step 5: Perform linting
       - name: Lint Code
-        run: make lint-flask
+        run: |
+          cd milestone-4
+          make lint-flask
 
       # Step 6: Build the Docker image
       - name: Build Docker Image
-        run: make docker-build
+        run: |
+          cd milestone-4
+          make docker-build
         env:
           DOCKER_IMAGE: flask-api
           TAG: 3.0.0
 
       # Step 7: Docker login (using credentials stored in GitHub Secrets)
       - name: Docker Login
-        run: make docker-login
+        run: |
+          cd milestone-4
+          make docker-login
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       # Step 8: Push Docker image to DockerHub
       - name: Push Docker Image
-        run: make docker-push
+        run: 
+          cd milestone-4
+          make docker-push
         env:
           DOCKER_IMAGE: flask-api
           TAG: 3.0.0

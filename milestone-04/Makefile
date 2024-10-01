@@ -1,6 +1,6 @@
-VENV_DIR := venv
-PYTHON := $(VENV_DIR)/bin/python
-PIP := $(VENV_DIR)/bin/pip
+#VENV_DIR := venv
+#PYTHON := $(VENV_DIR)/bin/python
+#PIP := $(VENV_DIR)/bin/pip
 
 # Search for .env File
 ifneq (,$(wildcard ./.env))
@@ -22,6 +22,10 @@ install-dependencies: $(VENV_DIR)/bin/activate
 	@echo "Installing dependencies..."
 	$(PIP) install -r requirements.txt
 
+#  Run Flask-api using the docker compose
+run-db:
+	docker-compose up -d db
+
 # Start the Flask application
 start-flask: install-dependencies
 	$(PYTHON) -m flask run
@@ -31,7 +35,7 @@ resume-flask:
 	$(PYTHON) -m flask run
 
 # Run tests using pytest, ensuring the test database exists
-test-flask: install-dependencies
+test-flask:
 	$(PYTHON) -m pytest
 
 # Linting target
@@ -69,7 +73,9 @@ docker-push: docker-build docker-tag
 # Run the complete pipeline (build, tag, and push)
 all: docker-push
 
-
+# Target to stop container 
+stop:
+	docker-compose down
 # Cleanup: remove virtual environment and other generated files (but not migrations)
 clean:
 	rm -rf $(VENV_DIR)
