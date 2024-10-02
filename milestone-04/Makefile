@@ -12,7 +12,7 @@ DOCKER_IMAGE ?= flask-api
 TAG ?= 3.0.0
 DOCKER_USER ?= rajeshecb70
 
-# Check if the virtual environment exists; if not, create it.
+# Check if the virtual environment exists; if not, create it..
 $(VENV_DIR)/bin/activate: requirements.txt
 	@test -d $(VENV_DIR) || ( \
 		echo "Creating virtual environment..."; \
@@ -25,7 +25,7 @@ $(VENV_DIR)/bin/activate: requirements.txt
 run-db:
 	docker-compose up -d db && sleep 10
 
-# Install dependencies inside the virtual environment
+# Install dependencies inside the virtual environment.
 install-dependencies: $(VENV_DIR)/bin/activate 
 	@echo "Installing dependencies..."
 	$(PIP) install -r requirements.txt

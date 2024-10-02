@@ -25,33 +25,41 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Step 3: Check if Makefile exists
+      # Step 3: Check the contents of milestone-04
+      - name: List files in milestone-04
+        run: |
+          ls -l milestone-04
+
+      # Step 4: Check if Makefile exists
       - name: Check Makefile
         run: |
-          ls -l
-          if [ ! -f Makefile ]; then
-            echo "Makefile not found!"
+          if [ ! -f milestone-04/Makefile ]; then
+            echo "Makefile not found in milestone-04 directory!"
             exit 1
           fi
 
-      # Step 4: Build the Docker image
+      # Step 5: Build the Docker image
       - name: Build Docker image
+        working-directory: milestone-04
         run: make docker-build  # Ensure your Makefile handles the build
 
-      # Step 5: Start the Database
+      # Step 6: Start the Database
       - name: Start Database
+        working-directory: milestone-04
         run: |
           docker-compose up -d db  # Ensure you have a 'db' service in your docker-compose.yml
           sleep 10  # Wait for the database to be ready
 
-      # Step 6: Install dependencies and run tests
+      # Step 7: Install dependencies and run tests
       - name: Install dependencies and run tests
+        working-directory: milestone-04
         run: |
           make install-dependencies  # Ensure your Makefile can install dependencies
           make test-flask  # Run the tests
 
-      # Step 7: Stop and remove containers
+      # Step 8: Stop and remove containers
       - name: Stop and remove containers
+        working-directory: milestone-04
         run: docker-compose down
 
       # Optional: Docker login and push steps can be uncommented if needed
