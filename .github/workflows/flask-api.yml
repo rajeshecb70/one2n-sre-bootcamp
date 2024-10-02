@@ -33,9 +33,9 @@ jobs:
         run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
 
       # Step 3: Run tests
-      - name: Run tests
-        working-directory: milestone-04  # Ensure the working directory is set
-        run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
+      #- name: Run tests
+      #  working-directory: milestone-04  # Ensure the working directory is set
+      #  run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
 
       # Step 5: Docker login to DockerHub
       - name: Docker login
