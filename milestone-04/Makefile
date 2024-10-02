@@ -25,7 +25,7 @@ $(VENV_DIR)/bin/activate: requirements.txt
 run-db:
 	docker-compose up -d db && sleep 10
 
-# Install dependencies inside the virtual environment
+# Install dependencies inside the virtual environment..
 install-dependencies: $(VENV_DIR)/bin/activate
 	@echo "Installing dependencies..."
 	$(PIP) install -r requirements.txt
