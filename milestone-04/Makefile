@@ -57,7 +57,7 @@ docker-tag:
 	@echo "Tagging Docker image"
 	docker tag $(DOCKER_IMAGE):$(TAG) $(DOCKER_USER)/$(DOCKER_IMAGE):$(TAG)
 
-# Target to docker login
+# Target to docker login.
 docker-login:
 	docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
 

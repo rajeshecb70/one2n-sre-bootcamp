@@ -64,3 +64,4 @@ jobs:
         working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${{ github.sha }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${{ github.sha }}
