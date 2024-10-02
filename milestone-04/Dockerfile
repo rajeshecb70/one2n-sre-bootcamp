@@ -12,7 +12,7 @@ RUN apk update && \
 # Copy the rest of the application code into the container
 ADD app /flask-app/app
 ADD migrations /flask-app/migrations
-COPY .env requirements.txt run.sh /flask-app/
+COPY requirements.txt run.sh /flask-app/
 RUN chmod +x /flask-app/run.sh
 
 # Activate the virtual environment and install dependencies
