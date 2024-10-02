@@ -48,8 +48,8 @@ test-flask: install-dependencies $(VENV_DIR)/bin/activate
 #	pylint app tests || { echo "Linting failed"; exit 1; }
 
 
-# Docker build the application
-docker-build:
+# Docker build the application it working 
+docker-build: install-dependencies 
 	@echo "Building Docker image for artifact it fine"
 	docker build -t $(DOCKER_IMAGE):$(TAG) . 
 
