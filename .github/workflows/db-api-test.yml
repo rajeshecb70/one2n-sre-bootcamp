@@ -57,6 +57,13 @@ jobs:
           docker-compose up -d db  # Ensure you have a 'db' service in your docker-compose.yml
           sleep 10  # Wait for the database to be ready
 
+      # Step 7: Start the Database
+      - name: Start 
+        working-directory: milestone-04
+        run: |
+          docker-compose up -d flask-api  # Ensure you have a 'db' service in your docker-compose.yml
+          sleep 10  # Wait for the appy to be ready
+
       # Step 8: Install dependencies and run tests
       - name: Install dependencies and run tests
         working-directory: milestone-04
