@@ -4,6 +4,10 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
+VENV_DIR = venv
+PYTHON = $(VENV_DIR)/bin/python
+PIP = $(VENV_DIR)/bin/pip
+
 DOCKER_IMAGE ?= flask-api
 TAG ?= 3.0.0
 DOCKER_USER ?= rajeshecb70
