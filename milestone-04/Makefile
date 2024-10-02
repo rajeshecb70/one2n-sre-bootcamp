@@ -42,7 +42,7 @@ test-flask:
 
 # Docker build the application
 docker-build:
-	@echo "Building Docker image for artifact"
+	@echo "Building Docker image for artifact it fine"
 	docker build -t $(DOCKER_IMAGE):$(TAG) . 
 
 # Tagging
