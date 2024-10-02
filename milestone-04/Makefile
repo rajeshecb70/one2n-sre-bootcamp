@@ -18,11 +18,10 @@ run-db:
 	docker-compose up -d db && sleep 10
 
 # Install dependencies inside the virtual environment
-install-dependencies: $(VENV_DIR)/bin/activate
+install-dependencies: $(VENV_DIR)/bin/activate 
 	@echo "Installing dependencies..."
 	$(PIP) install -r requirements.txt
 	
-
 #Target to initiate the migration.
 init-migration:
 	flask db init
