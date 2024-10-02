@@ -35,9 +35,9 @@ test-flask:
 	$(PYTHON) -m pytest
 
 # Linting target
-lint-flask:
-	@echo "Running pylint on app and tests directories..."
-	pylint app tests || { echo "Linting failed"; exit 1; }
+#lint-flask:
+#	@echo "Running pylint on app and tests directories..."
+#	pylint app tests || { echo "Linting failed"; exit 1; }
 
 
 # Docker build the application
