@@ -35,7 +35,7 @@ test-flask:
 	$(PYTHON) -m pytest
 
 # Linting target
-lint-flask: $(VENV_DIR)/bin/activate
+lint-flask:
 	@echo "Running pylint on app and tests directories..."
 	pylint app tests || { echo "Linting failed"; exit 1; }
 
