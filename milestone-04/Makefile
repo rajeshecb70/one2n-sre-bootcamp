@@ -12,7 +12,7 @@ DOCKER_IMAGE?=flask-api
 TAG?=3.0.1
 
 
-# Check if the virtual environment exists; if not, create it...
+# Check if the virtual environment exists; if not, create it....
 $(VENV_DIR)/bin/activate: requirements.txt
 	@test -d $(VENV_DIR) || ( \
 		echo "Creating virtual environment..."; \
