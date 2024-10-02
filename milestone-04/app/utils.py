@@ -2,6 +2,7 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 
+
 def setup_logging():
     if not os.path.exists('logs'):
         os.makedirs('logs')

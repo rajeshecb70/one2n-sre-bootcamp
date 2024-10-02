@@ -10,3 +10,4 @@ pytest==8.3.3
 python-dotenv==1.0.1
 SQLAlchemy<=2.0.35
 Werkzeug==3.0.4
+flake8
