@@ -38,7 +38,7 @@ init-migration:
 generate-migration:
 	flask db migrate -m "(Automatic generate the migration)"
 
-# Run tests using pytest, ensuring the test database exists
+# Run tests using pytest, ensuring the test database exists.
 test-flask: install-dependencies $(VENV_DIR)/bin/activate
 	$(PYTHON) -m pytest
 
