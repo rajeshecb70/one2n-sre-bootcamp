@@ -4,6 +4,10 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
+DOCKER_IMAGE ?= flask-api
+TAG ?= 3.0.0
+DOCKER_USER ?= rajeshecb70
+
 # Check if the virtual environment exists; if not, create it
 $(VENV_DIR)/bin/activate: requirements.txt
 	@test -d $(VENV_DIR) || ( \
