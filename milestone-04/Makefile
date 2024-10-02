@@ -46,10 +46,6 @@ docker-build:
 	@echo "Building Docker image"
 	docker build -t $(DOCKER_IMAGE):$(TAG) . 
 
-#  Run Flask-api using the docker compose
-run-flask:
-	docker-compose --env-file api.env -f docker-compose.yml up -d
-
 # Tagging
 docker-tag:
 	@echo "Tagging Docker image"
@@ -59,7 +55,6 @@ docker-tag:
 docker-login:
 	docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
 
-
 # Docker push the built image
 docker-push: docker-build docker-tag
 	@echo "Pushing Docker image to DockerHub"
@@ -67,8 +62,12 @@ docker-push: docker-build docker-tag
 	@echo "Pushing Docker image to Docker Hub..."
 	docker push $(DOCKER_USER)/$(DOCKER_IMAGE):$(TAG)
 
+#  Run Flask-api using the docker compose
+run-flask:
+	docker-compose --env-file api.env up -d
+
 # Run the complete pipeline (build, tag, and push)
-all:run-db install-dependencies init-migration generate-migration test-flask run-flask docker-push
+all:run-db install-dependencies init-migration generate-migration test-flask  docker-push run-flask
 
 # Target to stop container 
 stop:
