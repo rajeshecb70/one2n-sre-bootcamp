@@ -29,33 +29,30 @@ jobs:
     - name: Build Docker image
       run: make docker-build  # Ensure your Makefile handles the build
 
-    # Step 4: Set up the database using Docker Compose
+    # Step 4: Start the Database
     - name: Start Database
       run: |
         docker-compose up -d db  # Ensure you have a 'db' service in your docker-compose.yml
         sleep 10  # Wait for the database to be ready
 
-    # Step 5: Run application (if needed)
-    - name: Start Application
-      run: |
-        docker-compose up -d flask-api # Start the application if it is containerized
-        sleep 10  # Wait for the application to be ready
-
-    # Step 6: Run tests
+    # Step 5: Install dependencies and run tests
     - name: Run tests
-      run: make test-flask  # Ensure your Makefile can run tests against the application
+      run: |
+        make install-dependencies  # Ensure your Makefile can install dependencies
+        make test-flask  # Run the tests
 
-    # Step 7: Stop and remove containers
+    # Step 6: Stop and remove containers
     - name: Stop and remove containers
       run: docker-compose down
 
-    # Step 8: Push the Docker image to DockerHub (if needed)
-    - name: Docker login
-      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-      env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - name: Docker push
-      run: |
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:3.0.0
+#     # Step 7: Docker login (if needed)
+#     - name: Docker login
+#       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+#       env:
+#         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+#         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+# 
+#     # Step 8: Docker push (if needed)
+#     - name: Docker push
+#       run: |
+#         docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:3.0.0

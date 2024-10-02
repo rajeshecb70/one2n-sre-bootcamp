@@ -73,7 +73,7 @@ docker-push: docker-build docker-tag
 run-flask:
 	docker-compose --env-file api.env up -d
 
-# Run the complete pipeline (build, tag, and push)
+# Run the complete pipeline (build, tag, and push)..
 all:run-db install-dependencies init-migration generate-migration test-flask  docker-push run-flask
 
 # Target to stop container 
