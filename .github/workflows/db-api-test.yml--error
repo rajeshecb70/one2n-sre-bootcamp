@@ -51,10 +51,10 @@ jobs:
         run: make docker-build  # Ensure your Makefile handles the build
 
       # Step 7: Start the Database
-      - name: Start Database
+      - name: Start Database and app
         working-directory: milestone-04
         run: |
-          docker-compose up -d db  # Ensure you have a 'db' service in your docker-compose.yml
+          docker-compose up -d  # Ensure you have a 'db' service in your docker-compose.yml
           sleep 10  # Wait for the database to be ready
 
       # Step 7: Start the Database
