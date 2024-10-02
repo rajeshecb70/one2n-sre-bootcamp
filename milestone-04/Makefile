@@ -69,7 +69,7 @@ docker-push: docker-build docker-tag
 	@echo "Pushing Docker image to Docker Hub..."
 	docker push $(DOCKER_USER)/$(DOCKER_IMAGE):$(TAG)
 
-#  Run Flask-api using the docker compose
+#  Run Flask-api using the docker compose.
 run-flask:
 	docker-compose --env-file api.env up -d
 
