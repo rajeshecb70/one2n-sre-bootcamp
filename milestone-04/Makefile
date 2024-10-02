@@ -4,7 +4,9 @@ ifneq (,$(wildcard ./.env))
     export
 endif
 
-
+VENV_DIR = venv
+PYTHON = $(VENV_DIR)/bin/python
+PIP = $(VENV_DIR)/bin/pip
 DOCKER_USER?=rajeshecb70
 DOCKER_IMAGE?=flask-api
 TAG?=3.0.1
@@ -27,6 +29,7 @@ run-db:
 install-dependencies: $(VENV_DIR)/bin/activate
 	@echo "Installing dependencies..."
 	$(PIP) install -r requirements.txt
+
 	
 
 #Target to initiate the migration.
