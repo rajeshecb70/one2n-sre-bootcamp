@@ -1,6 +1,7 @@
 import logging
 import pytest
 from app import create_app, db
+# from app.models import Student
 
 logger = logging.getLogger('app')
 handler = logging.FileHandler('test_app.log')
