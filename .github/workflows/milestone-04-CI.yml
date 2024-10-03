@@ -46,6 +46,14 @@ jobs:
 
       - name: Debug secrets
         run: echo "database url ${{ secrets.DATABASE_URL }}" 
+
+      # Create the ENV file
+      - name: Create .env file from secrets
+        working-directory: milestone-04
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          cat .env
+#          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
   
       
       # Step 3: Start services with Docker Compose
@@ -54,12 +62,7 @@ jobs:
         run: docker-compose up -d  # Start the Flask API and MySQL database in detached mode
       
 
-      # Create the ENV file
-      - name: Create .env file from secrets
-        working-directory: milestone-04
-        run: |
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-#          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
+
       
 
       # Step 4: Build the API using Makefile target
