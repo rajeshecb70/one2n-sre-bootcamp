@@ -2,13 +2,12 @@ version: '3.8'
 
 services:
   flask-api:
-#    image: "${DOCKER_USER}/${DOCKER_IMAGE}:${TAG}"
     build:
       context: .
       dockerfile: Dockerfile
     restart: always
     env_file:
-      - ./api.env
+      - ./.env
     environment:
       RUN_MIGRATION: "true"
     ports:
@@ -20,7 +19,7 @@ services:
     image: mysql:8.0
     restart: always
     env_file:
-      - ./db.env
+      - ./.env
     ports:
       - '3306:3306'
     volumes:
