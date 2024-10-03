@@ -36,32 +36,38 @@ jobs:
       - name: Install dependencies
         working-directory: milestone-04  # Ensure the working directory is set
         run: make install-dependencies
+      
+      # Step 3: Start services with Docker Compose
+      - name: Start services with Docker Compose
+        working-directory: milestone-04  # Ensure the working directory is set
+        run: docker-compose up -d  # Start the Flask API and MySQL database in detached mode
+      
 
-      # Step 3: Build the API using Makefile target
+      # Step 4: Build the API using Makefile target
       - name: Build API
         working-directory: milestone-04  # Ensure the working directory is set
         run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
 
-      # Step 4: Run tests
+      # Step 5: Run tests
       - name: Run tests
         working-directory: milestone-04  # Ensure the working directory is set
         run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
 
-      # Step 5: Run the lint test
+      # Step 6: Run the lint test
       - name: Run lint
         working-directory: milestone-04
         run: make lint-flask
 
-      # Step 6: Docker login to DockerHub
-      - name: Docker login
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # Step 7: Docker build and push (with dynamic image tag)
-      - name: Docker build and push
-        working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${{ github.sha }}
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${{ github.sha }}
+#       # Step 7: Docker login to DockerHub
+#       - name: Docker login
+#         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+#         env:
+#           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+#           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+# 
+#       # Step 8: Docker build and push (with dynamic image tag)
+#       - name: Docker build and push
+#         working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
+#         run: |
+#           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${{ github.sha }}
+#           docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${{ github.sha }}
