@@ -7,10 +7,10 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
-    #env_file:
-    #  - ./api.env
+    env_file:
+      - ./api.env
     environment:
-      DATABASE_URL: "mysql+pymysql://root:mypassword@db:3306/studentdb1"
+    #  DATABASE_URL: "mysql+pymysql://root:mypassword@db:3306/studentdb1"
       RUN_MIGRATION: "true"
     ports:
       - "5000:5000"

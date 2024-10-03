@@ -40,7 +40,9 @@ generate-migration:
 
 # Run tests using pytest, ensuring the test database exists
 test-flask:
-	$(PYTHON) -m pytest
+	# Pass DATABASE_URL as an environment variable
+	DATABASE_URL="mysql+pymysql://root:mypassword@db:3306/studentdb1" $(PYTHON) -m pytest
+
 
 # Linting target
 lint-flask: $(VENV_DIR)/bin/activate
