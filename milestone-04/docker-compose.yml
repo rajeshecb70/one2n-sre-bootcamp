@@ -16,6 +16,12 @@ services:
       - my-network
     depends_on:
       - db
+    healthcheck:
+      test: [ "CMD-SHELL", "curl --fail http://localhost:5000/healthcheck || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   db:
     image: mysql:8.0
@@ -28,6 +34,12 @@ services:
       - db-database:/var/lib/mysql
     networks:
       - my-network
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
 volumes:
   db-database:
