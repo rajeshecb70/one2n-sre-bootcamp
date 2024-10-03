@@ -37,6 +37,13 @@ jobs:
         working-directory: milestone-04  # Ensure the working directory is set
         run: make install-dependencies
       
+      # Step : Install Docker Compose (since it's not available by default)
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose version  # Verify docker-compose installation
+      
       # Step 3: Start services with Docker Compose
       - name: Start services with Docker Compose
         working-directory: milestone-04  # Ensure the working directory is set
