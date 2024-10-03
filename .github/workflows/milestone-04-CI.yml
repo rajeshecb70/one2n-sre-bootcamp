@@ -49,12 +49,6 @@ jobs:
         working-directory: milestone-04  # Ensure the working directory is set
         run: docker-compose up -d  # Start the Flask API and MySQL database in detached mode
       
-
-      # Step 4: Build the API using Makefile target
-      - name: Build API
-        working-directory: milestone-04  # Ensure the working directory is set
-        run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
-
 #       # Step 5: Run tests
 #       - name: Run tests
 #         working-directory: milestone-04  # Ensure the working directory is set
@@ -64,6 +58,11 @@ jobs:
       - name: Run lint
         working-directory: milestone-04
         run: make lint-flask
+
+      # Step 4: Build the API using Makefile target
+      - name: Build API
+        working-directory: milestone-04  # Ensure the working directory is set
+        run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
 
       # Step 7: Docker login to DockerHub
       - name: Docker login
@@ -76,5 +75,5 @@ jobs:
       - name: Docker build and push
         working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${{ github.sha }} .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG} .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG}
