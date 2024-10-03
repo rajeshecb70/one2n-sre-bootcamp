@@ -77,18 +77,19 @@ jobs:
 #      - name: Run tests
 #        working-directory: milestone-04  # Ensure the working directory is set
 #        run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
-
-      # Step 7: Docker login to DockerHub
-      - name: Docker login
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # Step 8: Docker build and push (with dynamic image tag)
-      - name: Docker build and push
-        working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
-        run: |
-          TAG="3.0.0"
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG} .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:$${TAG}
+#
+#      # Step 7: Docker login to DockerHub
+#      - name: Docker login
+#        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+#        env:
+#          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+#          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+#
+#      # Step 8: Docker build and push (with dynamic image tag)
+#      - name: Docker build and push
+#        working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
+#        run: |
+#          TAG="3.0.0"
+#          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG} .
+#          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:$${TAG}
+#

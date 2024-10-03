@@ -46,8 +46,8 @@ test-flask:
 # Linting target..
 lint-flask: $(VENV_DIR)/bin/activate
 	@echo "Running flake8 on app and tests directories..."
-	#flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
-	$(PYTHON) -m flake8 app tests
+#flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
+	flake8 app tests
 
 # Docker build the application
 docker-build:
@@ -70,7 +70,7 @@ docker-push: docker-build docker-tag
 	@echo "Pushing Docker image to Docker Hub..."
 	docker push $(DOCKER_USER)/$(DOCKER_IMAGE):$(TAG)
 
-#  Run Flask-api using the docker compose
+#  Run Flask-api using the docker compose..
 run-flask:
 	docker-compose --env-file api.env up -d
 
