@@ -45,7 +45,7 @@ jobs:
           docker-compose version  # Verify docker-compose installation
 
       - name: Debug secrets
-        run: echo "DATABASE_URL is set" if [ -n "${{ secrets.DATABASE_URL }}" ]; then echo "DATABASE_URL is set"; else echo "DATABASE_URL is not set"; fi
+        run: echo "database url ${{ secrets.DATABASE_URL }}" 
   
       
       # Step 3: Start services with Docker Compose
