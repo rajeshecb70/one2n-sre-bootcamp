@@ -74,6 +74,6 @@ The following expectations should be met to complete this milestone.
     - Docker build and push
 
   To achieve the stages of building, testing, and performing code linting, you need to use appropriate make targets.✅
-  CI pipeline should be run using a self-hosted GitHub runner running on your local machine.
+  CI pipeline should be run using a self-hosted GitHub runner running on your local machine.✅
   CI pipeline should only be triggered when changes are made in the code directory and not in other directories or filepaths.✅
-  CI workflow should allow the developer to manually trigger the pipeline when required.
+  CI workflow should allow the developer to manually trigger the pipeline when required.✅
