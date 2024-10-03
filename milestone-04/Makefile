@@ -45,7 +45,7 @@ test-flask:
 
 
 # Linting target
-lint-flask: $(VENV_DIR)/bin/activate
+lint-flask:
 	@echo "Running flake8 on app and tests directories..."
     flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
 # $(PYTHON) -m flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
