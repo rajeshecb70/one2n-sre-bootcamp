@@ -51,10 +51,13 @@ jobs:
       
       # Create the ENV file
       - name: Create .env file from secrets
+        working-directory: milestone-04
         run: |
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> milestone-04/.env
-          echo "API_KEY=${{ secrets.API_KEY }}" >> milestone-04/.env
-      
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+#          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
+      - name: Debug secrets
+        run: echo "DATABASE_URL is set" if [ -n "${{ secrets.DATABASE_URL }}" ]; then echo "DATABASE_URL is set"; else echo "DATABASE_URL is not set"; fi
+
 
       # Step 4: Build the API using Makefile target
       - name: Build API
