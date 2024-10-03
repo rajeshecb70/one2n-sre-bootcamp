@@ -1,0 +1,57 @@
+name: CI Pipeline
+
+# Trigger workflow only when changes are made in 'milestone-04' directory on the 'milestone-04/pipeline' branch
+on:
+  push:
+    branches:
+      - milestone-04/pipeline
+    paths:
+      - 'milestone-04/**'  # Only trigger when changes are made in the 'milestone-04' directory
+  pull_request:
+    branches:
+      - milestone-04/pipeline
+    paths:
+      - 'milestone-04/**'  # Trigger on pull requests targeting the specific branch and directory
+
+jobs:
+  build-and-push:
+    # Use Ubuntu GitHub-hosted runner
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository (this ensures the milestone-04 directory is available)
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 1: Set up Docker (to use Docker CLI)
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      # Step 2: Build the API using Makefile target
+      - name: Build API
+        working-directory: milestone-04  # Ensure the working directory is set
+        run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
+
+    #  # Step 3: Run tests
+    #  - name: Run tests
+    #    working-directory: milestone-04  # Ensure the working directory is set
+    #    run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
+      
+      # Step 4: Run the lint test
+      - name: Run lint
+        working-directory:
+        run: make lint-flask
+
+      # Step 5: Docker login to DockerHub
+      - name: Docker login
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Step 6: Docker build and push (with dynamic image tag)
+      - name: Docker build and push
+        working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:3.0.0 .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:3.0.0
