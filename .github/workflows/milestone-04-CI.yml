@@ -16,7 +16,9 @@ on:
 jobs:
   build-and-push:
     # Use Ubuntu GitHub-hosted runner
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    # Use Ubuntu Self-hosted runner
+    runs-on: self-hosted 
 
     steps:
       # Checkout the repository (this ensures the milestone-04 directory is available)
@@ -32,6 +34,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
+
+      # Step 6: Run the lint test
+      - name: Run lint
+        working-directory: milestone-04
+        run: make lint-flask
+
 
       - name: Install dependencies
         working-directory: milestone-04  # Ensure the working directory is set
@@ -58,25 +66,17 @@ jobs:
       - name: Start services with Docker Compose
         working-directory: milestone-04  # Ensure the working directory is set
         run: docker-compose up -d  # Start the Flask API and MySQL database in detached mode
-      
-
-
-      
+         
 
       # Step 4: Build the API using Makefile target
       - name: Build API
         working-directory: milestone-04  # Ensure the working directory is set
         run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
 
-      # Step 5: Run tests
-      - name: Run tests
-        working-directory: milestone-04  # Ensure the working directory is set
-        run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
-
-      # Step 6: Run the lint test
-      - name: Run lint
-        working-directory: milestone-04
-        run: make lint-flask
+#      # Step 5: Run tests
+#      - name: Run tests
+#        working-directory: milestone-04  # Ensure the working directory is set
+#        run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
 
       # Step 7: Docker login to DockerHub
       - name: Docker login

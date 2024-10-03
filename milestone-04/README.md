@@ -1,76 +1,79 @@
 ## 1. Project Title
-  Milestone-04 : Setup a CI pipeline with github actions
+
+Milestone-04 : Setup a CI pipeline with github actions
 
 ## 2. Project Description
-  This project runs a Flask API using Docker, leveraging multi-stage builds to minimize the image size. The API interacts with a MySQL database and supports migrations using github Actions.
 
+This project aims to set up a Continuous Integration (CI) pipeline using GitHub Actions. The pipeline is designed to automate the process of building, testing, linting, and deploying a Dockerized application. By implementing this pipeline, developers can ensure code quality and streamline the deployment process to a central Docker registry, such as DockerHub or GitHub Docker registry.
 
 ## 3. Prerequisites
-  - Docker and Docker Compose installed.
-  - MySQL running in a container.
-  - .env file for database details. (DATABASE_URL=mysql+pymysql://root:<DBpassword>@localhost/databasename)
-  - Github actions required.
 
+- Docker and Docker Compose.
+- Make
+- Github actions.
+- Milestone-04-CI.yml is stored at .github/workflow/milestone-04-CI.yml
+- You should Have self-hosted runner configured on you github repository and below requirments to be installed on your local
+- Configure secrets on github repos with DATABASE_RUL, DOCKER_USERNAME & DOCKER_PASSWORD
 
-## 4. Setup & configuration of milestone-03
-  ```
-  # Clone the repository
-  git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
-  cd one2n-sre-bootcamp/milestone-04
-  ```
-  ```
-  # Target for Build API image
-  make docker-build
-  ```
+## 4. Setup & configuration of milestone-04
 
-  ```
-  # Target to Run tests
-  make test-flask
-  ```
+```
+# Clone the repository
+git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
+cd one2n-sre-bootcamp/milestone-04
+```
 
-  ```
-  # Target to Perform code linting
-  make lint-flask
-  ```
+```
+# Target for Build API image
+make docker-build
+```
 
-  ```
-  # Target to Docker login
-  make docker-login
-  ```
+```
+# Target to Run tests
+make test-flask
+```
 
-  ```
-  # Target to Docker build and push
-  make all
-  ```
-  ```
-  # Target to stop flask Database container
-  make stop-db
-  ```
+```
+# Target to Perform code linting
+make lint-flask
+```
 
-  ```
-  # Target to clean some files.
-  make clean
-  ```
+```
+# Target to Docker login
+make docker-login
+```
 
-  ```
-  # Target to clean-full the temporary files.
-  make clean-full
-  ```
+```
+# Target to Docker build and push
+make docker-push
+```
+
+```
+# Target to stop flask Database container
+make stop-db
+```
+
+```
+# Target to clean some files.
+make clean
+```
+
+```
+# Target to clean-full the temporary files.
+make clean-full
+```
 
 ### 5. Expectations
+
 The following expectations should be met to complete this milestone.
+  CI pipeline should consist of the following stages
+    - Build API
+    - Run tests
+    - Perform code linting
+    - Docker login
+    - Docker build and push
 
-    CI pipeline should consist of the following stages
-        Build API
-        Run tests
-        Perform code linting
-        Docker login
-        Docker build and push
-
-    To achieve the stages of building, testing, and performing code linting, you need to use appropriate make targets.
-
-    CI pipeline should be run using a self-hosted GitHub runner running on your local machine.
-
-    CI pipeline should only be triggered when changes are made in the code directory and not in other directories or filepaths.
-
-    CI workflow should allow the developer to manually trigger the pipeline when required.
+  To achieve the stages of building, testing, and performing code linting, you need to use appropriate make targets.✅
+  CI pipeline should be run using a self-hosted GitHub runner running on your local machine.
+  CI pipeline should only be triggered when changes are made in the code directory and not in other directories or filepaths.✅
+  CI workflow should allow the developer to manually trigger the pipeline when required.
