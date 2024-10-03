@@ -35,7 +35,7 @@ def create_app():
 
     # Healthcheck endpoint
     @app.route("/healthcheck", methods=["GET"])
-    def healthcheck():u
+    def healthcheck():
         return "API Service is up and running!", 200
 
     # Log requests and responses
