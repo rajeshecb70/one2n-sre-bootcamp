@@ -21,7 +21,7 @@ $(VENV_DIR)/bin/activate: requirements.txt
 		$(PIP) install -r requirements.txt \
 	)
 
-#  Run database using the docker compose
+#  Run database using the docker compose.
 run-db:
 	docker-compose up -d db && sleep 10
 

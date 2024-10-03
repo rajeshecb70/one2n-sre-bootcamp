@@ -4,12 +4,12 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - milestone-04/pipeline
+      - milestone-04/CI
     paths:
       - 'milestone-04/**'  # Only trigger when changes are made in the 'milestone-04' directory
   pull_request:
     branches:
-      - milestone-04/pipeline
+      - milestone-04/CI
     paths:
       - 'milestone-04/**'  # Trigger on pull requests targeting the specific branch and directory
 
