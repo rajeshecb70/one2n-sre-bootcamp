@@ -47,8 +47,8 @@ test-flask:
 # Linting target
 lint-flask: $(VENV_DIR)/bin/activate
 	@echo "Running flake8 on app and tests directories..."
-	@flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
-
+# flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
+    @. $(VENV_DIR)/bin/activate; flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
 # Docker build the application
 docker-build:
 	@echo "Building Docker image"
