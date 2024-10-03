@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   flask-api:
-    image: "${DOCKER_USER}/${DOCKER_IMAGE}:${TAG}"
+#    image: "${DOCKER_USER}/${DOCKER_IMAGE}:${TAG}"
     build:
       context: .
       dockerfile: Dockerfile
