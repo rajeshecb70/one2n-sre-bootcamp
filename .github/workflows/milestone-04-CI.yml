@@ -48,6 +48,11 @@ jobs:
       - name: Start services with Docker Compose
         working-directory: milestone-04  # Ensure the working directory is set
         run: docker-compose up -d  # Start the Flask API and MySQL database in detached mode
+
+        - name: Create .env file from secrets
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> milestone-04/.env
+          echo "API_KEY=${{ secrets.API_KEY }}" >> milestone-04/.env
       
 
       # Step 4: Build the API using Makefile target
