@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   flask-api:
-    #image: "${DOCKER_USER}/${DOCKER_IMAGE}:3.0"
+    image: "${DOCKER_USER}/${DOCKER_IMAGE}:${TAG}"
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,7 +10,6 @@ services:
     env_file:
       - ./api.env
     environment:
-    #  DATABASE_URL: "mysql+pymysql://root:mypassword@db:3306/studentdb1"
       RUN_MIGRATION: "true"
     ports:
       - "5000:5000"
