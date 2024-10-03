@@ -70,10 +70,10 @@ jobs:
         working-directory: milestone-04  # Ensure the working directory is set
         run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
 
-#       # Step 5: Run tests
-#       - name: Run tests
-#         working-directory: milestone-04  # Ensure the working directory is set
-#         run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
+      # Step 5: Run tests
+      - name: Run tests
+        working-directory: milestone-04  # Ensure the working directory is set
+        run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
 
       # Step 6: Run the lint test
       - name: Run lint

@@ -40,7 +40,7 @@ generate-migration:
 
 # Run tests using pytest, ensuring the test database exists
 test-flask:
-	# Pass DATABASE_URL as an environment variable
+	# Pass DATABASE_URL as an environment variable.
 	$(PYTHON) -m pytest
 
 
