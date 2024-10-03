@@ -12,7 +12,7 @@ DOCKER_IMAGE?=flask-api
 TAG?=3.0.1
 
 
-# Check if the virtual environment exists; if not, create it........
+# Check if the virtual environment exists; if not, create it
 $(VENV_DIR)/bin/activate: requirements.txt
 	@test -d $(VENV_DIR) || ( \
 		echo "Creating virtual environment..."; \
@@ -25,18 +25,18 @@ $(VENV_DIR)/bin/activate: requirements.txt
 run-db:
 	docker-compose up -d db && sleep 10
 
-# Install dependencies inside the virtual environment..
+# Install dependencies inside the virtual environment
 install-dependencies: $(VENV_DIR)/bin/activate
 	@echo "Installing dependencies..."
 	$(PIP) install -r requirements.txt
 
 #Target to initiate the migration.
 init-migration:
-	flask db init
+	$(PYTHON) -m flask db init
 
 # Target to generate the migration. (The message must comply with the app's requirements)
 generate-migration:
-	flask db migrate -m "(Automatic generate the migration)"
+	$(PYTHON) -m flask db migrate -m "(Automatic generate the migration)"
 
 # Run tests using pytest, ensuring the test database exists
 test-flask:
