@@ -53,8 +53,6 @@ jobs:
         run: |
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
           cat .env
-#          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
-  
       
       # Step 3: Start services with Docker Compose
       - name: Start services with Docker Compose
@@ -91,5 +89,6 @@ jobs:
       - name: Docker build and push
         working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${{ github.sha }} .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${{ github.sha }}
+          TAG="3.0.0"
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG} .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:$${TAG}

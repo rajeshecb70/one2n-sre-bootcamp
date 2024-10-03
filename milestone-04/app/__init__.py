@@ -7,10 +7,10 @@ from flask_migrate import Migrate
 from dotenv import load_dotenv
 from .utils import setup_logging
 
-# Load environment variables
+# Load environment variables.
 load_dotenv()
 
-# Initialize database and migration
+# Initialize database and migration.
 db = SQLAlchemy()
 migrate = Migrate()
 
@@ -35,7 +35,7 @@ def create_app():
 
     # Healthcheck endpoint
     @app.route("/healthcheck", methods=["GET"])
-    def healthcheck():
+    def healthcheck():u
         return "API Service is up and running!", 200
 
     # Log requests and responses

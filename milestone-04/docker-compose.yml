@@ -12,9 +12,11 @@ services:
       RUN_MIGRATION: "true"
     ports:
       - "5000:5000"
+    networks:
+      - my-network
     depends_on:
       - db
-    
+
   db:
     image: mysql:8.0
     restart: always
@@ -24,6 +26,12 @@ services:
       - '3306:3306'
     volumes:
       - db-database:/var/lib/mysql
+    networks:
+      - my-network
 
 volumes:
   db-database:
+
+
+networks:
+  my-network:
