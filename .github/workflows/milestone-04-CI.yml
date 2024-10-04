@@ -19,9 +19,9 @@ on:
 jobs:
   build-and-push:
     # Use Ubuntu GitHub-hosted runner
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
     # Use Ubuntu Self-hosted runner
-    # runs-on: self-hosted 
+    runs-on: self-hosted
 
     steps:
       # Checkout the repository (this ensures the milestone-04 directory is available)
@@ -51,9 +51,9 @@ jobs:
       # Step : Install Docker Compose (since it's not available by default)
       - name: Install Docker Compose
         run: |
-          curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          chmod +x /usr/local/bin/docker-compose
-          docker-compose version  # Verify docker-compose installation
+          curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /tmp/docker-compose
+          chmod +x /tmp/docker-compose
+          /tmp/docker-compose version  # Verify docker-compose installation
 
       - name: Debug secrets
         run: echo "database url ${{ secrets.DATABASE_URL }}" 
@@ -73,7 +73,7 @@ jobs:
       # Put a sleep to ensure that database is completely operational
       - name: Echo sleep
         run:  sleep 5
-        
+
       # Step 5: Run tests
       - name: Run tests
         working-directory: milestone-04  # Ensure the working directory is set
