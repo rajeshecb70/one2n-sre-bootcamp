@@ -12,7 +12,7 @@ This project aims to set up a Continuous Integration (CI) pipeline using GitHub 
 - Make
 - Github actions.
 - Milestone-04-CI.yml is stored at .github/workflow/milestone-04-CI.yml
-- You should Have self-hosted runner configured on you github repository and below requirments to be installed on your local
+- You should Have self-hosted runner configured on you github repository.
 - Configure secrets on github repos with DATABASE_RUL, DOCKER_USERNAME & DOCKER_PASSWORD
 
 ## 4. Setup & configuration of milestone-04
@@ -76,4 +76,4 @@ The following expectations should be met to complete this milestone.
   To achieve the stages of building, testing, and performing code linting, you need to use appropriate make targets.✅
   CI pipeline should be run using a self-hosted GitHub runner running on your local machine.✅
   CI pipeline should only be triggered when changes are made in the code directory and not in other directories or filepaths.✅
-  CI workflow should allow the developer to manually trigger the pipeline when required.✅
+  CI workflow should allow the developer to manually trigger the pipeline when required.
