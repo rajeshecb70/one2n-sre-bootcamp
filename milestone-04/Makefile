@@ -40,13 +40,11 @@ generate-migration:
 
 # Run tests using pytest, ensuring the test database exists
 test-api: $(VENV_DIR)/bin/activate
-	# Pass DATABASE_URL as an environment variable.
 	DATABASE_URL=$(DATABASE_URL) $(PYTHON) -m pytest
 
 # Linting target..
 lint-api:
 	@echo "Running flake8 on app and tests directories..."
-#flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
 	flake8 app tests
 
 # Docker build the application...
@@ -71,11 +69,11 @@ docker-push: docker-build docker-tag
 	docker push $(DOCKER_USER)/$(DOCKER_IMAGE):$(TAG)
 
 #  Run Flask-api using the docker compose
-run-flask:
+run-api:
 	docker-compose --env-file api.env up -d
 
 # Run the complete pipeline (build, tag, and push)
-all:run-db install-dependencies init-migration generate-migration test-flask  docker-push run-flask
+all:run-db install-dependencies init-migration generate-migration test-api  docker-push run-api
 
 # Target to stop container 
 stop:
