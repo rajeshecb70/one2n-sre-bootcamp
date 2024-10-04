@@ -72,7 +72,10 @@ jobs:
 
       # Put a sleep to ensure that database is completely operational
       - name: Echo sleep
-        run:  docker ps
+        run:  sleep 10
+
+      - name: Docker compose check
+        run: docker ps 
 
       # Step 5: Run tests
       - name: Run tests
