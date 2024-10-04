@@ -34,7 +34,7 @@ install-dependencies: $(VENV_DIR)/bin/activate
 init-migration:
 	$(PYTHON) -m flask db init
 
-# Target to generate the migration. (The message must comply with the app's requirements).
+# Target to generate the migration. (The message must comply with the app's requirements)..
 generate-migration:
 	$(PYTHON) -m flask db migrate -m "(Automatic generate the migration)"
 
