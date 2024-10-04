@@ -74,6 +74,8 @@ jobs:
       # Step 5: Run tests
       - name: Run tests
         working-directory: milestone-04  # Ensure the working directory is set
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
 
       # Step 4: Build the API using Makefile target
