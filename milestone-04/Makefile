@@ -41,7 +41,8 @@ generate-migration:
 # Run tests using pytest, ensuring the test database exists
 test-api:
 	# Pass DATABASE_URL as an environment variable.
-	DATABASE_URL=$(DATABASE_URL) $(PYTHON) -m pytest
+# DATABASE_URL=$(DATABASE_URL) $(PYTHON) -m pytest
+	DATABASE_URL=$(DATABASE_URL) pytest
 	
 
 # Linting target...
