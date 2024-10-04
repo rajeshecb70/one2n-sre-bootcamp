@@ -49,7 +49,7 @@ lint-api:
 #flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
 	flake8 app tests
 
-# Docker build the application
+# Docker build the application...
 docker-build:
 	@echo "Building Docker image"
 	docker build -t $(DOCKER_IMAGE):$(TAG) . 
