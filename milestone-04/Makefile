@@ -43,7 +43,7 @@ test-flask:
 	# Pass DATABASE_URL as an environment variable.
 	DATABASE_URL=$(DATABASE_URL) $(PYTHON) -m pytest
 
-# Linting target..
+# Linting target...
 lint-flask: $(VENV_DIR)/bin/activate
 	@echo "Running flake8 on app and tests directories..."
 #flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }

@@ -2,23 +2,23 @@ name: CI Pipeline
 
 # Trigger workflow only when changes are made in 'milestone-04' directory on the 'milestone-04/pipeline' branch
 on:
-#  push:
-#    branches:
-#      - milestone-04/CI
-#    paths:
-#      - 'milestone-04/**'  # Only trigger when changes are made in the 'milestone-04' directory
-#  pull_request:
-#    branches:
-#      - milestone-04/CI
-#    paths:
-#      - 'milestone-04/**'  # Trigger on pull requests targeting the specific branch and directory
-  workflow_dispatch:      # Manual Triggering.
+  push:
+    branches:
+      - milestone-04/CI
+    paths:
+      - 'milestone-04/**'  # Only trigger when changes are made in the 'milestone-04' directory
+  pull_request:
+    branches:
+      - milestone-04/CI
+    paths:
+      - 'milestone-04/**'  # Trigger on pull requests targeting the specific branch and directory
+#  workflow_dispatch:      # Manual Triggering.
 jobs:
   build-and-push:
     # Use Ubuntu GitHub-hosted runner
-    # runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     # Use Ubuntu Self-hosted runner
-    runs-on: self-hosted 
+    # runs-on: self-hosted 
 
     steps:
       # Checkout the repository (this ensures the milestone-04 directory is available)
@@ -73,23 +73,22 @@ jobs:
         working-directory: milestone-04  # Ensure the working directory is set
         run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
 
-#      # Step 5: Run tests
-#      - name: Run tests
-#        working-directory: milestone-04  # Ensure the working directory is set
-#        run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
-#
-#      # Step 7: Docker login to DockerHub
-#      - name: Docker login
-#        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-#        env:
-#          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-#          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-#
-#      # Step 8: Docker build and push (with dynamic image tag)
-#      - name: Docker build and push
-#        working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
-#        run: |
-#          TAG="3.0.0"
-#          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG} .
-#          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:$${TAG}
-#
+      # Step 5: Run tests
+      - name: Run tests
+        working-directory: milestone-04  # Ensure the working directory is set
+        run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
+
+      # Step 7: Docker login to DockerHub
+      - name: Docker login
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Step 8: Docker build and push (with dynamic image tag)
+      - name: Docker build and push
+        working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
+        run: |
+          TAG="3.0.0"
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG} .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:$${TAG}
