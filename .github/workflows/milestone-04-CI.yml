@@ -19,9 +19,9 @@ on:
 jobs:
   build-and-push:
     # Use Ubuntu GitHub-hosted runner
-    #runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     # Use Ubuntu Self-hosted runner
-    runs-on: self-hosted
+    #runs-on: self-hosted
 
     steps:
       # Checkout the repository (this ensures the milestone-04 directory is available)
@@ -68,7 +68,7 @@ jobs:
       # Step 3: Start services with Docker Compose
       - name: Start services with Docker Compose
         working-directory: milestone-04  # Ensure the working directory is set
-        run: docker-compose up db -d  # Start the Flask API and MySQL database in detached mode 
+        run: docker-compose up db  # Start the Flask API and MySQL database in detached mode 
 
       # Put a sleep to ensure that database is completely operational
       - name: Echo sleep
