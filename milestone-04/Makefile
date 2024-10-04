@@ -52,7 +52,7 @@ docker-build:
 	@echo "Building Docker image"
 	docker build -t $(DOCKER_IMAGE):$(TAG) . 
 
-# Tagging
+# Tagging.
 docker-tag:
 	@echo "Tagging Docker image"
 	docker tag $(DOCKER_IMAGE):$(TAG) $(DOCKER_USER)/$(DOCKER_IMAGE):$(TAG)

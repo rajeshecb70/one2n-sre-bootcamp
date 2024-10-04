@@ -17,16 +17,16 @@ on:
 # Manual trigger
 
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to monitor'
-        required: true
-        default: 'milestone-04/CI'
-      path:
-        description: 'Path to monitor for changes'
-        required: true
-        default: 'milestone-04/**'
-    
+#    inputs:
+#      branch:
+#        description: 'Branch to monitor'
+#        required: true
+#        default: 'milestone-04/CI'
+#      path:
+#        description: 'Path to monitor for changes'
+#        required: true
+#        default: 'milestone-04/**'
+#    
 jobs:
   build-and-push:
     # Use Ubuntu GitHub-hosted runner
