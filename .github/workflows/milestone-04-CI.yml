@@ -2,27 +2,31 @@ name: CI Pipeline
 
 # Trigger workflow only when changes are made in 'milestone-04' directory on the 'milestone-04/pipeline' branch
 on:
-  push:
-    branches:
-      - milestone-04/CI
-    paths:
-      - 'milestone-04/**'  # Only trigger when changes are made in the 'milestone-04' directory
-      - '.github/**'
-  pull_request:
-    branches:
-      - milestone-04/CI
-    paths:
-      - 'milestone-04/**'  # Trigger on pull requests targeting the specific branch and directory
+#  push:
+#    branches:
+#      - milestone-04/CI
+#    paths:
+#      - 'milestone-04/**'  # Only trigger when changes are made in the 'milestone-04' directory
+#      - '.github/**'
+#  pull_request:
+#    branches:
+#      - milestone-04/CI
+#    paths:
+#      - 'milestone-04/**'  # Trigger on pull requests targeting the specific branch and directory
+
+# Manual trigger
 
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'     
+      branch:
+        description: 'Branch to monitor'
         required: true
-        default: 'warning'
-      tags:
-        description: 'Test scenario tags'      # Manual Triggering..
-
+        default: 'milestone-04/CI'
+      path:
+        description: 'Path to monitor for changes'
+        required: true
+        default: 'milestone-04/**'
+    
 jobs:
   build-and-push:
     # Use Ubuntu GitHub-hosted runner
@@ -39,64 +43,54 @@ jobs:
       - name: Set up Docker
         uses: docker/setup-buildx-action@v2
 
-      # Step 2: Install Python and dependencies (for tests and linting).
+      # Step 2: Install Python (for tests and linting).
       - name: Set up Python environment
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
       
-      # Install dependencies
+      # Step 3: Install dependencies
       - name: Install dependencies
         working-directory: milestone-04  # Ensure the working directory is set..
         run: pip install -r requirements.txt
 
-      # Step 6: Run the lint test
+      # Step 4: Run the lint test
       - name: Run lint
         working-directory: milestone-04
         run: make lint-api
       
-      # Step : Install Docker Compose (since it's not available by default)
+      # Step 5: Install Docker Compose (since it's not available by default)
       - name: Install Docker Compose
         run: |
           curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /tmp/docker-compose
           chmod +x /tmp/docker-compose
           /tmp/docker-compose version  # Verify docker-compose installation
 
-      - name: Debug secrets
-        run: echo "database url ${{ secrets.DATABASE_URL }}" 
-
-      # Create the ENV file
-      - name: Create .env file from secrets
-        working-directory: milestone-04
-        run: |
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-          cat .env
-      
-      # Step 3: Start services with Docker Compose
+      # Step 6: Start services with Docker Compose
       - name: Start services with Docker Compose
         working-directory: milestone-04  # Ensure the working directory is set
         run: /tmp/docker-compose up db -d # Start the Flask API and MySQL database in detached mode 
 
-      # Step 5: Run tests
+      # Step 7: Run tests
       - name: Run tests
         working-directory: milestone-04  # Ensure the working directory is set
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: make test-api  # Assuming 'test-api' is a valid target in your Makefile
 
-      # Step 4: Build the API using Makefile target
+      # Step 8: Build the API using Makefile target
       - name: Build API
         working-directory: milestone-04  # Ensure the working directory is set
         run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
 
-      # Step 7: Docker login to DockerHub
+      # Step 9: Docker login to DockerHub
       - name: Docker login
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Step 8: Docker build and push (with dynamic image tag)
+      # Step 10: Docker build and push (with dynamic image tag)
       - name: Docker build and push
         working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
         run: |

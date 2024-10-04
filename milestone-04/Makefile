@@ -40,10 +40,9 @@ generate-migration:
 
 # Run tests using pytest, ensuring the test database exists
 test-api: $(VENV_DIR)/bin/activate
-#test-api:
 	DATABASE_URL=$(DATABASE_URL) python3 -m pytest
 
-# Linting target..
+# Linting target
 lint-api:
 	@echo "Running flake8 on app and tests directories..."
 	flake8 app tests
