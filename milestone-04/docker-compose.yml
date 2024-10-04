@@ -28,7 +28,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 'mypassword'
-      MYSQL_PASSWORD: 'mypassword'
+      #MYSQL_PASSWORD: 'mypassword'
       MYSQL_DATABASE: 'studentdb1'
     ports:
       - '3306:3306'
