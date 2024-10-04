@@ -70,13 +70,6 @@ jobs:
         working-directory: milestone-04  # Ensure the working directory is set
         run: /tmp/docker-compose up db -d # Start the Flask API and MySQL database in detached mode 
 
-    #  # Put a sleep to ensure that database is completely operational
-    #  - name: Echo sleep
-    #    run:  sleep 10
-
-    #  - name: Docker compose check
-    #    run: docker ps
-
       # Step 5: Run tests
       - name: Run tests
         working-directory: milestone-04  # Ensure the working directory is set
