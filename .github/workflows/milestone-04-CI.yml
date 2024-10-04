@@ -46,8 +46,6 @@ jobs:
       - name: Run lint
         working-directory: milestone-04
         run: make lint-flask
-
-
       
       # Step : Install Docker Compose (since it's not available by default)
       - name: Install Docker Compose
@@ -69,7 +67,7 @@ jobs:
       # Step 3: Start services with Docker Compose
       - name: Start services with Docker Compose
         working-directory: milestone-04  # Ensure the working directory is set
-        run: docker-compose up -d  # Start the Flask API and MySQL database in detached mode       
+        run: docker-compose up db -d  # Start the Flask API and MySQL database in detached mode 
 
       # Step 5: Run tests
       - name: Run tests
