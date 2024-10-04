@@ -1,18 +1,18 @@
-name: CI Pipeline-Final
+name: CI Pipeline-Final-manual
 
 
 # Trigger workflow only when changes are made in 'milestone-04' directory on the 'milestone-04/pipeline' branch
 on:
   workflow_dispatch:            # Manual trigger
   push:
-    branches:
-      - milestone-04/CI
+#    branches:
+#      - milestone-04/CI
     paths:
       - 'milestone-04/**'  # Only trigger when changes are made in the 'milestone-04' directory
       - '.github/**'
   pull_request:
-    branches:
-      - milestone-04/CI
+#    branches:
+#      - milestone-04/CI
     paths:
       - 'milestone-04/**'  # Trigger on pull requests targeting the specific branch and directory
 
