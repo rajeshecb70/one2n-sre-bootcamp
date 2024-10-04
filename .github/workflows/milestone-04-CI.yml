@@ -14,7 +14,14 @@ on:
     paths:
       - 'milestone-04/**'  # Trigger on pull requests targeting the specific branch and directory
 
-#  workflow_dispatch:      # Manual Triggering..
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'      # Manual Triggering..
 
 jobs:
   build-and-push:
