@@ -25,7 +25,7 @@ $(VENV_DIR)/bin/activate: requirements.txt
 run-db:
 	docker-compose up -d db && sleep 10
 
-# Install dependencies inside the virtual environment....
+# Install dependencies inside the virtual environment.
 install-dependencies: $(VENV_DIR)/bin/activate
 	@echo "Installing dependencies..."
 	$(PIP) install -r requirements.txt
@@ -34,22 +34,20 @@ install-dependencies: $(VENV_DIR)/bin/activate
 init-migration:
 	$(PYTHON) -m flask db init
 
-# Target to generate the migration. (The message must comply with the app's requirements)..
+# Target to generate the migration. (The message must comply with the app's requirements)
 generate-migration:
 	$(PYTHON) -m flask db migrate -m "(Automatic generate the migration)"
 
 # Run tests using pytest, ensuring the test database exists
-test-api:
+test-api: $(VENV_DIR)/bin/activate
 	# Pass DATABASE_URL as an environment variable.
 	DATABASE_URL=$(DATABASE_URL) $(PYTHON) -m pytest
-	
 
-# Linting target...
-# lint-flask: $(VENV_DIR)/bin/activate
+# Linting target..
 lint-api:
 	@echo "Running flake8 on app and tests directories..."
-#flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
-	flake8 app tests
+	#flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
+	$(PYTHON) -m flake8 app tests
 
 # Docker build the application
 docker-build:
@@ -72,7 +70,7 @@ docker-push: docker-build docker-tag
 	@echo "Pushing Docker image to Docker Hub..."
 	docker push $(DOCKER_USER)/$(DOCKER_IMAGE):$(TAG)
 
-#  Run Flask-api using the docker compose..
+#  Run Flask-api using the docker compose
 run-flask:
 	docker-compose --env-file api.env up -d
 
