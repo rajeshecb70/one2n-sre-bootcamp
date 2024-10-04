@@ -39,8 +39,8 @@ generate-migration:
 	$(PYTHON) -m flask db migrate -m "(Automatic generate the migration)"
 
 # Run tests using pytest, ensuring the test database exists
-# test-api: $(VENV_DIR)/bin/activate
-test-api:
+test-api: $(VENV_DIR)/bin/activate
+#test-api:
 	DATABASE_URL=$(DATABASE_URL) python3 -m pytest
 
 # Linting target..
