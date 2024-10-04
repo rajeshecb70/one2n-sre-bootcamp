@@ -46,7 +46,7 @@ jobs:
       # Step 6: Run the lint test
       - name: Run lint
         working-directory: milestone-04
-        run: make lint-flask
+        run: make lint-api
       
       # Step : Install Docker Compose (since it's not available by default)
       - name: Install Docker Compose
@@ -82,7 +82,7 @@ jobs:
         working-directory: milestone-04  # Ensure the working directory is set
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
+        run: make test-api  # Assuming 'test-api' is a valid target in your Makefile
 
       # Step 4: Build the API using Makefile target
       - name: Build API

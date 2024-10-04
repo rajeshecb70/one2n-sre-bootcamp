@@ -39,13 +39,14 @@ generate-migration:
 	$(PYTHON) -m flask db migrate -m "(Automatic generate the migration)"
 
 # Run tests using pytest, ensuring the test database exists
-test-flask:
+test-api:
 	# Pass DATABASE_URL as an environment variable.
 	DATABASE_URL=$(DATABASE_URL) $(PYTHON) -m pytest
 	
 
 # Linting target...
-lint-flask: $(VENV_DIR)/bin/activate
+# lint-flask: $(VENV_DIR)/bin/activate
+lint-api:
 	@echo "Running flake8 on app and tests directories..."
 #flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
 	flake8 app tests
