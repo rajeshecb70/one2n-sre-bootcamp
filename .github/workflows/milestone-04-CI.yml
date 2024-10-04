@@ -2,6 +2,7 @@ name: CI Pipeline
 
 # Trigger workflow only when changes are made in 'milestone-04' directory on the 'milestone-04/pipeline' branch
 on:
+  workflow_dispatch:
 #  push:
 #    branches:
 #      - milestone-04/CI
@@ -16,7 +17,7 @@ on:
 
 # Manual trigger
 
-  workflow_dispatch:
+#  workflow_dispatch:
 #    inputs:
 #      branch:
 #        description: 'Branch to monitor'
