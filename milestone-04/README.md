@@ -25,73 +25,10 @@ git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
 cd one2n-sre-bootcamp/milestone-04
 ```
 
+```
 # Check the status of pipeline
 
-You need to make changed in code and push in your repository then pipeline is autmatica run. you can check  status of pipelie in github repo  > action > All workflow.
-
-```
-# Target for CI pipeline
-make all
-```
-
-```
-# Target for Run DB
-make run-db
-```
-
-```
-# Target for install dependencies
-make install-dependencies
-```
-
-```
-# Target for initiate the migration.
-make init-migration
-```
-
-```
-# Target for generate migration
-make generate-migration
-```
-
-```
-# Target to Run tests
-make test-api
-```
-
-```
-# Target to Perform code linting
-make lint-api
-```
-
-```
-# Target for Build API image
-make docker-build
-```
-
-```
-# Target to Docker login
-make docker-login
-```
-
-```
-# Target to Docker build and push
-make docker-push
-```
-
-```
-# Target to stop flask Database container
-make stop
-```
-
-```
-# Target to clean some files.
-make clean
-```
-
-```
-# Target to clean-full the temporary files.
-make clean-full
+After making changes to the code and pushing them to your repository, the pipeline will automatically trigger. You can monitor the status and progress of the pipeline by navigating to GitHub Repository > Actions > All Workflows.
 ```
 
 We have created a CI pipeline using GitHub Actions. This pipeline is triggered automatically whenever code is pushed to the repository or changes are made in the working directory.
