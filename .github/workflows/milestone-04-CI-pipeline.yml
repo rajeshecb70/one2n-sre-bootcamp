@@ -1,27 +1,28 @@
-name: CI Pipeline-Final-manual
+name: CI Pipeline-Final-Manual on self hosted
 
 
 # Trigger workflow only when changes are made in 'milestone-04' directory on the 'milestone-04/pipeline' branch
 on:
-  workflow_dispatch:            # Manual trigger
   push:
-#    branches:
-#      - milestone-04/CI
+    branches:
+      - milestone-04/CI
     paths:
       - 'milestone-04/**'  # Only trigger when changes are made in the 'milestone-04' directory
       - '.github/**'
   pull_request:
-#    branches:
-#      - milestone-04/CI
+    branches:
+      - milestone-04/CI
     paths:
       - 'milestone-04/**'  # Trigger on pull requests targeting the specific branch and directory
+  
+  workflow_dispatch:            # Manual trigger
 
 jobs:
   build-and-push:
     # Use Ubuntu GitHub-hosted runner
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
     # Use Ubuntu Self-hosted runner
-    #runs-on: self-hosted
+    runs-on: self-hosted
 
     steps:
       # Checkout the repository (this ensures the milestone-04 directory is available)
