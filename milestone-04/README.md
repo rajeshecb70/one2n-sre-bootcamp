@@ -10,7 +10,8 @@ This project aims to set up a Continuous Integration (CI) pipeline using GitHub 
 
 - Docker and Docker Compose.
 - Make
-- Github actions login details.
+- Github actions login details fir run the CI and manage the secrets.
+- Self hosted runner
 - dockerhub login details.
 - Milestone-04-CI.yml is stored at .github/workflow/milestone-04-CI.yml
 - You should Have self-hosted runner configured on you github repository.
@@ -23,6 +24,10 @@ This project aims to set up a Continuous Integration (CI) pipeline using GitHub 
 git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
 cd one2n-sre-bootcamp/milestone-04
 ```
+
+# Check the status of pipeline
+
+You need to make changed in code and push in your repository then pipeline is autmatica run. you can check  status of pipelie in github repo  > action > All workflow.
 
 ```
 # Target for CI pipeline
@@ -94,14 +99,15 @@ We have created a CI pipeline using GitHub Actions. This pipeline is triggered a
 ### 5. Expectations
 
 The following expectations should be met to complete this milestone.
-  CI pipeline should consist of the following stages
-    - Build API
-    - Run tests
-    - Perform code linting
-    - Docker login
-    - Docker build and push
+CI pipeline should consist of the following stages
 
-  To achieve the stages of building, testing, and performing code linting, you need to use appropriate make targets.✅
-  CI pipeline should be run using a self-hosted GitHub runner running on your local machine.✅
-  CI pipeline should only be triggered when changes are made in the code directory and not in other directories or filepaths.✅
-  CI workflow should allow the developer to manually trigger the pipeline when required.
+- Build API
+- Run tests
+- Perform code linting
+- Docker login
+- Docker build and push
+
+- To achieve the stages of building, testing, and performing code linting, you need to use appropriate make targets.✅
+- CI pipeline should be run using a self-hosted GitHub runner running on your local machine.✅
+- CI pipeline should only be triggered when changes are made in the code directory and not in other directories or filepaths.✅
+- CI workflow should allow the developer to manually trigger the pipeline when required.
