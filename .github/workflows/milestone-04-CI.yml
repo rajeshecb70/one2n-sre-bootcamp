@@ -2,7 +2,7 @@ name: CI Pipeline for manual trigger
 
 # Trigger workflow only when changes are made in 'milestone-04' directory on the 'milestone-04/pipeline' branch
 on:
-  workflow_dispatch:
+#  workflow_dispatch:
 #  push:
 #    branches:
 #      - milestone-04/CI
@@ -17,17 +17,25 @@ on:
 
 # Manual trigger
 
-#  workflow_dispatch:
-#    inputs:
-#      branch:
-#        description: 'Branch to monitor'
-#        required: true
-#        default: 'milestone-04/CI'
-#      path:
-#        description: 'Path to monitor for changes'
-#        required: true
-#        default: 'milestone-04/**'
-#    
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to monitor'
+        required: true
+        default: 'milestone-04/CI'
+      path:
+        description: 'Path to monitor for changes'
+        required: true
+        default: 'milestone-04/**'
+
+  # Trigger on push to milestone-04/CI branch
+  push:
+    branches:
+      - milestone-04/CI
+    paths:
+      - milestone-04/**  # Only run the workflow if there are changes in the milestone-04 directory
+
+
 jobs:
   build-and-push:
     # Use Ubuntu GitHub-hosted runner
