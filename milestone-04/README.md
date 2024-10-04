@@ -10,7 +10,8 @@ This project aims to set up a Continuous Integration (CI) pipeline using GitHub 
 
 - Docker and Docker Compose.
 - Make
-- Github actions.
+- Github actions login details.
+- dockerhub login details.
 - Milestone-04-CI.yml is stored at .github/workflow/milestone-04-CI.yml
 - You should Have self-hosted runner configured on you github repository.
 - Configure secrets on github repos with DATABASE_RUL, DOCKER_USERNAME & DOCKER_PASSWORD
@@ -24,18 +25,43 @@ cd one2n-sre-bootcamp/milestone-04
 ```
 
 ```
-# Target for Build API image
-make docker-build
+# Target for CI pipeline
+make all
+```
+
+```
+# Target for Run DB
+make run-db
+```
+
+```
+# Target for install dependencies
+make install-dependencies
+```
+
+```
+# Target for initiate the migration.
+make init-migration
+```
+
+```
+# Target for generate migration
+make generate-migration
 ```
 
 ```
 # Target to Run tests
-make test-flask
+make test-api
 ```
 
 ```
 # Target to Perform code linting
-make lint-flask
+make lint-api
+```
+
+```
+# Target for Build API image
+make docker-build
 ```
 
 ```
@@ -50,7 +76,7 @@ make docker-push
 
 ```
 # Target to stop flask Database container
-make stop-db
+make stop
 ```
 
 ```
@@ -62,6 +88,8 @@ make clean
 # Target to clean-full the temporary files.
 make clean-full
 ```
+
+We have created a CI pipeline using GitHub Actions. This pipeline is triggered automatically whenever code is pushed to the repository or changes are made in the working directory.
 
 ### 5. Expectations
 

@@ -39,8 +39,9 @@ generate-migration:
 	$(PYTHON) -m flask db migrate -m "(Automatic generate the migration)"
 
 # Run tests using pytest, ensuring the test database exists
-test-api: $(VENV_DIR)/bin/activate
-	DATABASE_URL=$(DATABASE_URL) $(PYTHON) -m pytest
+# test-api: $(VENV_DIR)/bin/activate
+test-api:
+	DATABASE_URL=$(DATABASE_URL) python3 -m pytest
 
 # Linting target..
 lint-api:
@@ -73,7 +74,7 @@ run-api:
 	docker-compose --env-file api.env up -d
 
 # Run the complete pipeline (build, tag, and push)
-all:run-db install-dependencies init-migration generate-migration test-api  docker-push run-api
+all:run-db install-dependencies init-migration generate-migration lint-api test-api  docker-build docker-tag docker-login docker-push
 
 # Target to stop container 
 stop:
