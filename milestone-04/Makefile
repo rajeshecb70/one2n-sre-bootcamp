@@ -41,7 +41,8 @@ generate-migration:
 # Run tests using pytest, ensuring the test database exists
 test-flask:
 	# Pass DATABASE_URL as an environment variable.
-	DATABASE_URL=$(DATABASE_URL) $(PYTHON) -m pytest
+	# DATABASE_URL=$(DATABASE_URL) $(PYTHON) -m pytest
+	pytest app tests
 
 # Linting target...
 lint-flask: $(VENV_DIR)/bin/activate

@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: '3.10'
       
-      
+      # Install dependencies
       - name: Install dependencies
         working-directory: milestone-04  # Ensure the working directory is set..
         run: pip install -r requirements.txt
@@ -69,18 +69,17 @@ jobs:
       # Step 3: Start services with Docker Compose
       - name: Start services with Docker Compose
         working-directory: milestone-04  # Ensure the working directory is set
-        run: docker-compose up -d  # Start the Flask API and MySQL database in detached mode
-         
-
-      # Step 4: Build the API using Makefile target
-      - name: Build API
-        working-directory: milestone-04  # Ensure the working directory is set
-        run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
+        run: docker-compose up -d  # Start the Flask API and MySQL database in detached mode       
 
       # Step 5: Run tests
       - name: Run tests
         working-directory: milestone-04  # Ensure the working directory is set
         run: make test-flask  # Assuming 'test-flask' is a valid target in your Makefile
+
+      # Step 4: Build the API using Makefile target
+      - name: Build API
+        working-directory: milestone-04  # Ensure the working directory is set
+        run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
 
       # Step 7: Docker login to DockerHub
       - name: Docker login
