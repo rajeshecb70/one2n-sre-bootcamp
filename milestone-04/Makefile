@@ -12,7 +12,7 @@ DOCKER_IMAGE?=flask-api
 TAG?=3.0.1
 
 
-# Check if the virtual environment exists; if not, create it..
+# Check if the virtual environment exists; if not, create it........
 $(VENV_DIR)/bin/activate: requirements.txt
 	@test -d $(VENV_DIR) || ( \
 		echo "Creating virtual environment..."; \
@@ -21,11 +21,11 @@ $(VENV_DIR)/bin/activate: requirements.txt
 		$(PIP) install -r requirements.txt \
 	)
 
-#  Run database using the docker compose
+#  Run database using the docker compose.
 run-db:
 	docker-compose up -d db && sleep 10
 
-# Install dependencies inside the virtual environment
+# Install dependencies inside the virtual environment.
 install-dependencies: $(VENV_DIR)/bin/activate
 	@echo "Installing dependencies..."
 	$(PIP) install -r requirements.txt
@@ -34,28 +34,25 @@ install-dependencies: $(VENV_DIR)/bin/activate
 init-migration:
 	$(PYTHON) -m flask db init
 
-# Target to generate the migration. (The message must comply with the app's requirements)
+# Target to generate the migration. (The message must comply with the app's requirements)....
 generate-migration:
 	$(PYTHON) -m flask db migrate -m "(Automatic generate the migration)"
 
 # Run tests using pytest, ensuring the test database exists
-test-flask:
-	# Pass DATABASE_URL as an environment variable
-	$(PYTHON) -m pytest
+test-api: $(VENV_DIR)/bin/activate
+	DATABASE_URL=$(DATABASE_URL) python3 -m pytest
 
-
-# Linting target..
-lint-flask: $(VENV_DIR)/bin/activate
+# Linting target
+lint-api:
 	@echo "Running flake8 on app and tests directories..."
-	#flake8 app tests && echo "No linting errors found!" || { echo "Linting failed with error code $$?"; exit 1; }
-	$(PYTHON) -m flake8 app tests
+	flake8 app tests
 
-# Docker build the application
+# Docker build the application...
 docker-build:
 	@echo "Building Docker image"
 	docker build -t $(DOCKER_IMAGE):$(TAG) . 
 
-# Tagging
+# Tagging.
 docker-tag:
 	@echo "Tagging Docker image"
 	docker tag $(DOCKER_IMAGE):$(TAG) $(DOCKER_USER)/$(DOCKER_IMAGE):$(TAG)
@@ -72,11 +69,11 @@ docker-push: docker-build docker-tag
 	docker push $(DOCKER_USER)/$(DOCKER_IMAGE):$(TAG)
 
 #  Run Flask-api using the docker compose
-run-flask:
+run-api:
 	docker-compose --env-file api.env up -d
 
 # Run the complete pipeline (build, tag, and push)
-all:run-db install-dependencies init-migration generate-migration test-flask  docker-push run-flask
+all:run-db install-dependencies init-migration generate-migration lint-api test-api  docker-build docker-tag docker-login docker-push
 
 # Target to stop container 
 stop:
