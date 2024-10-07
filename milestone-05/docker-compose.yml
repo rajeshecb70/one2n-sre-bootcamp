@@ -20,6 +20,7 @@ services:
       - api-network
     depends_on:
       - db
+    
 
   # API service 2
   api2:
@@ -38,6 +39,7 @@ services:
       - api-network
     depends_on:
       - db
+    
 
   # MySQL 8 database container
   db:
