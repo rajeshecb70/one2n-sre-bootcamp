@@ -1,0 +1,31 @@
+Problem Statement
+
+We want to deploy our REST API along with its dependent services. For this, you need to spin up a Vagrant box using Vagrantfile. Treat this vagrant box as your production environment.
+Expectations
+
+The following expectations should be met to complete this milestone.
+
+    Vagrant box should be spun up using Vagrantfile.
+
+    For setting up the Vagrant box you need to use the bash script with functions to install the required dependencies.
+
+    You need to use the docker-compose and Makefile to do the deployment.
+
+    The final setup should consist of
+
+        2 API containers
+
+        1 DB container
+
+        1 Nginx container
+
+    The Nginx deployment configuration should be committed in the GitHub repository along with the Nginx config.
+
+    Nginx should be used for load balancing between these two API containers.
+
+    API should be accessible via port 8080 and internally should load balance requests between two API containers.
+
+    You should get status code 200 while making the request using Postman collection for different API endpoints.
+
+    API endpoint  http://<IP>:8080/healthcheck
+    http://<IP>:8080/api/v1/students
