@@ -5,6 +5,8 @@ version: '3.8'
 services:
   # API service 1
   api1:
+    image: "${DOCKER_IMAGE}:${TAG}"   # Custom image name with tag
+    container_name: "${CONTAINER_NAME_API1}"
     build:
       context: .
       dockerfile: Dockerfile
@@ -21,6 +23,8 @@ services:
 
   # API service 2
   api2:
+    image: "${DOCKER_IMAGE}:${TAG}"   # Custom image name with tag
+    container_name: "${CONTAINER_NAME_API2}"
     build:
       context: .
       dockerfile: Dockerfile
@@ -51,6 +55,7 @@ services:
   # Nginx reverse proxy
   nginx:
     image: nginx:latest
+    container_name: "${CONTAINER_NAME_NGINX}"
     container_name: nginx
     restart: always
     ports:

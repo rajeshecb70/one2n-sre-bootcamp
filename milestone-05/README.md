@@ -1,11 +1,10 @@
-# 1. Project Title
+## 1. Project Title
 
 Milestone-05 : Deploy REST API & its dependent services on bare metal
 
 ## 2. Project Description
 
 This project involves the deployment of a REST API and its associated services utilizing Vagrant, Docker-Compose, and a Makefile to establish a production-ready environment. The objective is to provision a Vagrant box, representing the production environment, where all services are containerized and managed using Docker-Compose for streamlined orchestration. A bash script will be leveraged to automate the installation of required dependencies inside the Vagrant box, ensuring consistency and repeatability in the setup process.
-
 The final infrastructure will comprise two API containers, one database (DB) container, and one Nginx container, forming a scalable, multi-tier architecture capable of efficiently managing traffic distribution and service availability.
 
 ## 3. Prerequisites
