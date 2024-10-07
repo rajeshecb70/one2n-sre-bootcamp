@@ -4,6 +4,7 @@ TAG?=3.0.0
 # Default container names
 CONTAINER_NAME_API1?=api1
 CONTAINER_NAME_API2?=api2
+CONTAINER_NAME_DB?=db
 CONTAINER_NAME_NGINX?=nginx
 
 # Build the containers
