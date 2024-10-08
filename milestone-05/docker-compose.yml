@@ -3,6 +3,19 @@
 version: '3.8'
 
 services:
+  # MySQL 8 database container
+  db:
+    image: mysql:8.0
+    container_name: ${CONTAINER_NAME_DB}
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - api-network
+
   # API service 1
   api1:
     image: "${DOCKER_IMAGE}:${TAG}" # Custom image name with tag
@@ -20,7 +33,7 @@ services:
       - api-network
     depends_on:
       - db
-    
+    command: /bin/sh -c "sleep 10"
 
   # API service 2
   api2:
@@ -39,24 +52,13 @@ services:
       - api-network
     depends_on:
       - db
-    
+    command: /bin/sh -c "sleep 10"
 
-  # MySQL 8 database container
-  db:
-    image: mysql:8.0
-    container_name: ${CONTAINER_NAME_DB}
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - api-network
+
 
   # Nginx reverse proxy
   nginx:
-    image: nginx:latest
+    image: nginx:1.26.0
     container_name: "${CONTAINER_NAME_NGINX}"
     restart: always
     ports:

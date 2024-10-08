@@ -17,13 +17,16 @@ build:
 	docker-compose build
 
 # Start the containers in detached mode
+db-up:
+	CONTAINER_NAME_DB=$(CONTAINER_NAME_DB) \
+	docker-compose up -d db
+
 up:
 	DOCKER_IMAGE=$(DOCKER_IMAGE) TAG=$(TAG) \
 	CONTAINER_NAME_API1=$(CONTAINER_NAME_API1) \
 	CONTAINER_NAME_API2=$(CONTAINER_NAME_API2) \
-	CONTAINER_NAME_DB=$(CONTAINER_NAME_DB) \
 	CONTAINER_NAME_NGINX=$(CONTAINER_NAME_NGINX) \
-	docker-compose up -d
+	docker-compose up -d nginx api1 api2
 
 # Stop the containers
 down:
@@ -34,4 +37,4 @@ clean:
 	docker-compose down --volumes --remove-orphans
 
 # Deploy the application
-deploy: build up
+deploy: build db-up up
