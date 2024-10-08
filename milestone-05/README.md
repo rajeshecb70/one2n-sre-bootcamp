@@ -1,6 +1,6 @@
 ## 1. Project Title
 
-Milestone-04 : Deploy REST API & its dependent services on bare metal
+Milestone-05 : Deploy REST API & its dependent services on bare metal
 
 ## 2. Project Description
 
