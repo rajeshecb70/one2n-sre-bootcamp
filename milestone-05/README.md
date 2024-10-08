@@ -16,22 +16,26 @@ This project aims to set up REST API container using the vagrant. We have spin u
 ## 4. Setup & configuration of milestone-04
 
 ```
+
 # Clone the repository
 git clone https://github.com/rajeshecb70/one2n-sre-bootcamp.git
 cd one2n-sre-bootcamp/milestone-05
 ```
 
 ```
+
 # Intialize the vagrant
 vagrant init
 ```
 
 ```
+
 # Start the vagrant
 vagrant up
 ```
 
 ```
+
 # Provision the vagrant
 vagrant provision
 ```
@@ -47,4 +51,4 @@ The following expectations should be met to complete this milestone.
 - The Nginx deployment configuration should be committed in the GitHub repository along with the Nginx config.✅
 - Nginx should be used for load balancing between these two API containers.✅
 - API should be accessible via port 8080 and internally should load balance requests between two API containers.✅
-- You should get status code 200 while making the request using Postman collection for different API endpoints.✅
+- You should get status code 200 while making the request using Postman collection for different API endpoints.✅   

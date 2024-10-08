@@ -32,8 +32,16 @@ start_deployment() {
     make deploy
 }
 
+# Function to start the database
+start_deploymentdb() {
+    echo "Starting the deployment..."
+    cd /vagrant
+    make deploy-db
+}
+
 # Execute functions
 install_docker
 install_docker_compose
 install_make
+start_deploymentdb
 start_deployment

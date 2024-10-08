@@ -7,21 +7,26 @@ CONTAINER_NAME_API2?=api2
 CONTAINER_NAME_DB?=db
 CONTAINER_NAME_NGINX?=nginx
 
-# Build the containers
-build:
+# Build the db containers
+build-db:
+	CONTAINER_NAME_DB=$(CONTAINER_NAME_DB) \
+	docker-compose build db
+
+# Build the API containers
+build-api:
 	DOCKER_IMAGE=$(DOCKER_IMAGE) TAG=$(TAG) \
 	CONTAINER_NAME_API1=$(CONTAINER_NAME_API1) \
 	CONTAINER_NAME_API2=$(CONTAINER_NAME_API2) \
-	CONTAINER_NAME_DB=$(CONTAINER_NAME_DB) \
 	CONTAINER_NAME_NGINX=$(CONTAINER_NAME_NGINX) \
 	docker-compose build
 
-# Start the containers in detached mode
-db-up:
+# Start the db containers in detached mode
+up-db:
 	CONTAINER_NAME_DB=$(CONTAINER_NAME_DB) \
 	docker-compose up -d db
 
-up:
+# Start the API containers in detached mode
+up-api:
 	DOCKER_IMAGE=$(DOCKER_IMAGE) TAG=$(TAG) \
 	CONTAINER_NAME_API1=$(CONTAINER_NAME_API1) \
 	CONTAINER_NAME_API2=$(CONTAINER_NAME_API2) \
@@ -37,4 +42,5 @@ clean:
 	docker-compose down --volumes --remove-orphans
 
 # Deploy the application
-deploy: build db-up up
+deploy-db: build-db up-db
+deploy: build-api up-api
