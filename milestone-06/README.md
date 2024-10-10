@@ -29,7 +29,7 @@ minikube start --nodes=4
 ```
 # Get the list of nodes
 kubectl get nodes
-```
+
 
 output :
 NAME           STATUS   ROLES           AGE     VERSION
@@ -37,6 +37,7 @@ minikube       Ready    control-plane   4m48s   v1.31.0
 minikube-m02   Ready    <none>          4m37s   v1.31.0
 minikube-m03   Ready    <none>          4m28s   v1.31.0
 minikube-m04   Ready    <none>          4m16s   v1.31.0
+```
 
 ```
 # Set lables of related nodes
@@ -67,10 +68,11 @@ minikube delete --all
 
 ### 5. Expectations
 
-- The following expectations should be met to complete this milestone.
+The following expectations should be met to complete this milestone.
+
 - Three node Kubernetes cluster using Minikube should be spun up.✅
 - Appropriate node labels should be added to these three nodes.
 - Ex:
-    Node A: type=application✅
-    Node B: type=dependent_services✅
-    Node C: type=observability✅  
+    - Node A: type=application✅
+    - Node B: type=dependent_services✅
+    - Node C: type=observability✅  
