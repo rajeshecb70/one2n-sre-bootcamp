@@ -1,0 +1,375 @@
+v1:
+
+Steps to Deploy
+
+#Create Namespace: First, apply the namespace configuration:
+
+kubectl apply -f namespace.yml
+
+#Apply ConfigMap and Secrets: Create the ConfigMap and Secret for your Flask app and MySQL database.
+
+kubectl apply -f configmap.yml
+kubectl apply -f secret.yml
+
+#Deploy MySQL: Deploy the MySQL database by applying the MySQL deployment and service YAML files.
+
+kubectl apply -f db-deployment.yml
+kubectl apply -f db-service.yml
+
+#Deploy Flask API: Finally, deploy the Flask API by applying the deployment and service YAML files.
+
+    kubectl apply -f api-deployment.yml
+    kubectl apply -f api-service.yml
+
+
+# Create a node :
+minikube start --nodes 4 -p mycluster
+
+# List of node :
+kubectl get nodes
+
+# provide the lables:
+kubectl label nodes mycluster type=application
+kubectl label nodes mycluster-m02 type=dependent_services
+kubectl label nodes mycluster-m03 type=observability
+
+# Verify the node 
+kubectl get nodes --show-labels
+
+
+
+
+=======================
+v0
+====================
+docker login -u rajeshecb70@gmail.com
+password :
+docker push rajeshecb70/flask-api:3.0.1
+
+helm repo add hashicorp https://helm.releases.hashicorp.com
+helm install vault hashicorp/vault --namespace vault-namespace --create-namespace
+
+Your release is named vault. To learn more about the release, try:
+
+  $ helm status vault
+  $ helm get manifest vault
+
+
+vault kv put secret/data/database/credentials username=root password=mypassword
+
+kubectl create secret generic vault-token --from-literal=token=mypassword -n student-api
+
+
+helm repo add external-secrets https://charts.external-secrets.io
+helm install external-secrets external-secrets/external-secrets
+
+kubectl create -f namespace.yaml
+kubectl create -f service.yaml
+kubectl create -f external-secret-store.yaml
+kubectl create -f pvc.yaml
+kubectl create -f mysql-credentials-secret.yaml
+kubectl create -f mysql-deployment.yaml
+kubectl create -f app-configmap.yaml
+kubectl create -f app-deployment.yaml
+
+
+
+
+kubectl apply -f service.yaml
+kubectl apply -f external-secret-store.yaml
+kubectl apply -f pvc.yaml
+kubectl apply -f mysql-credentials-secret.yaml
+kubectl apply -f mysql-deployment.yaml
+kubectl apply -f app-configmap.yaml
+kubectl apply -f app-deployment.yaml
+
+
+
+
+
+ kubectl get namespaces
+
+ kubectl get all -n student-api
+
+ kubectl get secrets -n student-api
+
+ kubectl get pods -n student-api
+
+ kubectl get deployments -n student-api
+
+
+kubectl delete deployment mysql-6859c55f4f-mhw2q
+
+kubectl describe pod mysql-6859c55f4f-mhw2q -n student-api
+
+kubectl describe pod student-api-7f45965f-l6vrd -n student-api
+
+================
+# create the mysql cred.
+
+kubectl create secret generic mysql-credentials \
+  --from-literal=root=root \
+  --from-literal=mypassword=mypassword \
+  -n student-api
+
+  ================
+
+#  identified the pods
+  kubectl describe pods mysql-7f9f575486-c499m -n student-api
+
+  kubectl get pods -n student-api
+
+
+ # delete the deployment 
+
+
+
+  kubectl delete deployment mysql -n student-api
+
+  #pvc delete 
+
+  kubectl delete pvc mysql-pvc -n student-api
+
+  #service delete 
+  kubectl delete secret mysql-credentials -n student-api
+
+  # check pods logs 
+  kubectl logs mysql-7f9f575486-8h94n -n student-api
+
+  # check the cluster status
+  minikube status -p my-cluster
+
+  # App secret:
+
+  kubectl create secret generic mysql-credentials \
+  --from-literal=MYSQL_ROOT_PASSWORD=mypassword \
+  --from-literal=MYSQL_DATABASE=studentdb1 \
+  -n student-api --dry-run=client -o yaml | kubectl apply -f -
+
+# make secrets
+  kubectl create secret generic mysql-credentials \
+  --from-literal=MYSQL_ROOT_PASSWORD=mypassword \
+  --from-literal=MYSQL_USER=mypassword \
+  --from-literal=MYSQL_PASSWORD=mypassword \
+  --from-literal=MYSQL_DATABASE=studentdb1 \
+  -n student-api --dry-run=client -o yaml | kubectl apply -f -
+
+
+  # enter in mysql:
+  kubectl exec -it mysql-7f9f575486-kjtmz -n student-api -- /bin/bash
+
+
+  # 13 Oct-2024
+minikube profile list 
+
+minikube delete --profile=mycluster
+
+minikube start --nodes 4 -p mycluster
+
+kubectl get nodes --show-labels
+
+'minikube node add'
+
+kubectl label nodes mycluster-m02 type=application
+kubectl label nodes mycluster-m03 type=dependent_services
+kubectl label nodes mycluster-m04 type=observability
+
+# check the lables
+kubectl get nodes --show-labels
+
+
+kubectl apply -f namespace.yaml
+kubectl apply -f ConfigMap.yaml
+kubectl apply -f db-deployment.yaml
+kubectl apply -f db-service.yaml
+kubectl apply -f api-deployment.yaml
+kubectl apply -f api-service.yaml
+
+
+tainting accordingly
+
+create the namespace
+student-api, vault, external-secrets
+
+
+kubectl apply -f namespaces.yaml
+
+
+1. Create the Vault
+helm repo add hashicorp https://helm.releases.hashicorp.com
+helm repo update
+
+helm install vault hashicorp/vault --namespace vault --create-namespace --set server.dev.enabled=true
+
+# must be running in backgroud 
+vault server -dev &
+the got this 
+
+Unseal Key: B9X3CWqGGeLPSLMSoZ4eHfHHJWqku3V5OmCAVTyQ2Ao=
+Root Token: hvs.YwYlwnrhN1SVZQFK3TPbEKvt
+
+# vault login 
+vault login hvs.YwYlwnrhN1SVZQFK3TPbEKvt
+
+# output
+
+Success! You are now authenticated. The token information displayed below
+is already stored in the token helper. You do NOT need to run "vault login"
+again. Future Vault requests will automatically use this token.
+
+Key                  Value
+---                  -----
+token                hvs.YwYlwnrhN1SVZQFK3TPbEKvt
+token_accessor       qindRA1UXdrDQaye6ltBvraj
+token_duration       ∞
+token_renewable      false
+token_policies       ["root"]
+identity_policies    []
+policies             ["root"]
+
+
+2. Configure Vault
+a. Port Forwarding
+kubectl port-forward svc/vault 8200:8200 -n vault
+
+b. Authenticate to Vault
+export VAULT_ADDR='http://127.0.0.1:8200'   # permission denied issue 
+
+Unseal Key: bGy49XUesnGz6ZbfbnTZwIzf/SehkxZ0S2deXjehZAo=
+Root Token: hvs.6Ae95owuUpmBGdwNoKAa0qXP
+
+==========
+WARNING! dev mode is enabled! In this mode, Vault runs entirely in-memory
+and starts unsealed with a single unseal key. The root token is already
+authenticated to the CLI, so you can immediately begin using Vault.
+
+You may need to set the following environment variables:
+
+    $ export VAULT_ADDR='http://127.0.0.1:8200'
+
+The unseal key and root token are displayed below in case you want to
+seal/unseal the Vault or re-authenticate.
+
+Unseal Key: bGy49XUesnGz6ZbfbnTZwIzf/SehkxZ0S2deXjehZAo=
+Root Token: hvs.6Ae95owuUpmBGdwNoKAa0qXP
+
+export VAULT_TOKEN=hvs.6Ae95owuUpmBGdwNoKAa0qXP
+
+export VAULT_ADDR='http://127.0.0.1:8200'
+export VAULT_ADDR='http://127.0.0.1:8200'
+export VAULT_TOKEN='hvs.bsNbhcCHBe4vaz3wtnP7oU6v' # Replace with your actual token
+
+Development mode should NOT be used in production installations!
+
+==========
+
+c. Enable Key-Value Secrets Engine
+vault secrets enable -path=secret kv
+
+d. Store the Secrets
+vault kv put secret/db-config \
+    DATABASE_URL="mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/studentdb1" \
+    MYSQL_ROOT_PASSWORD="mypassword" \
+    MYSQL_DATABASE="studentdb1" \
+    MYSQL_USER="root" \
+    MYSQL_PASSWORD="mypassword" \
+    MYSQL_HOST="mysql-service"
+
+3. Create External Secrets
+kubectl create namespace external-secrets
+
+kubectl apply -f https://raw.githubusercontent.com/external-secrets/external-secrets/master/deploy/external-secrets-operator.yaml
+
+4. Apply the ExternalSecret Manifest
+kubectl apply -f external-secret.yaml
+
+Verifying Secrets
+Check the Vault Secrets:
+vault kv get secret/db-config
+
+Check the Kubernetes Secrets:
+kubectl get secrets -n external-secrets
+kubectl describe secret db-config -n external-secrets
+
+
+===========================
+
+14-Oct-2024
+
+1994  sudo apt remove --purge fuse
+ 1995  apt-cache rdepends fuse
+ 1996  sudo apt remove --purge fuse
+ 1997  sudo apt autoremove
+ 1998  mount | grep fuse
+ 1999  init 6
+ 2000  systemctl status docker
+ 2001  systemctl restart docker
+ 2002  lsof | wc -l
+ 2003  lsof | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 20
+ 2004  sudo apt remove --purge evolution
+ 2005  lsof | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 20
+ 2006  minikube start
+ 2007  minikube profile list
+ 2008  minikube start --nodes 4 -p mycluster
+ 2009  minikube delete -p mycluster
+ 2010  minikube stop
+ 2011  sudo systemctl restart docker
+ 2012  minikube start --nodes 4 -p mycluster
+ 2013  docker images
+ 2014  docker ps 
+ 2015  kubectl get nodes
+ 2016  kubectl label nodes mycluster type=application
+ 2017  kubectl label nodes mycluster-m02 type=dependent_services
+ 2018  kubectl label nodes mycluster-m03 type=observability
+ 2019  kubectl get nodes --show-labels
+ 2020  minikube list profile
+ 2021  minikube profile list
+ 2022  cd k8s/
+ 2023  ls
+ 2024  k apply -f node.yml 
+ 2025  k apply -f namespace.yml 
+ 2026  k get ns
+
+ ==========================
+
+ 2022  cd k8s/
+ 2023  ls
+ 2024  k apply -f node.yml 
+ 2025  k apply -f namespace.yml 
+ 2026  k get ns
+ 2027  histroy
+ 2028  history
+ 2029  k get node -n ns
+ 2030  k get pods -n ns
+ 2031  k get pods -n student-api
+ 2032  k get pods -n vault
+ 2033  export VAULT_ADDR='http://127.0.0.1:8200'
+ 2034  vault operator init
+ 2035  kubectl port-forward svc/vault 8200:8200 -n vault
+ 2036  kubectl --status
+ 2037  kubectl status
+ 2038  kubectl apply -f vault-deployment.yaml
+ 2039  kubectl apply -f vault-service.yaml
+ 2040  kubectl port-forward svc/vault 8200:8200 -n vault
+ 2041  export VAULT_ADDR='http://127.0.0.1:8200'
+ 2042  vault operator init
+ 2043  kubectl get pods -n vault
+ 2044  k describe pod vault-8c67c4f9-xxldh -n vault
+ 2045  export VAULT_ADDR='http://127.0.0.1:8200'
+ 2046  vault operator init
+ 2047  kubectl get pvc -n vault
+ 2048  kubectl get events -n vault
+ 2049  kubectl get pods -n vault
+ 2050  k describe pod vault-8c67c4f9-xxldh -n vault
+ 2051  k logs  vault-8c67c4f9-xxldh -n vault
+ 2052  kubectl port-forward svc/vault 8200:8200 -n vault
+
+
+
+
+
+
+
+
+
+

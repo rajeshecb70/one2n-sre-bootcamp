@@ -1,0 +1,157 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vault
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault
+  namespace: vault
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault
+  template:
+    metadata:
+      labels:
+        app: vault
+    spec:
+      containers:
+        - name: vault
+          image: vault:1.12.0
+          ports:
+            - containerPort: 8200
+          env:
+            - name: DATABASE_URL
+              value: "mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/${MYSQL_DATABASE}"
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_DATABASE
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_HOST
+            # Set the VAULT_ADDR environment variable
+            - name: VAULT_ADDR
+              value: "http://127.0.0.1:8200" # Change to http for intra-cluster communication
+          command:
+            - "vault"
+            - "server"
+            - "-config=/vault/config/vault.hcl" # Specify the config file
+          volumeMounts:
+            - name: vault-data
+              mountPath: /vault/data
+            - name: vault-config
+              mountPath: /vault/config
+      volumes:
+        - name: vault-data
+          persistentVolumeClaim:
+            claimName: vault-pvc
+        - name: vault-config
+          configMap:
+            name: vault-config
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+  namespace: vault
+type: Opaque
+data:
+  MYSQL_ROOT_PASSWORD: bXlwYXNzd29yZA== # "mypassword" base64 encoded
+  MYSQL_DATABASE: c3R1ZGVudGRiMQ== # "studentdb1" base64 encoded
+  MYSQL_USER: cm9vdA== # "root" base64 encoded
+  MYSQL_PASSWORD: bXlwYXNzd29yZA== # "mypassword" base64 encoded
+  MYSQL_HOST: bXlzcWwtc2VydmljZQ== # "mysql-service" base64 encoded
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vault-pv
+  namespace: vault
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data/vault
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vault-pvc
+  namespace: vault
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vault-service
+  namespace: vault
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8200
+      targetPort: 8200
+      protocol: TCP
+  selector:
+    app: vault
+---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: mysql-service
+#   namespace: vault
+# spec:
+#   type: ClusterIP
+#   ports:
+#     - port: 3306
+#       targetPort: 3306
+#       protocol: TCP
+#   selector:
+#     app: mysql
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vault-config
+  namespace: vault
+data:
+  vault.hcl: |
+    ui = true # Enable UI
+    storage "file" {
+      path = "/vault/data/vault.db"
+    }
+    listener "tcp" {
+      address     = "0.0.0.0:8200"
+      tls_disable = true # Disable TLS for simplicity; in production, configure TLS properly
+    }
+
+    api_addr = "http://127.0.0.1:8200" # Set API address
+    disable_mlock = true  # Disable mlock to prevent memory locking issues

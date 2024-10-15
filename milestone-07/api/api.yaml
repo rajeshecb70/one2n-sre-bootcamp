@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  namespace: student-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api-container
+          image: your-api-image
+          env:
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: db-api-secret
+                  key: MYSQL_PASSWORD # Assuming the same password or create a separate secret key for API_KEY if needed
+            - name: DATABASE_URL
+              value: "mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/${MYSQL_DATABASE}"
