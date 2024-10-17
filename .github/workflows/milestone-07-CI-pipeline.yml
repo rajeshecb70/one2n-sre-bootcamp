@@ -5,13 +5,13 @@ name: CI Pipeline-Final-Manual on self hosted
 on:
   push:
     branches:
-      - milestone-04/CI
+      - main
     paths:
       - 'milestone-04/**'  # Only trigger when changes are made in the 'milestone-04' directory
       - '.github/**'
   pull_request:
     branches:
-      - milestone-04/CI
+      - main
     paths:
       - 'milestone-04/**'  # Trigger on pull requests targeting the specific branch and directory
   
