@@ -84,6 +84,6 @@ jobs:
       - name: Docker build and push
         working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
         run: |
-          TAG="3.0.0"
+          TAG="7.0.0"
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG} .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG}
