@@ -9,7 +9,7 @@ PYTHON = $(VENV_DIR)/bin/python
 PIP = $(VENV_DIR)/bin/pip
 DOCKER_USER?=rajeshecb70
 DOCKER_IMAGE?=flask-api
-TAG?=3.0.1
+TAG?=7.0.0
 
 
 # Check if the virtual environment exists; if not, create it........
