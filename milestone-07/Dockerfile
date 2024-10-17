@@ -41,5 +41,4 @@ EXPOSE 5000
 # Default command to activate the virtual environment and start the Flask app
 CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=5000" ]
 # Run the run.sh script
-#ENTRYPOINT ["echo", "rajesh"]
-#ENTRYPOINT ["sh", "/flask-app/run.sh"]
+#ENTRYPOINT ["/flask-app/run.sh"]
