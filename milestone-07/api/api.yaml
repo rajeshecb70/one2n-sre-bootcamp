@@ -17,8 +17,13 @@ spec:
       # Init Container that checks if the database is up and runs migrations
       initContainers:
         - name: db-migration
-          image: rajeshecb70/flask-api:7.0.0 # Using a Python Alpine image
-          command: ["/bin/sh", "-c", "python3", "-m", "flask", "db", "upgrade"]
+          image: rajeshecb70/flask-api:7.0.0
+          command: ["/bin/sh", "-c"]
+          args:
+          - |
+            echo "Starting DB Migration"
+            python3 -m flask db upgrade
+            echo "DB Migration completed"        
           env:
             - name: DATABASE_URL
               valueFrom:
@@ -36,9 +41,6 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: DATABASE_URL
-          #command: ["/bin/sh", "-c", "sleep 100"]
-          #command: ["python3", "-c", "flask run --host=0.0.0.0 --port=5000"]
-          #command: ["python3", "-m", "flask run --host=0.0.0.0 --port=5000"]
 ---
 apiVersion: v1
 kind: Service
