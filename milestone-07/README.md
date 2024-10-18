@@ -25,7 +25,7 @@ The project involves setup the REST API in kubernetes cluster using the below po
 
 **4. Setup the kubernetes cluster**
 
-**Step1: Kubernetes config File**
+- Kubernetes config File information
 
 ```bash
 # Kubectl path
@@ -38,7 +38,7 @@ File: config
 $kubectl config view
 ```
 
-**Step2: Minikube setup:**
+- Minikube setup
 
 ```bash
 # Download the latest minukube
@@ -57,7 +57,7 @@ $minikube start
 $minikube dashboard
 ```
 
-**Step:3 Create Cluster with 4 nodes**
+- Create Cluster with 4 nodes
 
 ```bash
 # Check the minikube profile
@@ -100,7 +100,7 @@ kubectl describe node mycluster-m02
 
 ```
 
-**Steps:4  Create the namespace: (file: namespace.yaml)**
+- Create the namespace
 
 ```bash
 # create the namespace.yaml file for create the namespace.
@@ -114,9 +114,7 @@ kubectl get namespaces
 
 ```
 
-### Vault Setup: Control Flow with vault
-
-**Steps:5  Create the vault container (File: vault.yaml)**
+### 5. Vault Setup: Control Flow with vault
 
 ```bash
 # Create the vault.yaml file
@@ -172,9 +170,7 @@ $ kubectl port-forward service/<service-name> 8200:8200 -n vault &
 
 ```
 
-### External Secrets configuration
-
-**Step:6 External-Secrets configuration:**
+### 6. External Secrets configuration
 
 ```bash
 #Create the token-secrets**
@@ -243,11 +239,7 @@ $kubectl get secretstore -n student-api
 $kubectl get secret vault-token -n student-api -o yaml
 
 - Working fine till now.
-```
 
-**Step:7 ESO configuration**
-
-```bash
 # Varification externalsecrets
 $kubectl get externalsecrets  -n  student-api
 
@@ -257,11 +249,7 @@ $kubectl get secretstore  -n  student-api
 - Note:  the secrets must be same as the your externalsecrets file.
 ```
 
----
-
-### Database deployment
-
-**Step:8 Generate the db.yml manifest.**
+### 7. Database deployment
 
 ```bash
 # create the db.yml
@@ -285,15 +273,9 @@ $kubectl exec -it db-deployment-b79b44ff9-kbb7g -n student-api -- /bin/sh
 
 sh-5.1# mysql -u root -p
 Enter password: 
-
 ```
 
-### API deployment
-
-**Step: 9 Generate the api.yml manifest.**
-
-- NOTE: Generate the application docker image and push to your repository.
-- API image do not have any migration. we can override the migration command using the init container.**
+### 8. API deployment
 
 ```bash
 # create the api.yml manifest
@@ -326,14 +308,15 @@ $kubectl logs -n student-api api-deployment-696479d9d9-vd27n -f
 # Check the db pod for database and related tables.
 $kubectl exec -it pod/db-deployment-8578ff468-qzqn8 -n student-api -- /bin/sh
 
+
+- NOTE: Generate the application docker image and push to your repository.
+- API image do not have any migration. we can override the migration command using the init container.
 ```
 
-### API Testing
-
-**Step: 10 Testing the application with live logs**
+### 9. API Testing
 
 ```bash
-# Check the live logs in pod
+# Application live logs on pod 
 $kubectl logs pod/api-deployment-7947d4db87-5cgdz -n student-api -f 
 
 # Testing on postman
@@ -356,7 +339,7 @@ $kubectl logs pod/api-deployment-7947d4db87-5cgdz -n student-api -f
 
 - Records with student ID : http://127.0.0.1:5000/api/v1/students/4
 
-- If there is no records found then error and logs .
+- If no records are found, an error message is shown in the browser.
 
 ```
 
@@ -366,7 +349,6 @@ $kubectl logs pod/api-deployment-7947d4db87-5cgdz -n student-api -f
 - Each component (application, DB) should have a single manifest file, which has all the different Kubernetes components. For example, the application.yml file should contain - namespace, configMap, secret, deployment, and service, etc. i.e. all K8s resource definitions required for the application to be deployed on K8s. Similarly, database.yml file should contain similar K8s resource definition for running database container on K8s.✅
 - DB DML migrations should run before you start the application pod, as an init container.✅
 - Application and DB components should be deployed in `student-api` namespace. Similarly, other elements should be deployed in the respective namespace and on the appropriate node. Here’s the deployment diagram for reference.✅
-- You need to use ConfigMaps for passing environment variables.✅
 - DB credentials and other sensitive information should be injected using Kubernetes External Secrets Operator(ESO).✅
 - Hashicorp Vault should be deployed in the Kubernetes cluster and configured to be used as a secret store for ESO.✅
 - You need to expose the REST API using the K8s service.✅
