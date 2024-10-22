@@ -1,0 +1,36 @@
+secretstore:
+  name: vault-secret-store
+  namespace: student-api
+
+vault:
+  server: "http://10.99.4.53:8200"  # Vault server ClusterIP address
+  path: "secret/"  # API path for the secret
+  version: "v1"
+  auth:
+    tokenSecretRef:
+      name: vault-token  # Kubernetes secret name
+      key: token  # Key inside the Kubernetes secret
+
+externalSecret:
+  name: db-api-secret
+  namespace: student-api
+  refreshInterval: "60s"
+  secretStoreRef:
+    name: vault-secret-store
+    kind: SecretStore
+  target:
+    name: mysql-secret
+    creationPolicy: Owner
+  data:
+    mysql:
+      key: "mysql"
+      properties:
+        MYSQL_ROOT_PASSWORD: "MYSQL_ROOT_PASSWORD"
+        MYSQL_DATABASE: "MYSQL_DATABASE"
+        #USER: "MYSQL_USER"
+        #HOST: "MYSQL_HOST"
+        DATABASE_URL: "DATABASE_URL"
+  dataFrom:
+    extract:
+      key: "mysql"
+
