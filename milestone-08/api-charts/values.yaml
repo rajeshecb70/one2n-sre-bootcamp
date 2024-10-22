@@ -48,6 +48,8 @@ database:
   mysql:
     rootPasswordKey: MYSQL_ROOT_PASSWORD  # Key to fetch from the external secret
     databaseKey: MYSQL_DATABASE            # Key to fetch from the external secret
+  #  rootPasswordKey: mypassword  # Key to fetch from the external secret
+  #  databaseKey: studentdb1            # Key to fetch from the external secret
 
   persistence:
     enabled: true
