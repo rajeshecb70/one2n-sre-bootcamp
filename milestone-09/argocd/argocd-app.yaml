@@ -16,7 +16,7 @@ spec:
 
   destination:
     name: ''
-    namespace: ''   # Specify your target namespace here
+    namespace: student-api   # Specify your target namespace here
     server: https://kubernetes.default.svc  
 
   syncPolicy:
