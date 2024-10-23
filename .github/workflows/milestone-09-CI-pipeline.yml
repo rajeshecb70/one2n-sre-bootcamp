@@ -27,7 +27,7 @@ jobs:
           echo "Release Tag: ${{ github.event.release.tag_name }}"
           echo "Release URL: ${{ github.event.release.html_url }}"
 
-    steps:
+    #steps:
       # Checkout the repository (this ensures the milestone-09 directory is available)
       - name: Checkout repository
         uses: actions/checkout@v2
