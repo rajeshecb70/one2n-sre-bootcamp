@@ -5,6 +5,8 @@ Deploy REST API & its dependent services using Helm Charts
 **2. Project Description**
 
 The project involves setup the REST API in kubernetes cluster using the helm.
+- app-charts for vault setup
+- api-charts for externalsecrets, secretstore, api & DB
 
 
 **3. Requirements**
