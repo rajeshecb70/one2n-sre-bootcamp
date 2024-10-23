@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-student-api
+  namespace: argocd
+spec:
+  source:
+    repoURL: https://github.com/rajeshecb70/one2n-sre-bootcamp  # Your Git repository
+    targetRevision: milestone-09
+    path: milestone-09/api-charts   # Path to your Helm chart
+    helm:
+      valueFiles:
+        - values.yaml                # Reference to your values.yaml file
+
+  project: default
+
+  destination:
+    name: ''
+    namespace: ''   # Specify your target namespace here
+    server: https://kubernetes.default.svc  
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
