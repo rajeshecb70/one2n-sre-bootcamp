@@ -1,0 +1,84 @@
+# templates/db.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.database.replicaCount }}
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: db-container
+          image: {{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalSecret.target.name }}  # Using mysql-secret
+                  key: {{ .Values.database.mysql.rootPasswordKey }}  # Pulling MYSQL_ROOT_PASSWORD
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalSecret.target.name }}  # Using mysql-secret
+                  key: {{ .Values.database.mysql.databaseKey }}   # Pulling MYSQL_DATABASE
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: mysql-pvc1
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv1
+  namespace: {{ .Release.Namespace }}
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data/mysql
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc1
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    {{- range .Values.database.persistence.accessModes }}
+    - {{ . }}
+    {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.database.persistence.size }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    app: db
+  ports:
+    #- protocol: TCP
+    - port: {{ .Values.database.service.port }}
+      targetPort: 3306
+  type: {{ .Values.database.service.type }}
