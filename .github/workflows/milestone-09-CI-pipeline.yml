@@ -22,7 +22,7 @@ permissions:
   contents: write
 
 env:
-  tag: 9.0.0
+  tag: 9.1.1
   
 
 jobs:
@@ -92,7 +92,7 @@ jobs:
       - name: Docker build and push
         working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
         run: |
-          TAG="9.0.0"
+          TAG=${{ env.tag }}
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG} .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG}
       
