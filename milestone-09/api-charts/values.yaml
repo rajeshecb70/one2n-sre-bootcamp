@@ -42,7 +42,7 @@ database:
 
   image:
     repository: mysql
-    tag: "8.0"
+    tagm: "8.0"
     pullPolicy: IfNotPresent
 
   mysql:

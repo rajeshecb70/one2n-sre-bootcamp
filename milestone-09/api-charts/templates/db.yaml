@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: db-container
-          image: {{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}
+          image: {{ .Values.database.image.repository }}:{{ .Values.database.image.tagm }}
           ports:
             - containerPort: 3306
           env:
