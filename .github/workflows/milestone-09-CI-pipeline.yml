@@ -4,7 +4,7 @@ name: CI Pipeline-milestone-09 on self hosted
 on:
   push:
     branches:
-      - main
+      - milestone-09
     paths:
       - 'milestone-09/**'  # Only trigger when changes are made in the 'milestone-09' directory
       - '.github/**'
