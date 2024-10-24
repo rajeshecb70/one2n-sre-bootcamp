@@ -1,0 +1,109 @@
+name: CI Pipeline for milestone-09
+
+
+# Trigger workflow only when changes are made in 'milestone-04' directory on the 'milestone-04/pipeline' branch
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'milestone-04/**'  # Only trigger when changes are made in the 'milestone-04' directory
+      - 'milestone-09/**'  # Only trigger when changes are made in the 'milestone-09' directory
+      - '.github/**'
+#  pull_request:
+#    branches:
+#      - main
+#    paths:
+#      - 'milestone-09/**'  # Trigger on pull requests targeting the specific branch and directory
+  
+  workflow_dispatch:            # Manual trigger
+
+permissions:
+  contents: write
+
+env:
+  tag: 9.0.0
+  
+
+jobs:
+  build-and-push:
+    # Use Ubuntu GitHub-hosted runner
+    runs-on: ubuntu-latest
+    # Use Ubuntu Self-hosted runner
+    # runs-on: self-hosted
+
+    steps:
+      # Checkout the repository (this ensures the milestone-04 directory is available)
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 1: Set up Docker (to use Docker CLI)
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      # Step 2: Install Python (for tests and linting).
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        working-directory: milestone-04  # Ensure the working directory is set..
+        run: pip install -r requirements.txt
+
+      # Step 4: Run the lint test
+      - name: Run lint
+        working-directory: milestone-04
+        run: make lint-api
+      
+      # Step 5: Install Docker Compose (since it's not available by default)
+      - name: Install Docker Compose
+        run: |
+          curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /tmp/docker-compose
+          chmod +x /tmp/docker-compose
+          /tmp/docker-compose version  # Verify docker-compose installation
+
+      # Step 6: Start services with Docker Compose
+      - name: Start services with Docker Compose
+        working-directory: milestone-04  # Ensure the working directory is set
+        run: /tmp/docker-compose up db -d # Start the Flask API and MySQL database in detached mode 
+
+      # Step 7: Run tests
+      - name: Run tests
+        working-directory: milestone-04  # Ensure the working directory is set
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: make test-api  # Assuming 'test-api' is a valid target in your Makefile
+
+      # Step 8: Build the API using Makefile target
+      - name: Build API
+        working-directory: milestone-04  # Ensure the working directory is set
+        run: make docker-build  # Assuming your Makefile is in the milestone-04 directory
+
+      # Step 9: Docker login to DockerHub
+      - name: Docker login
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Step 10: Docker build and push (with dynamic image tag)
+      - name: Docker build and push
+        working-directory: milestone-04  # Ensure Docker build happens in the milestone-04 directory
+        run: |
+          TAG="7.0.0"
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG} .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/flask-api:${TAG}
+      
+      - name: Update image tag in values.yaml
+        run: |
+          sed -i 's/tag: ".*"/tag: "${{ env.tag }}"/g' api-charts/values.yaml  # Update the tag in the api values.yaml file
+        working-directory: milestone-09
+      - name: Commit and push updated values.yaml
+        run: |
+          git config --local user.email "rajeshecb70@gmail.com"
+          git config --local user.name "rajeshecb70"
+          git add api/values.yaml
+          git commit -m "Updated image tag to ${{ env.tag }}"
+          git push

@@ -1,0 +1,81 @@
+# Secretstore values.yaml
+secretstore:
+  name: vault-secret-store
+  namespace: student-api
+
+vault:
+  server: "http://10.99.4.53:8200"  # Vault server ClusterIP address
+  path: "secret/"  # API path for the secret
+  version: "v1"
+  auth:
+    tokenSecretRef:
+      name: vault-token  # Kubernetes secret name
+      key: token  # Key inside the Kubernetes secret
+
+# Externalsecrets values.yaml
+externalSecret:
+  name: db-api-secret
+  namespace: student-api
+  refreshInterval: "60s"
+  secretStoreRef:
+    name: vault-secret-store
+    kind: SecretStore
+  target:
+    name: mysql-secret
+    creationPolicy: Owner
+  data:
+    mysql:
+      key: "mysql"
+      properties:
+        MYSQL_ROOT_PASSWORD: "MYSQL_ROOT_PASSWORD"
+        MYSQL_DATABASE: "MYSQL_DATABASE"
+      #  MYSQL_USER: "MYSQL_USER"
+        #MYSQL_HOST: "MYSQL_HOST"
+        DATABASE_URL: "DATABASE_URL"
+  dataFrom:
+    extract:
+      key: "mysql"
+
+# Database values.yaml
+database:
+  replicaCount: 1
+
+  image:
+    repository: mysql
+    tagm: "8.0"
+    pullPolicy: IfNotPresent
+
+  mysql:
+    rootPasswordKey: MYSQL_ROOT_PASSWORD  # Key to fetch from the external secret
+    databaseKey: MYSQL_DATABASE            # Key to fetch from the external secret
+  #  rootPasswordKey: mypassword  # Key to fetch from the external secret
+  #  databaseKey: studentdb1            # Key to fetch from the external secret
+
+  persistence:
+    enabled: true
+    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
+
+  service:
+    enabled: true
+    type: ClusterIP
+    port: 3306
+
+# API value.yaml
+api:
+  replicaCount: 1
+
+  image:
+    repository: rajeshecb70/flask-api
+    tag: "7.0.0"
+
+  migrationImage:
+    repository: rajeshecb70/flask-api
+    tag: "7.0.0"
+
+  containerPort: 5000
+
+  service:
+    port: 5000
