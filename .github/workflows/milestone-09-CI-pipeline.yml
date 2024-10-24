@@ -1,4 +1,4 @@
-name: CI Pipeline-Final-Manual on self hosted
+name: CI Pipeline for milestone-09
 
 
 # Trigger workflow only when changes are made in 'milestone-04' directory on the 'milestone-04/pipeline' branch
