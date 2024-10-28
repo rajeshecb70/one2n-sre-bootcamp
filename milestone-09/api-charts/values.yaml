@@ -69,11 +69,11 @@ api:
 
   image:
     repository: rajeshecb70/flask-api
-    tag: "9.1.2"
+    tag: "9.1.4"
 
   migrationImage:
     repository: rajeshecb70/flask-api
-    tag: "9.1.2"
+    tag: "9.1.4"
 
   containerPort: 5000
 
