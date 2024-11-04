@@ -1,0 +1,59 @@
+createNamespace: false
+
+namespace: vault
+appName: vault
+
+deployment:
+  name: vault
+  replicas: 1  # Increase replicas for High Availability
+
+container:
+  image: vault:1.12.0
+  port: 8200
+
+env:
+  vaultAddr: "http://127.0.0.1:8200"
+
+configFilePath: /vault/config/vault.hcl
+
+volume:
+  dataMountPath: /vault/data
+  configMountPath: /vault/config
+
+pv:
+  name: vault-pv
+  capacity: 2Gi
+  accessMode: ReadWriteMany
+  hostPath: /mnt/data/vault
+
+pvc:
+  name: vault-pvc
+  accessMode: ReadWriteMany
+  storage: 2Gi
+
+service:
+  name: vault-service
+  port: 8200
+  targetPort: 8200
+
+configMap:
+  name: vault-config
+
+config:
+  ui: true
+  storage:
+    raft:
+      path: /vault/data/raft  # Path for Raft storage
+      node_id: "$(HOSTNAME)"   # Unique identifier for each instance
+  listener:
+    tcp:
+      address: 0.0.0.0:8200
+      tls_disable: true
+  api_addr: "http://127.0.0.1:8200"  # API address for the service
+  disable_mlock: true
+  # Additional configuration for HA
+  ha_enabled: true
+  ha_storage:
+    raft:
+      enabled: true
+
