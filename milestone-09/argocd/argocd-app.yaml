@@ -24,24 +24,24 @@ spec:
       prune: true
       selfHeal: true
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: argocd-observability
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://prometheus-community.github.io/helm-charts  # Official Helm repo for kube-prometheus-stack
-    chart: kube-prometheus-stack
-    targetRevision: 65.5.0
-    helm:
-      valueFiles:
-        - https://raw.githubusercontent.com/rajeshecb70/one2n-sre-bootcamp/main/milestone-09/observability/kube-prometheus-stack-values.yml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: observability
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+#apiVersion: argoproj.io/v1alpha1
+#kind: Application
+#metadata:
+#  name: prometheus
+#  namespace: argocd
+#spec:
+#  project: default
+#  source:
+#    repoURL: https://prometheus-community.github.io/helm-charts  # Official Helm repo for kube-prometheus-stack
+#    chart: kube-prometheus-stack
+#    targetRevision: 65.5.0
+#    helm:
+#      valueFiles:
+#        - https://raw.githubusercontent.com/rajeshecb70/one2n-sre-bootcamp/main/milestone-09/observability/kube-prometheus-stack-values.yml
+#  destination:
+#    server: https://kubernetes.default.svc
+#    namespace: observability
+#  syncPolicy:
+#    automated:
+#      prune: true
+#      selfHeal: true
