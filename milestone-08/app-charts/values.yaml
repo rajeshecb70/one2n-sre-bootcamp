@@ -5,7 +5,7 @@ appName: vault
 
 deployment:
   name: vault
-  replicas: 3  # Increase replicas for High Availability
+  replicas: 1  # Increase replicas for High Availability
 
 container:
   image: vault:1.12.0

@@ -32,6 +32,9 @@ var/
 *.manifest
 *.spec
 
+
+milestone-09/cluster-keys.json
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt

@@ -4,7 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: db-deployment
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   replicas: {{ .Values.database.replicaCount }}
   selector:
@@ -17,20 +17,20 @@ spec:
     spec:
       containers:
         - name: db-container
-          image: {{ .Values.database.image.repository }}:{{ .Values.database.image.tagm }}
+          image: mysql:8.0
           ports:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.externalSecret.target.name }}  # Using mysql-secret
-                  key: {{ .Values.database.mysql.rootPasswordKey }}  # Pulling MYSQL_ROOT_PASSWORD
+                  name: {{ .Values.externalSecret.targetName }}  # Reference to the secret for MYSQL_ROOT_PASSWORD
+                  key: _MYSQL_ROOT_PASSWORD
             - name: MYSQL_DATABASE
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.externalSecret.target.name }}  # Using mysql-secret
-                  key: {{ .Values.database.mysql.databaseKey }}   # Pulling MYSQL_DATABASE
+                  name: {{ .Values.externalSecret.targetName }}  # Reference to the secret for MYSQL_DATABASE
+                  key: _MYSQL_DATABASE
           volumeMounts:
             - name: mysql-storage
               mountPath: /var/lib/mysql
@@ -41,29 +41,13 @@ spec:
 
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mysql-pv1
-  namespace: {{ .Release.Namespace }}
-spec:
-  capacity:
-    storage: 2Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: /mnt/data/mysql
-
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pvc1
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   accessModes:
-    {{- range .Values.database.persistence.accessModes }}
-    - {{ . }}
-    {{- end }}
+    - ReadWriteOnce
   resources:
     requests:
       storage: {{ .Values.database.persistence.size }}
@@ -73,12 +57,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mysql-service
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   selector:
     app: db
   ports:
-    #- protocol: TCP
     - port: {{ .Values.database.service.port }}
       targetPort: 3306
   type: {{ .Values.database.service.type }}

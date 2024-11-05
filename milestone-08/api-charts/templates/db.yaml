@@ -43,7 +43,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mysql-pv1
+  name: mysql-pv2
   namespace: {{ .Release.Namespace }}
 spec:
   capacity:
@@ -57,7 +57,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pvc1
+  name: mysql-pvc2
   namespace: {{ .Release.Namespace }}
 spec:
   accessModes:

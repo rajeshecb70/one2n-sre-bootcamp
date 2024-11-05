@@ -1,0 +1,16 @@
+image:
+  registry: quay.io
+  repository: prometheus/mysqld-exporter
+  tag: v0.15.1  # Specific version of MySQL exporter
+namespaceOverride: student-api  # Deploy in the student-api namespace
+mysql:
+  existingConfigSecret:
+    name: mysql-config   # Name of the Kubernetes secret containing .my.cnf
+    key: .my.cnf         # Key for the configuration file in the secret
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi

@@ -1,0 +1,32 @@
+# Node-A
+apiVersion: v1
+kind: Node
+metadata:
+  name: mycluster-m02
+spec:
+  taints:
+    - key: type
+      value: application
+      effect: PreferNoSchedule
+---
+# Node-B
+apiVersion: v1
+kind: Node
+metadata:
+  name: mycluster-m03
+spec:
+  taints:
+    - key: type
+      value: dependent_services
+      effect: PreferNoSchedule
+---
+# Node-C
+apiVersion: v1
+kind: Node
+metadata:
+  name: mycluster-m04
+spec:
+  taints:
+    - key: type
+      value: observability
+      effect: PreferNoSchedule

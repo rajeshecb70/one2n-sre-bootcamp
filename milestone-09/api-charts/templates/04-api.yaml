@@ -25,14 +25,22 @@ spec:
           args:
             - |
               echo "Starting DB Migration"
+
               python3 -m flask db upgrade
+              # Check if the migration was successful
+              if [ $? -eq 0 ]; then
+                echo "DB Migration completed successfully"
+              else
+                echo "DB Migration failed"
+                exit 1  # Exit with error code to indicate failure
+              fi
               echo "DB Migration completed"
           env:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.externalSecret.target.name }}  # Using mysql-secret
-                  key: DATABASE_URL                              # Key for DATABASE_URL
+                  name: {{ .Values.externalSecret.targetName }}  # Using mysql-secret
+                  key: _DATABASE_URL                              # Key for DATABASE_URL
       containers:
         - name: api-container
           image: {{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}
@@ -42,8 +50,8 @@ spec:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.externalSecret.target.name }}  # Using mysql-secret
-                  key: DATABASE_URL                              # Key for DATABASE_URL
+                  name: {{ .Values.externalSecret.targetName }}  # Using mysql-secret
+                  key: _DATABASE_URL                              # Key for DATABASE_URL
 ---
 apiVersion: v1
 kind: Service
