@@ -1,3 +1,7 @@
+### This README.md file includes the milestone-09, milestone-10 and milestone-11 README.md
+
+## Milestone-09 README
+
 **1. Project Title**
 
 Setup one-click deployments using ArgoCD
@@ -220,3 +224,140 @@ http://127.0.0.1:5000/api/v1/students
 ```bash
 minikube delete 
 ```
+
+
+## Milestone-10 README
+
+**1. Project Title**
+
+**Setup an observability stack**
+
+**2. Project Description**
+
+The project involves setting up Prometheus, Loki, Grafana, and Promtail and observing and monitoring the application system's performance. 
+
+**3. Requirements**
+
+- minikube
+- Docker
+- helm
+- postman
+
+**4. Create the namespace for observability**
+
+```bash
+kubectl create namespace observability
+```
+
+**5. Setup Prometheus, grafana, kube-state-metrics,node-exporter, alert manager in observability namespace
+ (values.yml:** observability/kube-prometheus-stack-values.yml**)**
+
+```bash
+$helm install prometheus-stack prometheus-community/kube-prometheus-stack -f  observability/kube-prometheus-stack-values.yml --namespace observability
+
+# Grafana Dashboard
+$kubectl port-forward svc/prometheus-stack-grafana 3000:80 -n observability  
+
+# Prometheus port forward
+$kubectl port-forward svc/prometheus-prometheus-stack-kube-prom-prometheus 9090:9090 -n observability
+```
+
+**6. Setup Loki and promtail in the observability namespace 
+(values.yaml:** observability/loki-stack-values.yaml**)**
+
+```bash
+helm install loki grafana/loki-stack -f observability/loki-stack-values.yaml --namespace observability
+
+```
+
+**7. Setup mysql-exporter in student-api namespace 
+(values.yaml:** observability/mysql-exporter-values.yaml**)**
+
+```bash
+$helm install mysql-exporter prometheus-community/prometheus-mysql-exporter  --version 2.6.1  -f observability/mysql-exportor-values.yaml  -n student-api
+
+#Mysql-exporter port forward
+$kubectl port-forward svc/mysql-exporter-prometheus-mysql-exporter 9104:9104 -n student-api 
+```
+
+**8. Grafana Dashboard with data sources Prometheus and loki.**
+
+![image.png](snapshots/DataSources.png)
+
+**9. Logs of application in the grafana using the Loki** 
+
+![image.png](snapshots/ApplicationLogs.png)
+
+**10. Prometheus Targets**
+
+![image.png](snapshots/Prometheus-targets.png)
+
+**11. Mysql Exporter metric**
+
+![image.png](snapshots/mysql-exporter.png)
+
+
+
+
+
+## Milestone-11 README
+
+**1. Project Title**
+
+**Configure dashboards & alerts**
+
+**2. Project Description**
+
+The project involves Configure dashboards & alerts for REST API i& systems.
+
+**3. Requirements**
+
+- minikube
+- docker
+- helm
+- grafana
+- slack for alert
+
+**3. Alert integration with slack**
+
+- Follow the integration with API token:
+- URL : https://grafana.com/docs/grafana/latest/alerting/configure-notifications/manage-contact-points/integrations/configure-slack/
+
+**4. Screenshots of Grafana Dashboards and Alerts.**
+
+- Custom dashboard
+
+![image.png](snapshots/customDashboard.png)
+
+- Dashboard of Node Exporter
+
+![image.png](snapshots/node-exporter.png)
+
+- Dashboard of Kube stack metric
+
+![image.png](snapshots/Kube-state-metric.png)
+
+- Dashboard of Api logs
+
+![image.png](snapshots/ApplicationLogs.png)
+
+- Mysql Exporter logs
+
+![image.png](snapshots/mysql-exporter.png)
+
+- 
+- Alert Notification on slack for too many requests
+
+![image.png](snapshots/TooManyRequests-Alerts.png)
+
+- Alert Notification on slack for CPU utilization
+
+![image.png](snapshots/HighCPU-Alerts.png)
+
+- Alert Notification on slack for Disk Utilization.
+
+![image.png](snapshots/DiskspaceAlerts.png)
+
+- Alert Notification on slack for 404 error
+
+![image.png](snapshots/applicationlogs-404-alerts.png)

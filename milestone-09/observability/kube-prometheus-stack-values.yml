@@ -1,31 +1,20 @@
-# Prometheus Configuration (Ephemeral Storage)
+# Prometheus Configuration (Persistent Storage)
 prometheus:
   prometheusSpec:
     scrapeInterval: 15s
     evaluationInterval: 15s
-    retention: 10d
-    nodeSelector:
-      type: dependent-services
-    storageSpec:
-      emptyDir: {}  # Use ephemeral storage to avoid PVC-related issues
-    serviceAccount:
-      create: true
-      name: prometheus-k8s
-    rbac:
-      create: true  # Enabling RBAC for Prometheus access to cluster resources
-      pspEnabled: false
-    additionalScrapeConfigs:
-      - job_name: 'kube-state-metrics'
-        scrape_interval: 15s
-        metrics_path: /metrics
-        static_configs:
-          - targets: ['kube-state-metrics.observability.svc:8081']
-      - job_name: 'node-exporter'
-        scrape_interval: 15s
-        metrics_path: /metrics
-        static_configs:
-          - targets: ['node-exporter.observability.svc:9100']
-# Grafana Configuration (No Persistence)
+    retention: 2d
+#    nodeSelector:
+#      type: dependent-services
+    storageSpec: {}
+  additionalScrapeConfigs:
+    - job_name: 'mysql-exporter'
+      scrapeInterval: 15s
+      metrics_path: /metrics
+      static_configs:
+        - targets: ['mysql-exporter-prometheus-mysql-exporter.student-api.svc:9104']
+
+# Grafana Configuration (Persistent Storage)
 grafana:
   enabled: true
   adminPassword: "admin_password"
@@ -34,31 +23,41 @@ grafana:
       enabled: true
     datasources:
       enabled: true
-  nodeSelector:
-    type: dependent-services
+#  nodeSelector:
+#    type: dependent-services
+  persistence:
+    enabled: true
+    size: 5Gi  # Set your desired storage size for Grafana
+    accessModes:
+      - ReadWriteOnce
+    storageClassName: ""  # Optionally set to a specific StorageClass, if required
 # Enable kube-state-metrics with Role Bindings
 kube-state-metrics:
-  #enabled: true
-  enabled: false
-  nodeSelector:
-    type: dependent-services
+  enabled: true
+#  nodeSelector:
+#    type: dependent-services
   rbac:
     create: true
   serviceAccount:
     create: true
     name: kube-state-metrics
+
+
 # Node Exporter Configuration
 nodeExporter:
   enabled: true
-  nodeSelector:
-    type: dependent-services
+#  nodeSelector:
+#    type: dependent-services
   serviceAccount:
     create: true
     name: node-exporter
+
+
+
 # Alertmanager Configuration (No Persistence)
 alertmanager:
   enabled: true
   alertmanagerSpec:
     replicas: 1
-    nodeSelector:
-      type: dependent-services
+#    nodeSelector:
+#      type: dependent-services

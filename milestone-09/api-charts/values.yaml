@@ -1,56 +1,37 @@
+namespace: student-api
 # Secretstore values.yaml
-secretstore:
-  name: vault-secret-store
-  namespace: student-api
-
 vault:
-  server: "http://10.99.4.53:8200"  # Vault server ClusterIP address
+  server: "http://vault.vault.svc.cluster.local:8200"
   path: "secret/"  # API path for the secret
   version: "v1"
-  auth:
-    tokenSecretRef:
-      name: vault-token  # Kubernetes secret name
-      key: token  # Key inside the Kubernetes secret
+  tokenSecretName: vault-token  # Kubernetes secret name
+  tokenSecretKey: token  # Key inside the Kubernetes secret
 
 # Externalsecrets values.yaml
 externalSecret:
   name: db-api-secret
-  namespace: student-api
-  refreshInterval: "60s"
-  secretStoreRef:
-    name: vault-secret-store
-    kind: SecretStore
-  target:
-    name: mysql-secret
-    creationPolicy: Owner
+  targetName: mysql-secret
+  refreshInterval: "1h"
+  
   data:
     mysql:
       key: "mysql"
       properties:
         MYSQL_ROOT_PASSWORD: "MYSQL_ROOT_PASSWORD"
         MYSQL_DATABASE: "MYSQL_DATABASE"
-      #  MYSQL_USER: "MYSQL_USER"
-        #MYSQL_HOST: "MYSQL_HOST"
         DATABASE_URL: "DATABASE_URL"
   dataFrom:
     extract:
       key: "mysql"
 
+
+
 # Database values.yaml
 database:
   replicaCount: 1
-
-  image:
-    repository: mysql
-    tagm: "8.0"
-    pullPolicy: IfNotPresent
-
   mysql:
     rootPasswordKey: MYSQL_ROOT_PASSWORD  # Key to fetch from the external secret
     databaseKey: MYSQL_DATABASE            # Key to fetch from the external secret
-  #  rootPasswordKey: mypassword  # Key to fetch from the external secret
-  #  databaseKey: studentdb1            # Key to fetch from the external secret
-
   persistence:
     enabled: true
     storageClass: ""

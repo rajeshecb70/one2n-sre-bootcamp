@@ -4,7 +4,8 @@ secretstore:
   namespace: student-api
 
 vault:
-  server: "http://10.99.4.53:8200"  # Vault server ClusterIP address
+  #server: "http://10.99.4.53:8200"  # Vault server ClusterIP address
+  server: http://vault-service.vault.svc.cluster.local:8200
   path: "secret/"  # API path for the secret
   version: "v1"
   auth:
