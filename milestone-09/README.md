@@ -1,4 +1,4 @@
-### This README.me incluse the milestone-09, milestone-10 and milestone-11 instructions.
+### This README.md file includes the milestone-09, milestone-10 and milestone-11 README.md
 
 ## Milestone-09 README
 
