@@ -210,7 +210,8 @@ To [https://github.com/***/one2n-sre-bootcamp](https://github.com/***/one2n-sre-
 
 NOTE : Another commit happen over the time in different branch so here the ref snapshots.
 ```
-![image.png](snapshots/ArgoCD-Dashboard.png)
+![image.png](snapshots/Latest_Push_to_git_in_branch_mile10.png)
+![image.png](snapshots/ArgoCD_DashBoard.png)
 
 **6. Check the api endpoints on postman**
 ```bash
@@ -287,19 +288,15 @@ $ kubectl port-forward svc/mysql-exporter-prometheus-mysql-exporter 9104:9104 -n
 ```
 
 **8. Grafana Dashboard with data sources Prometheus and loki.**
-
 ![image.png](snapshots/DataSources.png)
 
 **9. Logs of application in the grafana using the Loki** 
-
 ![image.png](snapshots/ApplicationLogs.png)
 
 **10. Prometheus Targets**
-
 ![image.png](snapshots/prometheus-targets1.png)
 
 **11. Mysql Exporter metric**
-
 ![image.png](snapshots/mysql-exporter.png)
 
 
@@ -332,38 +329,25 @@ The project involves Configure dashboards & alerts for REST API i& systems.
 **4. Screenshots of Grafana Dashboards and Alerts.**
 
 - Custom dashboard
-
 ![image.png](snapshots/CustomDashboard.png)
 
 - Dashboard of Node Exporter
-
 ![image.png](snapshots/node-exporter.png)
 
 - Dashboard of Kube stack metric
-
 ![image.png](snapshots/Kube-state-metric.png)
 
 - Dashboard of Api logs
-
 ![image.png](snapshots/ApplicationLogs.png)
 
-- Mysql Exporter logs
-
-![image.png](snapshots/mysql-exporter.png)
-
-- 
 - Alert Notification on slack for too many requests
-
 ![image.png](snapshots/TooManyRequests-Alerts.png)
 
 - Alert Notification on slack for CPU utilization
-
 ![image.png](snapshots/HighCPU-Alerts1.png)
 
 - Alert Notification on slack for Disk Utilization.
-
 ![image.png](snapshots/DiskspaceAlerts1.png)
 
 - Alert Notification on slack for 404 error
-
 ![image.png](snapshots/applicationlogs-404-alerts1.png)
