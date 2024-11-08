@@ -354,7 +354,7 @@ The project involves Configure dashboards & alerts for REST API i& systems.
 - 
 - Alert Notification on slack for too many requests
 
-![image.png](snapshots/TooManyRequests-Alerts1.png)
+![image.png](snapshots/TooManyRequests-Alerts.png)
 
 - Alert Notification on slack for CPU utilization
 
