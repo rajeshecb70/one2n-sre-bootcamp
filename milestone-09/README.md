@@ -1,4 +1,4 @@
-### This README.md file includes the milestone-09, milestone-10 and milestone-11 README.md
+### "This README.md file includes the milestone-09, milestone-10 and milestone-11 README.md"
 
 ## Milestone-09 README
 
@@ -207,8 +207,10 @@ Step11: To verify the commit message
 To [https://github.com/***/one2n-sre-bootcamp](https://github.com/***/one2n-sre-bootcamp)
 
 6de744f..6e28b3f  main -> main
-```
 
+NOTE : Another commit happen over the time in different branch so here the ref snapshots.
+```
+![image.png](snapshots/ArgoCD-Dashboard.png)
 
 **6. Check the api endpoints on postman**
 ```bash
@@ -274,6 +276,10 @@ helm install loki grafana/loki-stack -f observability/loki-stack-values.yaml --n
 (values.yaml:** observability/mysql-exporter-values.yaml**)**
 
 ```bash
+# Create the mysql secrets
+$kubectl create secret generic mysql-config --from-file=.my.cnf -n student-api
+
+# Mysql-exporter installation
 $helm install mysql-exporter prometheus-community/prometheus-mysql-exporter  --version 2.6.1  -f observability/mysql-exportor-values.yaml  -n student-api
 
 #Mysql-exporter port forward
@@ -290,7 +296,7 @@ $kubectl port-forward svc/mysql-exporter-prometheus-mysql-exporter 9104:9104 -n 
 
 **10. Prometheus Targets**
 
-![image.png](snapshots/Prometheus-targets.png)
+![image.png](snapshots/prometheus-targets1.png)
 
 **11. Mysql Exporter metric**
 
@@ -327,7 +333,7 @@ The project involves Configure dashboards & alerts for REST API i& systems.
 
 - Custom dashboard
 
-![image.png](snapshots/customDashboard.png)
+![image.png](snapshots/CustomDashboard.png)
 
 - Dashboard of Node Exporter
 
@@ -348,16 +354,16 @@ The project involves Configure dashboards & alerts for REST API i& systems.
 - 
 - Alert Notification on slack for too many requests
 
-![image.png](snapshots/TooManyRequests-Alerts.png)
+![image.png](snapshots/TooManyRequests-Alerts1.png)
 
 - Alert Notification on slack for CPU utilization
 
-![image.png](snapshots/HighCPU-Alerts.png)
+![image.png](snapshots/HighCPU-Alerts1.png)
 
 - Alert Notification on slack for Disk Utilization.
 
-![image.png](snapshots/DiskspaceAlerts.png)
+![image.png](snapshots/DiskspaceAlerts1.png)
 
 - Alert Notification on slack for 404 error
 
-![image.png](snapshots/applicationlogs-404-alerts.png)
+![image.png](snapshots/applicationlogs-404-alerts1.png)
