@@ -22,7 +22,7 @@ permissions:
   contents: write
 
 env:
-  tag: 10.0.1
+  tag: 10.0.2
   
 
 jobs:
