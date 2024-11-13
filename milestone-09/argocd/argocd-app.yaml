@@ -6,7 +6,7 @@ metadata:
 spec:
   source:
     repoURL: https://github.com/rajeshecb70/one2n-sre-bootcamp  # Your Git repository
-    targetRevision: mile10
+    targetRevision: main
     path: milestone-09/api-charts   # Path to your Helm chart
     helm:
       valueFiles:
