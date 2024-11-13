@@ -50,11 +50,11 @@ api:
 
   image:
     repository: rajeshecb70/flask-api
-    tag: "10.0.0"
+    tag: "10.0.1"
 
   migrationImage:
     repository: rajeshecb70/flask-api
-    tag: "10.0.0"
+    tag: "10.0.1"
 
   containerPort: 5000
 
